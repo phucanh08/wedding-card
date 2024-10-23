@@ -437,10 +437,17 @@
 </div>
 
 <div class="bottom_left">
-    <audio id="player" src="mus.mp3"></audio>
     <div>
-        <i class="fa fa-music fa-2x" onclick="document.getElementById('player').play()"></i>
+        <i id="playButton" class="fa fa-music fa-2x" onclick="document.getElementById('player').play()"></i>
     </div>
+    <audio autoplay loop  id="player">
+        <source src="mus.mp3" type="audio/mpeg">
+    </audio>
+    <script>
+        setTimeout(function() {
+            document.getElementById('player').play();
+        }, 5000); // Delay 5000ms (5 giây)
+    </script>
 </div>
 
 </body>
