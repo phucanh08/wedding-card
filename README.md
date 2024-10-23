@@ -5,7 +5,7 @@ Repository này là thiệp mời đám cưới di động để mời dự đá
 
 Để biết cách để lại lời chúc mừng, vui lòng tham khảo [cách tạo pull request trên github (liên kết trực tiếp)](https://wayhome25.github.io/git/2017/07/08/git-first-pull-request-story/) 👍
 
-![Ảnh chính](https://github.com/AndersonChoi/wedding-card/raw/master/docs/images/pic2.jpg)
+![Ảnh chính](https://raw.githubusercontent.com/phucanh08/wedding-card/refs/heads/main/docs/images/pic2.jpg)
 
 ## Thông tin lễ cưới
 
