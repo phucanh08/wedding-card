@@ -1,86 +1,86 @@
-# 최원영과 이소민의 결혼식 모바일 청첩장
-![date](https://img.shields.io/date/1558189800.svg?style=for-the-badge)
+# Thiệp mời đám cưới di động của Lê Phúc Anh và Nguyễn thị Ngọc
+![ngày](https://img.shields.io/date/1558189800.svg?style=for-the-badge)
 
-이 repository는 결혼식 초대를 위한 모바일청첩장입니다. 이 repository가 마음에 드신다면 star과 fork 많이 많이 부탁드립니다. 축하 메시지는 pull request로 받습니다. :)
+Repository này là thiệp mời đám cưới di động để mời dự đám cưới. Nếu bạn thích repository này, xin hãy cho nhiều sao và fork. Chúng tôi nhận lời chúc mừng qua pull request. :)
 
-축하메시지 남기는 방법은 [github에서 pullrequest하는 방법(바로가기)](https://wayhome25.github.io/git/2017/07/08/git-first-pull-request-story/) 을 참고하세요 👍
+Để biết cách để lại lời chúc mừng, vui lòng tham khảo [cách tạo pull request trên github (liên kết trực tiếp)](https://wayhome25.github.io/git/2017/07/08/git-first-pull-request-story/) 👍
 
-![메인사진](https://github.com/AndersonChoi/wedding-card/raw/master/docs/images/pic2.jpeg)
+![Ảnh chính](https://github.com/AndersonChoi/wedding-card/raw/master/docs/images/pic2.jpg)
 
-## 예식정보
+## Thông tin lễ cưới
 
-* 날짜 : 2019년 5월 18일 14시 30분
-* 장소 : 부산광역시 해운대구 센텀시티 센텀사이언스파크 23층
-* 청첩장 url : https://andersonchoi.github.io/wedding-card/
+* Ngày: 18 tháng 5 năm 2019 lúc 14:30
+* Địa điểm: Tầng 23, Centum Science Park, Centum City, Haeundae-gu, Busan
+* URL thiệp cưới: https://andersonchoi.github.io/wedding-card/
 
-## 축하의 말
+## Lời chúc mừng
 
-### 한경수
+### Han Kyung-soo
 
-아는 후배가 깃허브 청첩장이라고 하여 링크타고 들어왔습니다. 저는 07 학번 한경수 입니다. 동문의 github 청첩장을 보니 새롭고, 굉장히 특이하고 재밌는 청첩장이네요.
+Tôi đã vào đây qua liên kết khi một hậu bối quen biết nói về thiệp cưới GitHub. Tôi là Han Kyung-soo, khóa 07. Khi thấy thiệp cưới GitHub của một đồng môn, tôi thấy nó mới mẻ, cực kỳ độc đáo và thú vị.
 
-두 사람의 소중한 결합을 축하하며 더 없이 행복한 부부 되시기를 바랍니다. 
+Chúc mừng sự kết hợp quý giá của hai người và mong rằng các bạn sẽ trở thành một cặp vợ chồng hạnh phúc nhất.
 
-### 이병근
+### Lee Byung-geun
 
 LGTM 👍
 
-### 최지영
+### Choi Ji-young
 
-소민이 결혼 너무너무 축하해! 사진도 소민이도 햇살처럼 너무 이쁘다! 앞으로 다가올 날들도 모두 환하게 비추어 나갈것 같아 ㅎㅎ 늘 지금처럼, 지금보다 더 행복하길!  
+So-min à, chúc mừng đám cưới của cậu! Cả bức ảnh và So-min đều đẹp như ánh nắng! Tớ nghĩ những ngày sắp tới cũng sẽ tỏa sáng rực rỡ như vậy. Hy vọng cậu sẽ luôn hạnh phúc như bây giờ, thậm chí còn hơn thế nữa!
 
-### 김경수
-특별한 청첩장이네요! 두분 결혼 축하드리고 행복하게 사세요. 
+### Kim Kyung-soo
+Đây là một thiệp cưới đặc biệt! Chúc mừng đám cưới của hai bạn và hãy sống hạnh phúc nhé.
 
-### 익명의 회사 사원
-사우님 결혼 축하드려요~ 너무 예쁘네용 *_*
+### Nhân viên công ty ẩn danh
+Chúc mừng đám cưới của đồng nghiệp! Trông rất đẹp *_*
 
-### 장준영
-개발자 부부아니랄까봐 청첩장도 이렇게 아름답게 만드셨네요ㅋㅋㅋ
-언제나 행복하시길 바라요~ 결혼 축하합니당 ^^
+### Jang Jun-young
+Không hổ danh là cặp đôi lập trình viên, các bạn đã tạo ra một thiệp cưới đẹp như thế này ㅋㅋㅋ
+Mong rằng các bạn sẽ luôn hạnh phúc! Chúc mừng đám cưới ^^
 
-### 김채영
+### Kim Chae-young
 
 sudo forever start happyMarriage.js
 
-### 옌
-청첩장이 너무 재밌어여 ㅋㅋㅋㅋㅋ이런 청첩장은 처음본다요 결혼축하해용 울언니울형부>_<
+### Yen
+Thiệp cưới rất thú vị ㅋㅋㅋㅋㅋ Đây là lần đầu tiên tôi thấy một thiệp cưới như thế này. Chúc mừng đám cưới chị và anh >_<
 
-### 임채빈
-나도 나중에 이렇게만들어야지 ㅎㅎㅎㅎ 축하합니다!!!
+### Lim Chae-bin
+Tôi cũng phải làm một cái như thế này sau này ㅎㅎㅎㅎ Chúc mừng!!!
 
-### 김지혁
-결혼 축하합니다. 오래오래 행복하게 사세요^^
+### Kim Ji-hyuk
+Chúc mừng đám cưới. Hãy sống hạnh phúc mãi mãi nhé ^^
 
-### 원영이랑 쪼금 친한 누나
-원영아 결혼 정말 축하하구 신부도 정말 이쁘다 ㅎ 잘살아 히힛
+### Chị hơi thân với Won-young
+Won-young à, thật sự chúc mừng đám cưới của em và cô dâu cũng rất xinh đẹp ㅎ Hãy sống tốt nhé, hihi
 
-### 부산대 백수
-원영이형 소민이 결혼 정말 축하드려요!!!, while(true) { 최원영 = 이소민 = :heart:; }
+### Sinh viên thất nghiệp Đại học Busan
+Anh Won-young và chị So-min, thật sự chúc mừng đám cưới của hai anh chị!!!, while(true) { Choi Won-young = Lee So-min = :heart:; }
 
-### 쿠팡X 김범석
-원영씨 축하해요~ 
-청첩장 정말 잘 만들었네 ㅋㅋㅋㅋㅋ
-코드 쓰고 싶게 만드는 청첩장이야 ㅋㅋㅋ
+### Kim Beom-seok từ CoupangX
+Chúc mừng Won-young nhé~
+Thiệp cưới làm rất đẹp ㅋㅋㅋㅋㅋ
+Đây là một thiệp cưới khiến người ta muốn viết code ㅋㅋㅋ
 val choileeMarriage = Marriage.Builder()
-  .addEvent("결혼식")
-  .addLocation("부산광역시 해운대구 센텀시티 센텀사이언스파크 23층")
-  .addDateTime("2019년 5월 18일 14시 30분")
+  .addEvent("Đám cưới")
+  .addLocation("Tầng 23, Centum Science Park, Centum City, Haeundae-gu, Busan")
+  .addDateTime("18 tháng 5 năm 2019 lúc 14:30")
   .build();
   
-### 한정현 (원영님 같은팀 동료)  
-원영님 결혼 축하 드립니다 :) 청첩장도 이쁘네요^~^ 행복하게 사세요 !!   
+### Han Jung-hyun (đồng nghiệp cùng team với Won-young)  
+Chúc mừng đám cưới của anh Won-young :) Thiệp cưới cũng rất đẹp^~^ Hãy sống hạnh phúc nhé !!   
 
-### 송혜영
-풀리퀘로 결혼 축하 인사 남기긴 처음이네요 ㅋㅋ 원영님 결혼 축하해요!
+### Song Hye-young
+Đây là lần đầu tiên tôi để lại lời chúc mừng đám cưới qua pull request ㅋㅋ Anh Won-young, chúc mừng đám cưới!
 
-### 조진영 (똑같은 팀 동료)
-축하해요~ 그냥 개발자야 개발자~ㅎㅎ
+### Jo Jin-young (đồng nghiệp cùng team)
+Chúc mừng nhé~ Đúng là một lập trình viên mà~ㅎㅎ
 
-### 임유빈 (위 사람 맞은 편 앉은 사람)
-경) 결 혼 축 하 (축
+### Lim Yu-bin (người ngồi đối diện người trên)
+Chúc) Mừng Đám Cưới (Mừng
 
-### 정태양
+### Jung Tae-yang
 <html>
     <head>
         <style type="text/css">
@@ -88,31 +88,31 @@ val choileeMarriage = Marriage.Builder()
         </style>
     </head>
     <body>
-        <div class="celebration">원영이형! 결혼 축하드려요!!!</div>
+        <div class="celebration">Anh Won-young! Chúc mừng đám cưới!!!</div>
         <div class="text">
-            github으로 청첩장 만드는 사람 처음봤어요 ㅋㅋㅋㅋ 진짜 잘 만들었고<br>
-            아이디어가 너무 좋은거 같아요 저도 나중에 사용해야겠어요ㅎㅎ<br>
-            다시 한번 결혼 축하드리고 행복하세요!!!!!
+            Đây là lần đầu tiên tôi thấy ai đó tạo thiệp cưới bằng github ㅋㅋㅋㅋ Thật sự làm rất tốt<br>
+            và ý tưởng rất hay, tôi cũng sẽ sử dụng nó sau này ㅎㅎ<br>
+            Một lần nữa chúc mừng đám cưới và hãy hạnh phúc nhé!!!!!
         </div>
     </body>
 </html>
 
-### 임승민 (전직장 동료)
+### Lim Seung-min (đồng nghiệp cũ)
 cat << EOF\
-원영이형 결혼 정말 축하해!!\
-오래오래 행복하게 살아~~\
+Anh Won-young, thật sự chúc mừng đám cưới!!\
+Hãy sống hạnh phúc mãi mãi nhé~~\
 EOF
 
-### 김성현
-너무너무 멋진 청첩장!
-원영이 소민이 결혼 진심으로 축하해!!
+### Kim Sung-hyun
+Thiệp cưới thật tuyệt vời!
+Won-young và So-min, chúc mừng đám cưới từ tận đáy lòng!!
 
-### 박정빈
-행님 형수님 결혼 축하해요 \^^/
-오래오래 행복하세요 :)
+### Park Jung-bin
+Anh và chị dâu, chúc mừng đám cưới \^^/
+Hãy hạnh phúc mãi nhé :)
 
-### 권준영(원영맴 전직장 동료)
-우와 신기한 청첩장이네요. 결혼 축하합니다.
+### Kwon Jun-young (đồng nghiệp cũ của Won-young)
+Wow, đây là một thiệp cưới thú vị. Chúc mừng đám cưới.
 
          mMm  _[_]_
         /(_)\  (_)
@@ -120,12 +120,12 @@ EOF
       /(/&@&\)\|~|/
      / /-~`~-\ |||
      `/       \|||
-     `--------'-'-- 원영 & 소민
+     `--------'-'-- Won-young & So-min
 
-### 서재원
-여기부터는 재워니의 기가막힌 축하메시지~~ ٩( ᐛ )و
-<marquee direction="left">결혼을 너무너무 축하해요!!!!!!!</marquee>
-특별한 깃허브 청첩장과 부산 결혼식이라니!!!! (๑˃̵ᴗ˂̵)
-나도 준영님처럼 예쁜 그림을 그리고 싶어!!!! 키키
-사진도 너무 예뻐요~!!!!!!!!!!!!! 평생 행복하세요!!!!!!!!!!!!
-결혼식 마치면 떠데해요~~ (*'▽'*)
+### Seo Jae-won
+Từ đây là lời chúc tuyệt vời của Jae-won~~ ٩( ᐛ )و
+<marquee direction="left">Chúc mừng đám cưới rất rất nhiều!!!!!!!</marquee>
+Thiệp cưới GitHub đặc biệt và đám cưới ở Busan!!!! (๑˃̵ᴗ˂̵)
+Tôi cũng muốn vẽ một bức tranh đẹp như Jun-young!!!! Kiki
+Ảnh cũng rất đẹp~!!!!!!!!!!!!! Hãy hạnh phúc mãi mãi nhé!!!!!!!!!!!!
+Sau khi kết thúc đám cưới, hãy đi chơi nhé~~ (*'▽'*)

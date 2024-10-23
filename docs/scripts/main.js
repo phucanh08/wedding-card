@@ -1,27 +1,31 @@
 // Add your javascript here
 // Don't forget to add it into respective layouts where this js file is needed
 $(document).ready(function () {
+    // Xử lý sự kiện click cho phần tử có id "map-image"
     $("#map-image").on("click")
     {
-
+        // Chưa có xử lý, cần bổ sung logic ở đây
     }
 
+    // Xử lý nút "Về đầu trang"
     $('#go-to-top').click(function () {
         $('html,body').animate({scrollTop: 0}, 400);
         return false;
     });
 
+    // Xử lý khi click vào nút gửi quà
     $(".gift-send").click(function () {
         $("#gift-name").text($(this).data("name"));
     })
 
-
+    // Xử lý khi click vào nút đặt quà
     $("#reserveGiftButton").click(function () {
         let name = $("#sender-name").val();
         let message = $("#sender-message").val();
-        $("#reserveGiftButton").text("전송중...");
+        $("#reserveGiftButton").text("전송중..."); // Đang gửi...
         $("#reserveGiftButton").prop("disabled", true);
 
+        // Khởi tạo và gửi email
         emailjs.init("user_yjLL5xG0A3kkOCH5BGIDh");
         emailjs.send("wedding-mail", "gift_send", {
             name: name,
@@ -29,14 +33,15 @@ $(document).ready(function () {
             message: message
         }).then(function (response) {
             $('#giftMailModal').modal('hide');
-            alert(name + "님의 메시지가 정상적으로 전송되었습니다.");
+            alert(name + "님의 메시지가 정상적으로 전송되었습니다."); // Thông báo gửi thành công
 
-            $("#reserveGiftButton").text("예약하기!");
+            // Đặt lại trạng thái ban đầu cho form
+            $("#reserveGiftButton").text("예약하기!"); // Đặt quà!
             $("#sender-name").val('');
             $("#sender-message").val('');
             $("#reserveGiftButton").prop("disabled", false);
         }, function (err) {
-            alert("메시지 전송이 실패했습니다. 다시 시도해주세요.");
+            alert("메시지 전송이 실패했습니다. 다시 시도해주세요."); // Thông báo gửi thất bại
         });
     })
 })
