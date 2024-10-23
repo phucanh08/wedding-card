@@ -440,14 +440,16 @@
     <div>
         <i id="playButton" class="fa fa-music fa-2x" onclick="document.getElementById('player').play()"></i>
     </div>
-    <audio autoplay loop  id="player">
-        <source src="mus.mp3" type="audio/mpeg">
-    </audio>
-    <script>
-        setTimeout(function() {
-            document.getElementById('player').play();
-        }, 5000); // Delay 5000ms (5 giây)
-    </script>
+    <audio id="player" src="mus.mp3" preload="auto" autoplay loop>
+
+<!--    <script>-->
+<!--        const playButton = document.getElementById('playButton');-->
+<!--        document.addEventListener('load', function() {-->
+<!--            setTimeout(function() {-->
+<!--                playButton.click(); // Giả lập click vào nút-->
+<!--            }, 5000);-->
+<!--        }, { once: true });-->
+<!--    </script>-->
 </div>
 
 </body>
