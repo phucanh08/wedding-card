@@ -7,7 +7,7 @@
     <title>Đám cưới của Lê Phúc Anh và Nguyễn Thị Ngọc</title>
     <meta content="Hãy đến chúc mừng đám cưới của Lê Phúc Anh và Nguyễn Thị Ngọc!" name="description"/>
     <meta property="og:image" content="images/pic2.jpeg">
-    <meta property="fb:app_id" content="781066922265598" />
+    <meta property="fb:app_id" content="781066922265598"/>
     <meta property="fb:admins" content="Choi.Anderson"/>
     <link href="images/favicon/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180">
     <link href="images/favicon/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png">
@@ -18,329 +18,49 @@
     <link href="styles/main.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Gamja+Flower|Gugi|Noto+Serif+KR|Stylish|Sunflower:300"
           rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-2.2.1.js"></script>
-
-
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/remarkable/1.7.1/remarkable.js" type="text/javascript"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="js/aos.js"></script>
+    <script src="js/parallax.min.js"></script>
+    <script src="js/ekko-lightbox.min.js"></script>
+    <script src="scripts/main.js"></script>
+
     <script type="text/javascript">
-        function sendMail() {
-
-            (function () {
-                emailjs.init("user_yjLL5xG0A3kkOCH5BGIDh");
-                emailjs.send("wedding-mail", "gift_send", {
-                    name: $("#sender-name").value,
-                    gift: $("#gift-name").text(),
-                    message: $("#sender-message").value
-                }).then(function (response) {
-                    console.log("SUCCESS. status=%d, text=%s", response.status, response.text);
-                }, function (err) {
-                    console.log("FAILED. error=", err);
-                });
-            })();
-        }
-
-        function findGetParameter(parameterName) {
-            var result = null,
-                tmp = [];
-            location.search
-                .substr(1)
-                .split("&")
-                .forEach(function (item) {
-                  tmp = item.split("=");
-                  if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
-                });
-            return result;
-        }
-
-        $(document).ready(function () {
-
-            function getText(){
-                var result = null;
-                $.ajax( { url: "https://raw.githubusercontent.com/AndersonChoi/wedding-card/master/README.md",
-                        type: 'get',
-                        dataType: 'html',
-                        async: false,
-                        success: function(data) { result = data; }
-                    }
-                );
-                FileReady = true;
-                return result;
-            }
-            var markdown_source = getText();
-            var comment_contents = markdown_source.split("축하의 말")[1];
-
-            var md = new Remarkable();
-            $("#comments").append(md.render(comment_contents));
-
-            
-            if(findGetParameter('gift')=='false'){
-                $('#gifts').hide();
-            }
+        $(function () {
+            $("#home").load("./components/home.html");
+            $("#nav-bar").load("./components/nav-bar.html");
+            $("#couple").load("./components/couple.html");
+            $("#events").load("./components/events.html");
+            $("#gifts").load("./components/gifts.html");
+            $("#gallery").load("./components/gallery.html");
         });
-
-
-
-
     </script>
 </head>
-
-<body id="top">
-<header></header>
-<div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v3.2"></script>
+<body>
 <div class="page-content">
     <div class="div">
-        <div class="ww-home-page" id="home">
-            <div class="ww-wedding-announcement d-flex align-items-center justify-content-start">
-                <div class="container ww-announcement-container">
-                    <p class="ww-couple-name ww-title" style="font-size:4.0em">Phúc Anh & Thị Ngọc</p>
-                    <p class="h2 mt-5 ww-title" style="font-family: 'Gugi', cursive; font-size:1.0em">
-                        | WE ARE GETTING MARRIED |
-                    </p>
-                    <p class="h2 mt-5 ww-title"
-                       style="font-family: 'Noto Serif KR', serif; font-size:1.0em; letter-spacing:-1px">
-                        <b style="font-size:1.4em;">09:00 sáng Chủ nhật ngày 24. 11. 2024</b>
-                        <br>Số 1, xóm 17, thôn Phú Yên, Hương Sơn, Mỹ Đức, Hà Nội
-                    </p>
-                </div>
-            </div>
+        <div id="home" class="ww-home-page"></div>
+        <div id="nav-bar" class="ww-nav-bar sticky-top bg-light"></div>
+        <div id="couple" class="ww-section"></div>
+        <div id="events" class="ww-section bg-light"></div>
+        <div id="gallery" class="ww-section"></div>
+
+        <div id="gifts" class="ww-section parallax-window  text-white" data-parallax="scroll"
+             data-image-src="images/gift/gift-background.jpg">
         </div>
-        <div class="ww-nav-bar sticky-top bg-light">
-            <nav class="navbar navbar-expand-lg navbar-light">
-                <div class="container">
-                    <button aria-controls="ww-navbarNav" aria-expanded="false" aria-label="Toggle navigation"
-                            class="navbar-toggler"
-                            data-target="#ww-navbarNav" data-toggle="collapse" type="button">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse text-uppercase" id="ww-navbarNav">
-                        <ul class="navbar-nav ml-auto">
-                            <li class="nav-item"><a class="nav-link smooth-scroll" href="#home">Home</a></li>
-                            <li class="nav-item"><a class="nav-link smooth-scroll" href="#couple">Couple</a></li>
-                            <li class="nav-item"><a class="nav-link smooth-scroll" href="#events">Events</a></li>
-                            <li class="nav-item"><a class="nav-link smooth-scroll" href="#gallery">Gallery</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </div>
-        <div class="ww-section" id="couple">
-            <div class="container">
-                <h2 class="h1 text-center pb-3 ww-title" style="font-family: 'Noto Serif KR', serif;">Chú rể & Cô dâu</h2>
-                <div class="row text-center">
-                    <div class="col-md-6">
-                        <div class="mt-3">
-                            <h3 class="h2 ww-title" style="font-family: 'Sunflower', sans-serif; font-size:1.5em">
-                                Nguyễn Thị Ngọc </h3>
-                            <img alt="Groom" class="img-fluid" src="images/bride.webp"/>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="mt-3">
-                            <h3 class="h2 ww-title" style="font-family: 'Sunflower', sans-serif; font-size:1.5em">
-                                Lê Phúc Anh </h3>
-                            <img alt="Bride" class="img-fluid" src="images/groom.webp"/>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="ww-section bg-light" id="events">
-            <div class="container ww-wedding-event">
-                <h2 class="h1 text-center pb-3 ww-title" style="font-family: 'Noto Serif KR', serif;">Chúng tôi xin trân trọng kính mời</h2>
-                    <div class="col text-center mb-5">
-                        <h6 style="font-family: 'Noto Serif KR', serif;">
-                            1463<br>
-                            (Kết hôn vào ngày thứ 1463 kể từ ngày gặp nhau = 4 năm + 1 ngày)
-                        </h6>
-                    </div>
-                <div class="row">
-                    <div class="col-md-7 col-sm-12">
-                        <div class="my-3">
-                            <div class="h4">Lễ cưới</div>
-                            <ul>
-                                <li>
-                                    <i class="text-muted fas fa-map-marker-alt"></i>
-                                    <span class="pl-2 text-muted">Tầng 23, Centum Science Park, Woo-dong, Haeundae, Busan</span>
-                                </li>
-                                <li class="pt-2">
-                                    <i class="text-muted far fa-calendar-alt"></i>
-                                    <span class="pl-2 text-muted">18 tháng 5 năm 2019, 2:30 chiều</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-5 col-sm-12">
-                        <div class="my-3">
-                            <img alt="Wedding Party" class="img-fluid" src="images/wedding-party.jpg"/>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-7 col-sm-12">
-                        <div class="my-3">
-                            <div class="h4">Tiệc cưới</div>
-                            <ul>
-                                <li>
-                                    <i class="text-muted fas fa-map-marker-alt "></i>
-                                    <span class="pl-2 text-muted">The Party Centum, Tầng hầm 1, Centum Science Park, Woo-dong, Haeundae, Busan</span>
-                                </li>
-                                <li class="pt-2">
-                                    <i class="text-muted far fa-calendar-alt "></i>
-                                    <span class="pl-2 text-muted">18 tháng 5 năm 2019, 2:30 chiều - 4:30 chiều</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-5 col-sm-12">
-                        <div class="my-3"><img alt="Reception" class="img-fluid" src="images/reception.jpg"/></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="ww-section" id="gallery">
-            <div class="ww-photo-gallery">
-                <div class="container">
-                    <h2 class="h1 text-center pb-3 ww-title" style="font-family: 'Noto Serif KR', serif;">Thư viện ảnh</h2>
-                    <div class="ww-gallery">
-                        <div class="card-columns">
-                            <div class="card" data-groups="[&quot;party&quot;,&quot;wedding&quot;]">
-                                <a data-gallery="ww-gallery" data-toggle="lightbox">
-                                    <img alt="Gallery Pic 1" class="img-fluid" src="images/pic1.webp"/>
-                                </a>
-                            </div>
-                            <div class="card" data-groups="[&quot;vacation&quot;]">
-                                <a data-gallery="ww-gallery" data-toggle="lightbox">
-                                    <img alt="Gallery Pic 2" class="img-fluid" src="images/pic2.webp"/>
-                                </a>
-                            </div>
-                            <div class="card" data-groups="[&quot;party&quot;,&quot;vacation&quot;]">
-                                <a data-gallery="ww-gallery" data-toggle="lightbox">
-                                    <img alt="Gallery Pic 3" class="img-fluid" src="images/pic3.webp"/>
-                                </a>
-                            </div>
-                            <div class="card" data-groups="[&quot;vacation&quot;]">
-                                <a data-gallery="ww-gallery" data-toggle="lightbox">
-                                    <img alt="Gallery Pic 4" class="img-fluid" src="images/pic4.webp"/>
-                                </a>
-                            </div>
-                            <div class="card"
-                                 data-groups="[&quot;wedding&quot;,&quot;ceremony&quot;,&quot;party&quot;]">
-                                <a data-gallery="ww-gallery" data-toggle="lightbox">
-                                    <img alt="Gallery Pic 5" class="img-fluid" src="images/pic5.webp"/>
-                                </a>
-                            </div>
-                            <div class="card" data-groups="[&quot;vacation&quot;]">
-                                <a data-gallery="ww-gallery" data-toggle="lightbox">
-                                    <img alt="Gallery Pic 6" class="img-fluid" src="images/pic6.webp"/>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-       <div class="ww-section parallax-window  text-white" data-parallax="scroll" data-image-src="images/gift/gift-background.jpg" id="gifts">
-            <div class="ww-gift-section">
-                <div class="container">
-                    <h2 class="h1 text-center pb-3 ww-title" style="font-family: 'Noto Serif KR', serif;">Gift for our
-                        wedding</h2>
-                    <div class="col text-center mb-5">
-                        <h6 style="font-family: 'Noto Serif KR', serif;">
-                            Bạn muốn tặng một món quà đặc biệt<br>
-                            cho cuộc sống hàng ngày của chúng tôi trong tương lai?<br>
-                            Nếu vậy, thay vì lo lắng, hãy tham khảo danh sách dưới đây.<br>
-                            Chúng tôi đã liệt kê những món đồ chúng tôi cần.<br>
-                            Những món quà bạn gửi với tình yêu thương<br>
-                            sẽ được chúng tôi trân trọng sử dụng và giữ gìn lâu dài.<br>
-                            <br><br>
-                            (Hãy nhấn nút quà tặng bên dưới để gửi tin nhắn đặt trước cho cô dâu và chú rể!)
-                        </h6>
-                    </div>
-                    <div class="ww-gift">
-                        <div class="gift-columns">
-                            <div class="gift">
-                                <img alt="와인셀러" class="img-fluid gift-img gift-selected" src="images/gift/wineceller.png"/>
-                                <div class="btn-group gift-btn-group" role="group">
-                                    <button class="btn btn-default gift-btn"
-                                            onclick="window.open('https://smartstore.naver.com/dhk00840/products/4311205513')">
-                                        <i class="fa fa-search"></i></button>
-                                    <button class="btn btn-default gift-btn gift-send" data-name="와인셀러"
-                                            onclick="alert('다른분에게 예약된 선물입니다.');"><i
-                                            class="fa fa-gift"></i></button>
-                                </div>
-                            </div>
-                            <div class="gift">
-                                <img alt="전동클렌저" class="img-fluid gift-img gift-selected"
-                                     src="images/gift/philips_clenser.png"/>
-                                <div class="btn-group gift-btn-group" role="group">
-                                    <button class="btn btn-default gift-btn"
-                                            onclick="window.open('https://www.philips.co.kr/c-p/BSC111_06/visapure-mini-facial-cleanser')">
-                                        <i class="fa fa-search"></i></button>
-                                    <button class="btn btn-default gift-btn gift-send" data-name="전동클렌저"
-                                            onclick="alert('다른분에게 예약된 선물입니다.');"><i
-                                            class="fa fa-gift"></i></button>
-                                </div>
-                            </div>
-                            <div class="gift">
-                                <img alt="드라이기" class="img-fluid gift-img gift-selected" src="images/gift/dyson.png"/>
-                                <div class="btn-group gift-btn-group" role="group">
-                                    <button class="btn btn-default gift-btn"
-                                            onclick="window.open('https://www.kr.dyson.com/products/hair-care/dyson-supersonic-hair-dryer')">
-                                        <i class="fa fa-search"></i></button>
-                                    <button  class="btn btn-default gift-btn gift-send" data-name="드라이기"
-                                             onclick="alert('다른분에게 예약된 선물입니다.');"><i
-                                            class="fa fa-gift"></i></button>
-                                </div>
-                            </div>
-                            <div class="gift">
-                                <img alt="믹서기" class="img-fluid gift-img gift-selected" src="images/gift/blender.png"/>
-                                <div class="btn-group gift-btn-group" role="group">
-                                    <button class="btn btn-default gift-btn"
-                                            onclick="window.open('http://jenniferoom.co.kr/product/detail.html?product_no=85&cate_no=24&display_group=1')">
-                                        <i class="fa fa-search"></i></button>
-                                    <button  class="btn btn-default gift-btn gift-send" data-name="믹서기"
-                                             onclick="alert('다른분에게 예약된 선물입니다.');"><i
-                                            class="fa fa-gift"></i></button>
-                                </div>
-                            </div>
-                            <div class="gift">
-                                <img alt="레고" class="img-fluid gift-img gift-selected" src="images/gift/lego.png"/>
-                                <div class="btn-group gift-btn-group" role="group">
-                                    <button class="btn btn-default gift-btn"
-                                            onclick="window.open('https://shop.lego.com/ko-KR/product/10232')"><i
-                                            class="fa fa-search"></i></button>
-                                    <button class="btn btn-default gift-btn gift-send" data-name="레고"
-                                            
-                                             onclick="alert('다른분에게 예약된 선물입니다.');"><i
-                                            class="fa fa-gift"></i></button>
-                                </div>
-                            </div>
-                            <div class="gift">
-                                <img alt="전기레인지" class="img-fluid gift-img gift-selected" src="images/gift/range.png"/>
-                                <div class="btn-group gift-btn-group" role="group">
-                                    <button class="btn btn-default gift-btn"
-                                            onclick="window.open('https://www.lge.co.kr/lgekor/product/kitchen/electricRange/productDetail.do?cateId=4410&prdId=EPRD.333447')">
-                                        <i class="fa fa-search"></i></button>
-                                    <button class="btn btn-default gift-btn gift-send" data-name="전기레인지"
-                                            
-                                             onclick="alert('다른분에게 예약된 선물입니다.');"><i
-                                            class="fa fa-gift"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
         <div class="ww-section ww-rsvp-detail" id="map">
+            <!--todo: update later-->
             <div class="container">
                 <div class="col text-center">
                     <h2 class="h1 text-center pb-3 ww-title" style="font-family: 'Noto Serif KR', serif;">Địa điểm</h2>
                     <div>
-                        <h5 style="font-family: 'Noto Serif KR', serif;">Sky Hall, Tầng 23, Centum Science Park Wedding Hall</h5>
+                        <h5 style="font-family: 'Noto Serif KR', serif;">Sky Hall, Tầng 23, Centum Science Park Wedding
+                            Hall</h5>
                         <h6 style="font-family: 'Noto Serif KR', serif;">(79 Centum jungang-ro, Haeundae-gu, Busan)</h6>
                     </div>
                 </div>
@@ -367,7 +87,8 @@
                             </label>
                         </div>
                         <div class="my-3">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3261.297439052569!2d129.1238775160104!3d35.1741384652207!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x356892c2513ecf5d%3A0x7d362ece2091e2f8!2z7IS87YWA7IKs7J207Ja47Iqk7YyM7YGsIOy7qOuypOyFmO2ZgA!5e0!3m2!1sko!2skr!4v1554092125630!5m2!1sko!2skr" width="100%" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3261.297439052569!2d129.1238775160104!3d35.1741384652207!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x356892c2513ecf5d%3A0x7d362ece2091e2f8!2z7IS87YWA7IKs7J207Ja47Iqk7YyM7YGsIOy7qOuypOyFmO2ZgA!5e0!3m2!1sko!2skr!4v1554092125630!5m2!1sko!2skr"
+                                    width="100%" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
                         </div>
                     </div>
                 </div>
@@ -377,15 +98,19 @@
         </div>
 
         <div class="ww-section bg-light" id="comment">
+            <!--todo: update later-->
             <div class="ww-photo-gallery">
                 <div class="container">
                     <div class="col text-center">
-                        <h2 class="h1 text-center pb-3 ww-title" style="font-family: 'Noto Serif KR', serif;">Lời chúc</h2><br>
+                        <h2 class="h1 text-center pb-3 ww-title" style="font-family: 'Noto Serif KR', serif;">Lời
+                            chúc</h2><br>
                         <div id="comments"></div>
                         <br>
                         <div class="row">
-                            <div class="col text-center"><form action="https://github.com/AndersonChoi/wedding-card/blob/master/README.md">
-                                <button class="btn btn-primary btn-submit" type="submit">Để lại lời chúc</button></form>
+                            <div class="col text-center">
+                                <form action="https://github.com/AndersonChoi/wedding-card/blob/master/README.md">
+                                    <button class="btn btn-primary btn-submit" type="submit">Để lại lời chúc</button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -394,7 +119,6 @@
         </div>
 
     </div>
-</div>
 </div>
 <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="giftMailModal" role="dialog"
      tabindex="-1">
@@ -424,33 +148,17 @@
         </div>
     </div>
 </div>
-<footer></footer>
-<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="js/aos.js"></script>
-<script src="js/parallax.min.js"></script>
-<script src="js/ekko-lightbox.min.js"></script>
-<script src="scripts/main.js"></script>
-
-<div class="bottom_right"><i class="fa fa-arrow-up fa-2x" id="go-to-top"></i>
-</div>
-
-<div class="bottom_left">
-    <div>
-        <i id="playButton" class="fa fa-music fa-2x" onclick="document.getElementById('player').play()"></i>
-    </div>
-    <audio id="player" src="mus.mp3" preload="auto" autoplay loop>
-
-<!--    <script>-->
-<!--        const playButton = document.getElementById('playButton');-->
-<!--        document.addEventListener('load', function() {-->
-<!--            setTimeout(function() {-->
-<!--                playButton.click(); // Giả lập click vào nút-->
-<!--            }, 5000);-->
-<!--        }, { once: true });-->
-<!--    </script>-->
-</div>
-
 </body>
+<footer>
+    <div class="bottom_right">
+        <i class="fa fa-arrow-up fa-2x" id="go-to-top"></i>
+    </div>
+
+    <div class="bottom_left">
+        <div>
+            <i id="playButton" class="fa fa-music fa-2x" onclick="document.getElementById('player').play()"></i>
+        </div>
+        <audio id="player" src="mus.mp3" preload="auto" autoplay loop></audio>
+    </div>
+</footer>
 </html>
