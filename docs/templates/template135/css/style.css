@@ -1,0 +1,618 @@
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background-color: #fff;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #827f76;
+}
+body {
+    font-family: "Bellota Text", cursive;
+}
+.section-bg-affect:nth-child(even) {
+    background-color: #f9f9f9;
+}
+.story-section .timeline-card::before {
+    border-color: #474747;
+}
+.story-section .timeline .title::before {
+    border-color: #474747;
+}
+.story-section .timeline-1 li {
+    border-left-color: #d3c4a1;
+}
+.story-section .timeline-1 li:before {
+    border-color: #cbb788;
+    box-shadow: 3px 3px 0px #d3c4a1;
+}
+.donate-section .donate-box .donate-card {
+    width: 100%;
+    border: 1px dashed #474747;
+}
+.donate-section .donate-box .donate-card p:last-child {
+    margin-bottom: 0 !important;
+}
+
+.donate-section .donate-box .donate-card .qr-code-image {
+    max-width: 150px;
+    display: block;
+    cursor: zoom-in;
+}
+.donate-modal {
+    display: none;
+    position: fixed;
+    z-index: 199;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0)!important;
+    background-color: rgba(0,0,0,0.5)!important;
+}
+.donate-modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    width: 90%;
+    max-width: 750px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetopfordonatemodal;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetopfordonatemodal;
+    animation-duration: 0.4s
+}
+@-webkit-keyframes animatetopfordonatemodal {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+@keyframes animatetopfordonatemodal {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+.donate-modal strong, .donate-modal h3{font-family:inherit!important;}
+.donate-modal-close {color: red;font-size: 28px;font-weight: bold;text-decoration: none;cursor: pointer;position: absolute;right: 15px;z-index: 999;}
+.donate-modal-header {padding: 8px 16px;background-color: #f23b43;color: #fff;font-size:30px;text-align:center;line-height: 40px;}
+.donate-modal-header strong{display:flex;align-items:center;justify-content: center;flex-wrap: wrap;color:#fff;}
+
+.donate-modal-header strong span{margin-left:10px;}
+.donate-modal-body {padding: 0 15px;}
+/* .donate-box{display: flex;justify-content: space-evenly;flex-wrap: wrap;} */
+.donate-box .donate-card:hover{box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);}
+.donate-box .donate-card h3{padding:0;margin:0;margin-bottom: 20px;font-weight: bold;font-size: 18px;line-height: 30px;}
+.donate-box .donate-card p {margin: 10px 0!important;font-size: 16px;}
+.donate-box .donate-card p:last-child {margin-bottom:0!important;}
+@media (max-width: 699px) {
+    .donate-box .donate-card{width:100%;}
+    .donate-wrap{
+        width: 100%;
+    }
+    .qr-code-image {
+        max-width: 200px;
+    }
+}
+.donate-box .donate-card {position:relative;}
+.donate-box .donate-card .qr-code-image{max-width: 150px;border: 1px solid #ccc;padding: 3px;margin: auto;display: block;cursor: zoom-in;}
+.donate-box .cryptos-box .cryptos-items {display: flex;flex-wrap: wrap;justify-content: center;margin-right: -10px;margin-left: -10px;margin-top: 10px;}
+.donate-box .cryptos-box .cryptos-items .crypto-item {padding:10px 10px 0;}
+.donate-box .cryptos-box .cryptos-items .crypto-item img {width:30px;max-width:100%;min-width:35px;cursor:pointer;}
+.donate-box .cryptos-box-view {display:none;position: absolute;top: 0;left: 0;background: #ffffff;width: 100%;height: 100%;border-radius: 7px;padding:10px;text-align: center;}
+.donate-box .cryptos-box-view h5 {font-weight: bold;font-size: 18px;display: flex;align-items: center;justify-content: center;margin-bottom: 15px;}
+.donate-box .cryptos-box-view h5 img{width:25px;}
+.donate-box .cryptos-box-view h5 .coin-img {margin-right: 5px;}
+.donate-box .cryptos-box-view h5 .coin-id {margin-left: 5px;}
+.donate-box .cryptos-box-view .coin-address {display: block;padding: 10px;background: #ffe2e4;margin-bottom: 15px;word-break: break-word;color: #201f1f;}
+.donate-box .cryptos-box-view .cryptos-box-view-close {margin-top: 15px;background: #f23b43;color: #fff;padding: 5px 15px;border-radius: 5px;border: 1px solid #e3252d;}
+.donate-box .cryptos-box-view .cryptos-box-view-close:hover{background: #e3252d;}
+
+header .navbar-brand {
+    font-size: 20px;
+}
+.offcanvas-menu li {
+    position: relative;
+}
+.offcanvas-menu li:after {
+    content: "";
+    position: absolute;
+    width: 50px;
+    height: 1px;
+    bottom: 0;
+    left: 0;
+    border: 1px solid #474747;
+}
+.offcanvas-menu .nav-link {
+    font-size: 1.2rem;
+    text-transform: capitalize;
+}
+.section-title {
+    font-family: 'Bonheur Royale', cursive;
+    letter-spacing: 1px;
+    font-size: 2.8rem;
+    color: #474747;
+}
+.section-sub-title {
+    font-family: "Bellota Text", cursive;
+}
+.title {
+    font-family: "Bellota Text", cursive;
+    font-size: 1.4rem;
+}
+.sub-title {
+    font-family: "Bellota Text", cursive;
+    font-size: 1.1rem;
+}
+.wrapper {
+}
+/* Banner Section */
+.main_area {
+    position: relative;
+    text-align: center;
+}
+.main_image_area {
+    /* position: relative; */
+}
+.main_image_area .bg-title {
+    position: absolute;
+    left: 0;
+    bottom: 35px;
+}
+.main_image_area .wrap-name {
+    text-align: left;
+    font-size: 22px;
+}
+.main_area .day_wrapper {
+    width: 100%;
+    z-index: 1;
+}
+.main_area .day_area p {
+    color: #3d3d3d;
+}
+.main_area .day_area .we {
+    position: absolute;
+    left: calc(100% - 270px);
+    bottom: 20px;
+}
+.main_area .day_area .wrap-text p {
+    color: #c6c6c6;
+    font-size: 70px;
+    line-height: 1;
+}
+.main_area .day_area .wrap-text p:first-child{
+    border-bottom: 1px solid;
+}
+.main_area .day_area .day_area_inner {
+    justify-content: right;
+    align-items: center;
+    gap: 10px;
+}
+.main_area .day_area_inner > span {
+    display: block;
+    color: #fff;
+    font-size: 1.2em;
+    line-height: 30px;
+    height: 30px;
+}
+.main_area .wedding_area {
+    color: #474747;
+    font-size: 1.6em;
+    line-height: 50px;
+    letter-spacing: 3px;
+}
+.main_image {
+    overflow: hidden;
+}
+.main_area .wedding_area {
+    font-size: 2.2em;
+}
+.accessibilities-section a {
+    border-color: #636363;
+    background: #636363;
+}
+.accessibilities-section .content-button {
+    font-size: 14px;
+}
+
+/* video-section */
+.video-section iframe {
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+/* galleries-section */
+#btn-see-more-gallery{
+    border-radius: 50px;
+    padding: 12px 24px;
+}
+.gallery-section .btn-secondary.btn-see-more-gallery {
+    background: #636363;
+    border-color: #636363;
+}
+.lg-backdrop, .lg-outer{
+    z-index: 9999999;
+}
+.gallery-item {
+    cursor: pointer;
+}
+
+/* weddingdate-section */
+.weddingdate-section .mini_calendar .calendar-month,
+.weddingdate-section .mini_calendar table th {
+    color: #474747;
+}
+.mini_calendar > .mini_calendar{
+    border-bottom: 1px solid #2a2a2d;
+    padding-bottom: 20px;
+}
+.weddingdate-section .mini_calendar table tr:nth-child(2) td {
+    padding: 0;
+    height: 40px;
+}
+.weddingdate-section #clock > div {
+    color: #474747;
+}
+.main_dday_wrapper .main_dday_icon {
+    position: absolute;
+    top: -5px;
+    width: 100%;
+    text-align: center;
+    opacity: 1;
+    width: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.main_dday_wrapper .main_dday_text {
+    position: absolute;
+    top: 42px;
+    left: 52%;
+    font-size: 1.5em;
+}
+.weddingdate-section .mini_calendar td {
+    color: #808080;
+}
+.weddingdate-section .mini_calendar td #today {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    line-height: 20px;
+    padding: 5px;
+    background-color: #726e6e;
+    color: #fff;
+    border-radius: 50%;
+}
+/* story-section */
+.story-section .timeline .title {
+    color: #474747;
+}
+.timeline-card .img-holder {
+    border-radius: 20px;
+    overflow: hidden;
+}
+.invitation-couple {
+    color: #474747;
+}
+.invitation-section {
+    color: #000;
+}
+.invitation-section .invitation-place {
+    line-height: 2rem;
+}
+.invitation-section .invation-title h3 {
+    font-size: 2.7rem;
+}
+.invitation-section .invation-title p {
+    text-transform: uppercase;
+    font-size: 14px;
+}
+.invitation-section .couple-img {
+    overflow: hidden;
+}
+.invitation-section .invitation-content {
+    width: 70%;
+    margin: 0 auto;
+    line-height: 2rem;
+}
+.invitation-section .invitation-parent {
+    color: #000;
+    letter-spacing: 1px;
+    text-align: center;
+}
+.invitation-section .invitation-couple p {
+    color: #949494;
+}
+.invitation-section .invitation-couple span {
+    font-size: 40px;
+    line-height: 45px;
+    color: #000;
+}
+.invitation-section .invitation-couple i {
+    font-size: 20px;
+    color: #fff;
+}
+.invitation-section .invitation-common-wrapper p {
+    font-size: 2rem;
+}
+.invitation-section .invitation-common-wrapper {
+    background-color: #fff;
+}
+/* event-section */
+.event-section a {
+    background: #636363;
+    border-color: #636363;
+    font-size: 14px;
+}
+.event-section .event-item {
+    background-color: #f2f2f2;
+}
+/* couple-section */
+.couple-section .wrap-people {
+    overflow: hidden;
+    gap: 25px;
+    justify-content: space-between;
+}
+.couple-section .wrap-people .member {
+    margin: 0 auto;
+}
+@media screen and (max-width: 450px){
+    .couple-section .wrap-people .member {
+        width: 100%!important;
+    }
+    .couple-section .wrap-people{
+        flex-direction: column;
+    }
+}
+.couple-section .wrap-people .member img {
+    width: 100%;
+    max-width: 350px;
+    margin: auto;
+    border-radius: 50%;
+}
+.couple-section .wrap-people .member-name {
+    text-align: center;
+    margin: 0 auto;
+    font-size: 30px;
+}
+.couple-section .wrap-people .member-contact {
+    justify-content: center;
+    gap: 10px;
+}
+.couple-section .wrap-people .member-contact li {
+    line-height: 20px;
+    align-self: center;
+}
+.couple-section .member-contact li a {
+    font-size: 20px;
+    display: inline-block;
+}
+.parent{
+    font-size: 16px;
+    font-family: "Bellota Text", cursive;
+}
+.parent-name > span {
+    font-weight: bold;
+}
+/* people-section */
+.people-section .rounded-circle {
+    overflow: hidden;
+}
+.people-section a,
+.couple-section a {
+    color: #474747;
+    display: inline-block;
+}
+
+/* wishes-section */
+.wish-box {
+    border-color: #474747;
+}
+.wishes-section button {
+    font-size: 14px;
+    background: #474747;
+    border-color: #474747;
+}
+
+/* footer-section */
+.footer-section .title {
+    font-size: 2.6rem;
+    color: #474747;
+}
+
+@media (max-width: 375px) {
+    .section-title {
+        font-size: 2.5rem;
+    }
+    .main_area .wedding_area {
+        font-size: 1.5rem;
+    }
+    .main_area .wedding_area img {
+        display: block;
+        margin: 0 auto;
+    }
+    .invitation-section .invitation-content {
+        width: 90%;
+    }
+    .invitation-section .invitation-couple span {
+        font-size: 27px;
+        line-height: 45px;
+    }
+    .invitation-section .invitation-common-wrapper {
+        margin: 0 10px;
+        color: #000;
+    }
+    .invitation-section h3 {
+        background-size: contain;
+    }
+    .footer-section .title {
+        font-size: 1.6rem;
+    }
+}
+@media (max-width: 414px) {
+    .main_image_area .bg-title {
+        position: absolute;
+        left: 0;
+        bottom: 50px;
+    }
+    .main_image_area .wrap-name {
+        font-size: 18px;
+    }
+    .invitation-section .invitation-common-wrapper p {
+        font-size: 22px;
+    }
+}
+/*new form*/
+#wish-form {
+    background-color: #D8D8D8;
+}
+#show-comments {
+    background-color: #D8D8D8;
+}
+.box-comment {
+    border-bottom: 1px dashed black;
+}
+button#btn-submit-comment {
+    background-color: #5C636A;
+    color: white;
+    text-transform: uppercase;
+    border: none;
+}
+button#btn-submit-comment:hover {
+    background-color: #848484;
+}
+#show-comments::-webkit-scrollbar {
+    width: 8px;
+
+}
+#show-comments::-webkit-scrollbar-thumb {
+    background-color:#5C636A;
+}
+
+.emoji-picker{max-width:100%;display:none;position: absolute;user-select: none!important;background: #fff;right: 0px;z-index: 9999;bottom: -355px;-webkit-box-shadow: 0 1px 2px 0 rgb(60 64 67 / 35%), 0 2px 6px 2px rgb(60 64 67 / 35%);box-shadow: 0 1px 2px 0 rgb(60 64 67 / 35%), 0 2px 6px 2px rgb(60 64 67 / 35%);border-radius: 0.5rem;overflow: hidden;}
+.emoji-picker > emoji-picker{--emoji-size:22px;}
+@media screen and (max-width: 400px){
+    .emoji-picker > emoji-picker{ --num-columns: 6;}
+}
+#wish-form textarea:focus {box-shadow: none;}
+#wish-form textarea{margin-bottom:0;border-radius:0!important;resize: none;}
+#wish-form .textAreaIcons{position:relative;text-align:right;background: #fff;padding: 10px;border-top: none;border-top: 1px solid #f3f1f1;}
+#wish-form .textAreaIcons span{color: #333;cursor:pointer;margin-right:4px;}
+.tooltip{ width: 160px;}
+.tooltip .tooltip-inner{padding: 8px 12px;font-size: 16px;}
+#wish-form .wishes-autocomplete-content{position: absolute;top: 50px;width: 100%;left: 0;z-index: 333;background: #fff;-webkit-box-shadow: 0 1px 2px 0 rgb(60 64 67 / 35%), 0 2px 6px 2px rgb(60 64 67 / 35%);box-shadow: 0 1px 2px 0 rgb(60 64 67 / 35%), 0 2px 6px 2px rgb(60 64 67 / 35%);}
+#wish-form .wishes-autocomplete-content input{
+    background-image: url('common/searchicon.png')!important;
+    background-position: 10px!important;
+    background-repeat: no-repeat!important;
+    width: 100%!important;
+    font-size: 16px!important;
+    padding: 12px 20px 12px 40px!important;
+    border: 1px solid #ddd!important;
+    margin-bottom: 0!important;
+    border-radius:0!important;
+}
+#wish-form .wishes-autocomplete-content ul{list-style-type: none;margin: 0;padding: 0;max-height: 300px;overflow: auto;display: block;height: auto;text-align:left;}
+#wish-form .wishes-autocomplete-content ul li a {
+    border: 1px solid #ddd!important;
+    margin-top: -1px!important;
+    padding: 12px!important;
+    text-decoration: none!important;
+    font-size: 15px!important;
+    color: black!important;
+    display: block!important;
+}
+#wish-form .wishes-autocomplete-content ul li a:hover{background-color: #eee!important;}
+#wish-form .tooltip-custom {
+    position: relative;
+    display: inline-block;
+}
+
+/* dresscode */
+.event-section .dresscode-colors-event{
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: rgb(246 246 246 / 70%);
+    padding: 4px;
+    justify-content: center;
+}
+.event-section .dresscode-colors-event > .dresscode-colors-item{
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+}
+.event-section .dresscode-colors-wrap{
+    position: absolute;
+    bottom: 0;
+}
+.event-section .event-item:hover .tooltip-dresscode{
+    display: block;
+}
+.event-section .event-item .tooltip-dresscode {
+    width: 130px;
+    font-family: sans-serif;
+    font-size: 14px;
+    background-color: rgb(255 255 255);
+    border: 1px solid #eee;
+    color: #000;
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 40px;
+    display: none;
+}
+.event-section .event-item .tooltip-dresscode::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: rgb(255 255 255) transparent transparent transparent;
+}
+@media (max-width:449px){
+    .event-section .dresscode-colors-event{gap: 10px!important;}
+    .event-section .dresscode-colors-wrap{width: 100%!important;}
+}
+
+.contact-validation-active .error-handling-messages {
+    width: 100% !important;
+    margin-top: 15px !important;
+}
+
+.contact-validation-active #success,
+.contact-validation-active #c-success,
+.contact-validation-active #c-error,
+.contact-validation-active #error {
+    width: 100%;
+    color: #fff;
+    padding: 5px 10px;
+    font-size: 16px;
+    text-align: center;
+    display: none;
+}
+@media (max-width: 767px) {
+    .contact-validation-active #success,
+    .contact-validation-active #c-success,
+    .contact-validation-active #c-error,
+    .contact-validation-active #error {
+        font-size: 15px;
+    }
+}
+.contact-validation-active #c-success,
+.contact-validation-active #success {
+    background-color: #009a00;
+    border-left: 5px solid green;
+    margin-bottom: 5px;
+}
+.contact-validation-active #c-error,
+.contact-validation-active #error {
+    background-color: #ff1a1a;
+    border-left: 5px solid red;
+}
