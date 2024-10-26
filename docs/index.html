@@ -75,7 +75,7 @@
             <div class="day_wrapper" data-aos="fade-up" data-aos-delay="500">
                 <div class="day_area p-1 text-center">
                     <div class="section-sub-title d-flex day_area_inner text-center p-2 py-3">
-                        <p class="m-0 we"> Chúng tôi  </p>
+                        <p class="m-0 we"> Chúng tôi </p>
                         <div class="wrap-text">
                             <p class="day m-0">24</p>
                             <p class="month m-0">11</p>
@@ -106,13 +106,14 @@
                        data-aos="fade-right">
                         <span class="content-button">
                             <img class="access-section-icon"
-                                 src="assets/images/common/wishes.webp" alt="access-btn">Gửi lời chúc
+                                 src="assets/images/common/wishes.webp" alt="access-btn">  Gửi lời chúc
                         </span>
                     </a>
                 </div>
                 <div class="col-sm-4">
                     <!-- todo: check later -->
-                    <a href="https://preview.iwedding.info/rsvp" target="_blank"
+                    <!--                    <a href="https://preview.iwedding.info/rsvp" target="_blank"-->
+                    <a target="_blank"
                        class="w-100 mb-1 px-2 accessibility-btn btn btn-secondary"
                        data-aos="fade-up">
                         <span class="content-button">
@@ -1324,7 +1325,9 @@
         </li>
 
         <li class="text-center">
-            <a href="https://preview.iwedding.info/rsvp" target="_blank" class="text-white">
+            <!-- todo: check later -->
+            <!-- <a href="https://preview.iwedding.info/rsvp" target="_blank" class="text-white">-->
+            <a target="_blank" class="text-white">
                     <span class="content-button tooltipBtn">
                         <span class="tooltiptext">Xác nhận tham dự</span>
                         <img class="access-icon" src="assets/images/common/rsvp4.webp"
@@ -1488,7 +1491,7 @@
         }
     }
 </style>
-<audio id="myAudio" src="https://cdn.biihappy.com/ziiweb/wedding-musics/IDo-911.mp3" preload="auto"></audio>
+<audio id="myAudio" src="https://cdn.biihappy.com/ziiweb/wedding-musics/IDo-911.mp3" preload="auto" loop></audio>
 <div id="player" class="bii-player">
     <div onclick="togglePlay();" class="bii-player-secondary">
         <div class="bii-player-secondary-content">Click vào đây để nghe nhạc nhé!</div>
@@ -1682,46 +1685,43 @@
         left: 65%;
         animation-delay: 2.5s
     }
-</style>
-<div class="snowflakes" aria-hidden="true">
 
-    <div class="snowflake">
-        <div class="inner"><img alt="snow" src="assets/images/common/heart.png"></div>
-    </div>
-    <div class="snowflake">
-        <div class="inner"><img alt="snow" src="assets/images/common/heart.png"></div>
-    </div>
-    <div class="snowflake">
-        <div class="inner"><img alt="snow" src="assets/images/common/heart.png"></div>
-    </div>
-    <div class="snowflake">
-        <div class="inner"><img alt="snow" src="assets/images/common/heart.png"></div>
-    </div>
-    <div class="snowflake">
-        <div class="inner"><img alt="snow" src="assets/images/common/heart.png"></div>
-    </div>
-    <div class="snowflake">
-        <div class="inner"><img alt="snow" src="assets/images/common/heart.png"></div>
-    </div>
-    <div class="snowflake">
-        <div class="inner"><img alt="snow" src="assets/images/common/heart.png"></div>
-    </div>
-    <div class="snowflake">
-        <div class="inner"><img alt="snow" src="assets/images/common/heart.png"></div>
-    </div>
-    <div class="snowflake">
-        <div class="inner"><img alt="snow" src="assets/images/common/heart.png"></div>
-    </div>
-    <div class="snowflake">
-        <div class="inner"><img alt="snow" src="assets/images/common/heart.png"></div>
-    </div>
-    <div class="snowflake">
-        <div class="inner"><img alt="snow" src="assets/images/common/heart.png"></div>
-    </div>
-    <div class="snowflake">
-        <div class="inner"><img alt="snow" src="assets/images/common/heart.png"></div>
-    </div>
-</div>
+
+    .snowflake-image {
+        width: 16px; /* Kích thước bạn muốn */
+        height: 16px; /* Kích thước bạn muốn */
+        display: block; /* Đảm bảo không có khoảng trống bên dưới */
+    }
+</style>
+<div id="snowflakes" class="snowflakes" aria-hidden="true"></div>
+<script>
+    let timeout;
+
+    function setupSnowFlakes() {
+        clearTimeout(timeout);
+        timeout = setTimeout(function () {
+            const snowflakes = document.getElementById('snowflakes');
+            // Xóa tất cả bông tuyết hiện có trước khi thêm mới
+            snowflakes.innerHTML = '';
+
+            // Số lượng bông tuyết cần tạo
+            const numberOfSnowflakes = Math.floor(window.innerWidth / 100);
+
+            for (let i = 0; i < numberOfSnowflakes; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.className = 'snowflake';
+                snowflake.style.left = Math.random() * 100 + 'vw'; // Đặt vị trí ngẫu nhiên
+                snowflake.style.animationDelay = Math.random() * 5 + 's'; // Đặt độ trễ ngẫu nhiên
+                snowflake.innerHTML = '<div class="inner"><img alt="snow" src="assets/images/common/heart.png" class="snowflake-image"></div>';
+                snowflakes.appendChild(snowflake);
+            }
+        }, 300); // Thời gian debounce là 300ms
+    }
+
+    window.addEventListener('resize', setupSnowFlakes);
+    // Gọi hàm một lần khi tải trang
+    setupSnowFlakes();
+</script>
 <!--END SNOWFLAKES-->
 </body>
 </html>
