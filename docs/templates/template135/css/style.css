@@ -502,7 +502,7 @@ button#btn-submit-comment:hover {
 .tooltip .tooltip-inner{padding: 8px 12px;font-size: 16px;}
 #wish-form .wishes-autocomplete-content{position: absolute;top: 50px;width: 100%;left: 0;z-index: 333;background: #fff;-webkit-box-shadow: 0 1px 2px 0 rgb(60 64 67 / 35%), 0 2px 6px 2px rgb(60 64 67 / 35%);box-shadow: 0 1px 2px 0 rgb(60 64 67 / 35%), 0 2px 6px 2px rgb(60 64 67 / 35%);}
 #wish-form .wishes-autocomplete-content input{
-    background-image: url('common/searchicon.png')!important;
+    background-image: url('https://phucanh08.github.io/wedding-card/assets/images/common/searchicon.png')!important;
     background-position: 10px!important;
     background-repeat: no-repeat!important;
     width: 100%!important;

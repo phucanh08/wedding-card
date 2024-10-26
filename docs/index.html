@@ -7,8 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description"
           content="Lê Phúc Anh &amp; Nguyễn Thị Ngọc - Our wedding date: 2024-11-24 | Điều tuyệt vời nhất mà bạn từng học là yêu và được yêu để đáp lại">
-    <meta name="keywords"
-          content="Wedding,Lê Phúc Anh,Nguyễn Thị Ngọc,Wedding website, Website đám cưới, Tạo website đám cưới miễn phí">
+    <meta name="keywords" content="Wedding,Lê Phúc Anh,Nguyễn Thị Ngọc">
     <meta name="format-detection" content="telephone=no">
     <meta name="application-name" content="P.Anh & N.Ngọc Wedding">
     <meta name="author" content="anhlp">
@@ -21,9 +20,7 @@
     <meta property="og:image" content="assets/images/meta_image.webp">
     <meta property="og:image:url" content="assets/images/meta_image.webp">
     <meta property="og:image:secure_url" content="assets/images/meta_image.webp">
-
     <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon/favicon.webp">
-
 
     <link href="https://fonts.googleapis.com/css2?family=Texturina:opsz,wght@12..72,100&display=swap"
           rel="stylesheet"/>
@@ -39,6 +36,14 @@
     <link rel="stylesheet" href="templates/template135/css/style.css"/>
     <link rel="stylesheet" href="common/calendar.css">
 
+    <script src="common/calendar.js"></script>
+    <script src="templates/template135/js/libs.js"></script>
+    <script src="templates/template135/js/script.js"></script>
+    <script src="common/emoji-picker/js/insertTextAtCursor.js"></script>
+    <script src="common/emoji-picker/js/init.js" type="module"></script>
+
+    <!-- Firebase SDK -->
+    <!--    <script src="firebase-config.js"></script>-->
 </head>
 <script type="text/javascript">
     var photoGalleries = [];
@@ -142,7 +147,6 @@
             <div class="ratio ratio-16x9" data-aos="zoom-in">
                 <iframe width="100%" src="https://www.youtube.com/embed/lGUdD29BDMg"
                         title="YouTube video player"
-                        frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                         allowfullscreen></iframe>
             </div>
@@ -960,7 +964,9 @@
                                           rows="3"
                                           placeholder="Nhập lời chúc của bạn*"></textarea>
                                 <div class="textAreaIcons">
-                                <span class="show-autocomplete tooltip-custom" data-toggle="tooltip"
+                                <span class="show-autocomplete tooltip-custom"
+                                      onclick="toggleWishesAutocompleteContent();"
+                                      data-toggle="tooltip"
                                       data-placement="top" title="Lời chúc gợi ý">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                          fill="currentColor"
@@ -969,6 +975,7 @@
                                     </svg>
                                 </span>
                                     <span class="hide-autocomplete tooltip-custom"
+                                          onclick="toggleWishesAutocompleteContent();"
                                           style="display: none;">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                          fill="currentColor"
@@ -988,134 +995,111 @@
                                     </svg>
                                 </span>
                                     <div class="wishes-autocomplete-content" style="display: none;">
-                                        <input type="text" id="searchWishSuggestions"
-                                               onkeyup="searchWishSuggestionsFunction()"
-                                               placeholder="Tìm kiếm...">
-                                        <ul id="wishSuggestions">
-                                            <li><a class="showContent" href="#">Chúc mừng hạnh phúc!
-                                                Chúc hai bạn trăm
-                                                năm hạnh phúc!</a></li>
-                                            <li><a class="showContent" href="#">Chúc mừng ngày trọng
-                                                đại tới hai bạn.
-                                                Hạnh phúc bền lâu và trọn vẹn nhé!</a></li>
-                                            <li><a class="showContent" href="#">Chúc mừng hạnh phúc
-                                                hai bạn. Chúc hai
-                                                bạn bên nhau đầu bạc răng long, sớm có thiên thần
-                                                nhỏ nhé!</a></li>
-                                            <li><a class="showContent" href="#">Chúc hai bạn ngày
-                                                vui hạnh phúc. Hãy yêu
-                                                thương nhau thật nhiều và sống thật hạnh phúc
-                                                nha!</a></li>
-                                            <li><a class="showContent" href="#">Chúc hai bạn sớm có
-                                                con đàn cháu đống,
-                                                cửa nhà lúc nào cũng đầm ấm, yên vui nhé!</a></li>
-                                            <li><a class="showContent" href="#">Thật vui vì cuối
-                                                cùng ngày này cũng tới
-                                                với bạn. Tôi thành tâm chúc hai bạn thật nhiều hạnh
-                                                phúc và sống đời vui
-                                                vẻ cùng nhau mãi mãi!</a></li>
-                                            <li><a class="showContent" href="#">Một chương mới đã mở
-                                                ra với hai bạn rồi.
-                                                Tôi mong cuộc sống mới của cả hai sẽ tràn ngập hy
-                                                vọng, hạnh phúc và
-                                                niềm vui!</a></li>
-                                            <li><a class="showContent" href="#">Chúc đôi trai tài
-                                                gái sắc hạnh phúc trọn
-                                                vẹn, luôn yêu thương nhau thật nhiều!</a></li>
-                                            <li><a class="showContent" href="#">Chia vui cùng bạn
-                                                trong ngày trọng đại
-                                                này. Cầu mong cuộc sống sau này của 2 vợ chồng thật
-                                                thuận hòa, may mắn,
-                                                làm ăn phát tài nha.</a></li>
-                                            <li><a class="showContent" href="#">Tôi mong tình yêu
-                                                của hai bạn thật bền
-                                                chặt, gắn bó để xây dựng tổ ấm yên bình, hạnh
-                                                phúc!</a></li>
-                                            <li><a class="showContent" href="#">Hai bạn của tôi chắc
-                                                chắn sẽ có được
-                                                nhiều hạnh phúc. Mong hai bạn có sức khỏe dồi dào,
-                                                làm ăn phát đạt và
-                                                sớm có cháu cho ông bà bồng bế nhé!</a></li>
-                                            <li><a class="showContent" href="#">Gửi lời chúc mừng
-                                                chân thành nhất tới
-                                                bạn của tôi. Chúc hai bạn một cuộc sống thật tuyệt
-                                                vời, hòa thuận, gắn
-                                                bó son sắt, thủy chung, hạnh phúc lâu dài.</a></li>
-                                            <li><a class="showContent" href="#">Nơi nào có yêu
-                                                thương nơi đó chắc chắn
-                                                hạnh phúc. Hai bạn đã tìm được nơi đủ đầy yêu thương
-                                                rồi, hãy cùng nắm
-                                                tay nhau đi hết cuộc đời nhé!</a></li>
-                                            <li><a class="showContent" href="#">Khởi đầu một cuộc
-                                                sống mới, nguyện ước
-                                                cho bạn của tôi những ngày tháng hạnh phúc phía
-                                                trước để cùng xây dựng
-                                                tổ ấm với người bạn đời. Happy ending!</a></li>
-                                            <li><a class="showContent" href="#">Mình tin rằng đây sẽ
-                                                là khởi đầu cho
-                                                những điều tốt đẹp sắp tới trong cuộc sống của hai
-                                                bạn. Hãy yêu thương
-                                                và cùng nhau vượt qua mọi khó khăn trong cuộc sống
-                                                nhé.</a></li>
-                                            <li><a class="showContent" href="#">Hôn nhân đánh dấu sự
-                                                kết thúc một câu
-                                                chuyện tình yêu và bắt đầu một trận đấu vật. Chúc
-                                                bạn những điều tốt đẹp
-                                                nhất.</a></li>
-                                            <li><a class="showContent" href="#">Tôi sẽ nói cho bạn
-                                                bí mật của một cuộc
-                                                hôn nhân hạnh phúc. Đó vẫn là … một bí mật cho tất
-                                                cả! Chúc bạn tất cả
-                                                những điều tốt đẹp nhất của thời gian phía
-                                                trước.</a></li>
-                                            <li><a class="showContent" href="#">Hôn nhân thật đẹp.
-                                                Cuối cùng bạn đã tìm
-                                                thấy một người mà bạn bị làm phiền suốt cuộc
-                                                đời.</a></li>
-                                            <li><a class="showContent" href="#">Hai trở thành một:
-                                                Một giường, một điều
-                                                khiển từ xa, một phòng tắm! Xin chúc mừng đám cưới
-                                                hai bạn.</a></li>
-                                            <li><a class="showContent" href="#">Chúc đôi trai tài
-                                                gái sắc nhà mình hạnh
-                                                phúc vẹn tròn, cung hỷ cung hỷ!</a></li>
-                                            <li><a class="showContent" href="#">Chúc mừng anh trai
-                                                của em đã có người
-                                                rước nhé. Em mong anh chị có cuộc sống vui vẻ, hạnh
-                                                phúc phía trước, làm
-                                                ăn phát tài phát lộc.</a></li>
-                                            <li><a class="showContent" href="#">Anh chị là một cặp
-                                                trời sinh, chắc chắn
-                                                sau này sẽ rất hạnh phúc. Em chúc anh chị sức khỏe
-                                                dồi dào, làm ăn phát
-                                                đạt và sớm có thiên thần nhỏ cho vui cửa vui
-                                                nhà.</a></li>
-                                            <li><a class="showContent" href="#">Hôm nay là ngày vui
-                                                của anh chị và cũng
-                                                là ngày em rất hạnh phúc. Chúc anh chị mãi yêu
-                                                thương nhau như bây giờ
-                                                và đạt được mọi ước nguyện trong cuộc sống.</a></li>
-                                            <li><a class="showContent" href="#">Chúc anh/chị/em trăm
-                                                năm hạnh phúc,
-                                                thuận vợ thuận chồng.</a></li>
-                                            <li><a class="showContent" href="#">Hôm nay chú rể đẹp
-                                                trai, cô dâu xinh
-                                                gái. Chúc mừng ngày thành hôn hai bạn tôi!</a></li>
-                                            <li><a class="showContent" href="#">Chúc mừng đôi bạn
-                                                trẻ nhé! Mãi yêu
-                                                thương nhau đến đầu bạc răng long bạn nha!</a></li>
-                                            <li><a class="showContent" href="#">Thay mặt team (tên
-                                                nhóm) chúc hai bạn
-                                                ngày ngày ân ái, bên nhau trọn đời.</a></li>
-                                            <li><a class="showContent" href="#">Happy wedding! Chúc
-                                                hai bạn có cuộc sống
-                                                mới ngập tràn tiếng cười và niềm vui, sớm có thiên
-                                                thần nhỏ bồng bé!</a>
-                                            </li>
-                                        </ul>
+                                        <div>
+                                            <label for="searchWishSuggestions" style="display: flex">
+                                                <input type="text" id="searchWishSuggestions"
+                                                       onkeyup="searchWishSuggestionsFunction()"
+                                                       placeholder="Tìm kiếm...">
+                                            </label>
+
+                                        </div>
+
+                                        <ul id="wishSuggestions"></ul>
                                     </div>
                                 </div>
                             </div>
+                            <script>
+                                // Hàm chuyển có dấu thành không dấu
+                                function removeAccents(str) {
+                                    return str.normalize('NFD')
+                                        .replace(/[\u0300-\u036f]/g, '')
+                                        .replace(/đ/g, 'd')
+                                        .replace(/Đ/g, 'D');
+                                }
+
+                                const wishSuggestions = [
+                                    'Chúc mừng hạnh phúc! Chúc hai bạn trăm năm hạnh phúc!',
+                                    'Chúc mừng ngày trọng đại tới hai bạn. Hạnh phúc bền lâu và trọn vẹn nhé!',
+                                    'Chúc mừng hạnh phúc hai bạn. Chúc hai bạn bên nhau đầu bạc răng long, sớm có thiên thần nhỏ nhé!',
+                                    'Chúc hai bạn ngày vui hạnh phúc. Hãy yêu thương nhau thật nhiều và sống thật hạnh phúc nha!',
+                                    'Chúc hai bạn sớm có con đàn cháu đống, cửa nhà lúc nào cũng đầm ấm, yên vui nhé!',
+                                    'Thật vui vì cuối cùng ngày này cũng tới với bạn. Tôi thành tâm chúc hai bạn thật nhiều hạnh phúc và sống đời vui vẻ cùng nhau mãi mãi!',
+                                    'Một chương mới đã mở ra với hai bạn rồi. Tôi mong cuộc sống mới của cả hai sẽ tràn ngập hy vọng, hạnh phúc và niềm vui!',
+                                    'Chúc đôi trai tài gái sắc hạnh phúc trọn vẹn, luôn yêu thương nhau thật nhiều!',
+                                    "Chia vui cùng bạn trong ngày trọng đại này. Cầu mong cuộc sống sau này của 2 vợ chồng thật thuận hòa, may mắn, làm ăn phát tài nha.",
+                                    "Tôi mong tình yêu của hai bạn thật bền chặt, gắn bó để xây dựng tổ ấm yên bình, hạnh phúc!",
+                                    "Hai bạn của tôi chắc chắn sẽ có được nhiều hạnh phúc. Mong hai bạn có sức khỏe dồi dào, làm ăn phát đạt và sớm có cháu cho ông bà bồng bế nhé!",
+                                    "Gửi lời chúc mừng chân thành nhất tới bạn của tôi. Chúc hai bạn một cuộc sống thật tuyệt vời, hòa thuận, gắn bó son sắt, thủy chung, hạnh phúc lâu dài.",
+                                    "Nơi nào có yêu thương nơi đó chắc chắn hạnh phúc. Hai bạn đã tìm được nơi đủ đầy yêu thương rồi, hãy cùng nắm tay nhau đi hết cuộc đời nhé!",
+                                    "Khởi đầu một cuộc sống mới, nguyện ước cho bạn của tôi những ngày tháng hạnh phúc phía trước để cùng xây dựng tổ ấm với người bạn đời. Happy ending!",
+                                    "Mình tin rằng đây sẽ là khởi đầu cho những điều tốt đẹp sắp tới trong cuộc sống của hai bạn. Hãy yêu thương và cùng nhau vượt qua mọi khó khăn trong cuộc sống nhé.",
+                                    "Hôn nhân đánh dấu sự kết thúc một câu chuyện tình yêu và bắt đầu một trận đấu vật. Chúc bạn những điều tốt đẹp nhất.",
+                                    "Tôi sẽ nói cho bạn bí mật của một cuộc hôn nhân hạnh phúc. Đó vẫn là … một bí mật cho tất cả! Chúc bạn tất cả những điều tốt đẹp nhất của thời gian phía trước.",
+                                    "Hôn nhân thật đẹp. Cuối cùng bạn đã tìm thấy một người mà bạn bị làm phiền suốt cuộc đời.",
+                                    "Hai trở thành một: Một giường, một điều khiển từ xa, một phòng tắm! Xin chúc mừng đám cưới hai bạn.",
+                                    "Chúc đôi trai tài gái sắc nhà mình hạnh phúc vẹn tròn, cung hỷ cung hỷ!",
+                                    "Chúc mừng anh trai của em đã có người rước nhé. Em mong anh chị có cuộc sống vui vẻ, hạnh phúc phía trước, làm ăn phát tài phát lộc.",
+                                    "Anh chị là một cặp trời sinh, chắc chắn sau này sẽ rất hạnh phúc. Em chúc anh chị sức khỏe dồi dào, làm ăn phát đạt và sớm có thiên thần nhỏ cho vui cửa vui nhà.",
+                                    "Hôm nay là ngày vui của anh chị và cũng là ngày em rất hạnh phúc. Chúc anh chị mãi yêu thương nhau như bây giờ và đạt được mọi ước nguyện trong cuộc sống.",
+                                    "Chúc anh/chị/em trăm năm hạnh phúc, thuận vợ thuận chồng.",
+                                    "Hôm nay chú rể đẹp trai, cô dâu xinh gái. Chúc mừng ngày thành hôn hai bạn tôi!",
+                                    "Chúc mừng đôi bạn trẻ nhé! Mãi yêu thương nhau đến đầu bạc răng long bạn nha!",
+                                    "Thay mặt team (tên nhóm) chúc hai bạn ngày ngày ân ái, bên nhau trọn đời.",
+                                    "Happy wedding! Chúc hai bạn có cuộc sống mới ngập tràn tiếng cười và niềm vui, sớm có thiên thần nhỏ bồng bé!"
+                                ]
+                                const wishList = document.getElementById('wishSuggestions');
+                                wishSuggestions.forEach(message => {
+                                    const listItem = document.createElement('li');
+                                    const link = document.createElement('a');
+                                    link.className = 'showContent';
+                                    link.onclick = function () {
+                                        document.getElementById('detail-comment').value = message;
+                                    };
+                                    link.innerText = message;
+                                    listItem.setAttribute('data-normalized', removeAccents(message.toLowerCase()));
+
+                                    listItem.appendChild(link);
+                                    wishList.appendChild(listItem);
+                                });
+
+                                function searchWishSuggestionsFunction() {
+                                    const searchText = removeAccents(
+                                        document.getElementById('searchWishSuggestions').value.toLowerCase()
+                                    );
+                                    const items = document.getElementById('wishSuggestions').getElementsByTagName('li');
+                                    Array.from(items).forEach(item => {
+                                        const normalizedText = item.getAttribute('data-normalized');
+                                        if (normalizedText.includes(searchText)) {
+                                            item.style.display = '';
+                                        } else {
+                                            item.style.display = 'none';
+                                        }
+                                    });
+                                }
+
+                                const showAutocomplete = document.querySelector('.show-autocomplete')
+                                const hideAutocomplete = document.querySelector('.hide-autocomplete')
+                                const wishesAutocompleteContent = document.querySelector('.wishes-autocomplete-content')
+
+                                function toggleWishesAutocompleteContent() {
+                                    if (wishesAutocompleteContent.style.display === 'none') {
+                                        setTimeout(() => {
+                                            wishesAutocompleteContent.style.display = '';
+                                            wishesAutocompleteContent.focus();
+                                            showAutocomplete.style.display = 'none';
+                                            hideAutocomplete.style.display = '';
+                                        }, 100);
+                                    }
+                                }
+
+                                document.addEventListener('click', function (event) {
+                                    if (!wishesAutocompleteContent.contains(event.target)) {
+                                        wishesAutocompleteContent.style.display = 'none';
+                                        showAutocomplete.style.display = '';
+                                        hideAutocomplete.style.display = 'none';
+                                    }
+                                });
+                            </script>
 
                             <div class="emoji-picker">
                                 <emoji-picker style="max-width: 100%;max-height: 350px;"
@@ -1161,10 +1145,10 @@
      data-bs-backdrop="true" aria-labelledby="offcanvasNavbarLabel">
     <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1">
-            <div class="offcanvas-header pb-4 pt-2 px-2 justify-content-end">
+            <li class="offcanvas-header pb-4 pt-2 px-2 justify-content-end">
                 <button type="button" class="btn-close p-0" data-bs-dismiss="offcanvas"
                         aria-label="Close"></button>
-            </div>
+            </li>
             <li class="nav-item">
                 <a class="section-sub-title nav-link active" aria-current="page" href="#video">Video
                     Cưới</a>
@@ -1322,10 +1306,10 @@
 </div>
 
 <div id="menu-access">
-    <div class="btn-menu-open">
+    <div class="btn-menu-open" onclick="toggleMenuAccess();">
         <i class="bi bi-list text-white"></i>
     </div>
-    <div class="btn-menu-close">
+    <div class="btn-menu-close" onclick="toggleMenuAccess();">
         <i class="bi bi-x-lg text-white"></i>
     </div>
     <ul class="p-0 m-0 list-menu-icon">
@@ -1359,31 +1343,385 @@
             </a>
         </li>
     </ul>
+    <script>
+        const btnMenuOpen = document.querySelector('#menu-access > .btn-menu-open');
+        const btnMenuClose = document.querySelector('#menu-access > .btn-menu-close');
+        const listMenuIcon = document.querySelector('#menu-access > .list-menu-icon');
+
+        function toggleMenuAccess() {
+            if (btnMenuClose.style.display !== 'none') {
+                btnMenuOpen.style.display = '';
+                btnMenuClose.style.display = 'none';
+                listMenuIcon.style.opacity = 0;
+                listMenuIcon.style.pointerEvents = 'none';
+            } else {
+                btnMenuOpen.style.display = 'none';
+                btnMenuClose.style.display = 'block';
+                listMenuIcon.style.opacity = 1;
+            }
+        }
+    </script>
 </div>
 
-<script type="text/javascript">
-    function parseJsonRecursively(jsonString) {
-        let parsed = JSON.parse(jsonString);
-        Object.keys(parsed).forEach(function (key) {
-            try {
-                let checkValue = JSON.parse(parsed[key]);
-                if (checkValue && checkValue.constructor === Object) {
-                    parsed[key] = checkValue;
-                }
-            } catch (e) {
 
-            }
-        });
-        return parsed;
+<!--BEGIN PLAYER-->
+<style>
+    @-webkit-keyframes biilogo-pulse {
+        from {
+            -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+        }
+        50% {
+            -webkit-transform: scale3d(0.95, 0.95, 0.95);
+            transform: scale3d(0.95, 0.95, 0.95);
+        }
+        to {
+            -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+        }
     }
 
-    let biicore = parseJsonRecursively('{"template_id":"644000ba4f8e0c7ddf09c709","templatePremium":true,"themeRoot":"https:\/\/vietlien.iwedding.info\/templates\/template19","webroot":"https:\/\/vietlien.iwedding.info","coreSite":"https:\/\/biihappy.com","webToken":"65eb2608ebd9f4c0110a33da","isPremium":true,"bgMusic":"https:\/\/cdn.biihappy.com\/ziiweb\/wedding-musics\/BeautifulInWhite-ShaneFilan-524801.mp3","alert":"[]","effect":"{\\\"type\\\":\\\"heart\\\"}","logo":"https:\/\/iwedding.info\/common\/imgs\/bii.png?v=20210131","url_landing_page":"https:\/\/biihappy.com\/iwedding","isAutoPlay":false,"footer_title":"iWedding | N\u1ec1n t\u1ea3ng t\u1ea1o website \u0111\u00e1m c\u01b0\u1edbi mi\u1ec5n ph\u00ed t\u1eeb Biihappy","footer_title_mobile":"T\u1ea1o website \u0111\u00e1m c\u01b0\u1edbi mi\u1ec5n ph\u00ed"}');
+    @keyframes biilogo-pulse {
+        from {
+            -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+        }
+        50% {
+            -webkit-transform: scale3d(0.95, 0.95, 0.95);
+            transform: scale3d(0.95, 0.95, 0.95);
+        }
+        to {
+            -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+        }
+    }
+
+    .bii-player {
+        position: fixed;
+        bottom: 70px;
+        left: 50px;
+        width: 40px;
+        height: 40px;
+        z-index: 99999;
+        display: block;
+    }
+
+    .bii-player .playerIcon {
+        cursor: pointer;
+        display: block;
+        width: 40px;
+        height: 40px;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+        background-color: #df4758;
+        padding-top: 7px;
+        padding-left: 9px;
+        position: absolute;
+        z-index: 2;
+    }
+
+    .bii-player:after {
+        content: "";
+        position: absolute;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+        background-color: rgba(242, 59, 67, 0.3);
+        width: 120%;
+        height: 120%;
+        left: -10%;
+        top: -10%;
+        -webkit-animation: biilogo-pulse 1s infinite;
+        animation: biilogo-pulse 1s infinite;
+        z-index: 1;
+    }
+
+    .bii-player img {
+        width: 100%;
+        z-index: 999999;
+        position: absolute;
+        cursor: pointer;
+    }
+
+    .bii-player.show-sec .bii-player-secondary {
+        visibility: visible;
+    }
+
+    .bii-player.show-sec .bii-player-secondary-content {
+        transform: translate3d(0, 0, 0);
+    }
+
+    .bii-player-secondary {
+        position: absolute;
+        width: 310px;
+        left: 25px;
+        height: 50px;
+        overflow: hidden;
+        visibility: hidden;
+    }
+
+    .bii-player-secondary-content {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        user-select: none;
+        position: absolute;
+        width: 310px;
+        left: -25px;
+        background: #fff;
+        height: 40px;
+        padding: 8px 11px 8px 50px;
+        border: 1px solid #df4759;
+        border-radius: 30px;
+        z-index: 1;
+        font-size: 14px;
+        transform: translate3d(-100%, 0, 0);
+        transition: transform 175ms ease;
+        font-family: arial, sans-serif;
+        font-weight: 200;
+        color: #000;
+    }
+
+    @media (max-width: 799px) {
+        .bii-player {
+            bottom: 30px;
+            left: 20px;
+        }
+    }
+</style>
+<audio id="myAudio" src="https://cdn.biihappy.com/ziiweb/wedding-musics/IDo-911.mp3" preload="auto"></audio>
+<div id="player" class="bii-player">
+    <div onclick="togglePlay();" class="bii-player-secondary">
+        <div class="bii-player-secondary-content">Click vào đây để nghe nhạc nhé!</div>
+    </div>
+    <div onclick="togglePlay();" class="playerIcon">
+        <span id="playerVolumeOff">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="27" fill="#fff" class="bi bi-volume-mute-fill"
+                 viewBox="0 0 16 16">
+                <path d="M6.717 3.55A.5.5 0 0 1 7 4v8a.5.5 0 0 1-.812.39L3.825 10.5H1.5A.5.5 0 0 1 1 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06zm7.137 2.096a.5.5 0 0 1 0 .708L12.207 8l1.647 1.646a.5.5 0 0 1-.708.708L11.5 8.707l-1.646 1.647a.5.5 0 0 1-.708-.708L10.793 8 9.146 6.354a.5.5 0 1 1 .708-.708L11.5 7.293l1.646-1.647a.5.5 0 0 1 .708 0z"/>
+            </svg>
+        </span>
+        <span style="display:none;" id="playerVolumeOn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="27" fill="#fff" class="bi bi-volume-up-fill"
+                 viewBox="0 0 16 16">
+                <path d="M11.536 14.01A8.473 8.473 0 0 0 14.026 8a8.473 8.473 0 0 0-2.49-6.01l-.708.707A7.476 7.476 0 0 1 13.025 8c0 2.071-.84 3.946-2.197 5.303l.708.707z"/>
+                <path d="M10.121 12.596A6.48 6.48 0 0 0 12.025 8a6.48 6.48 0 0 0-1.904-4.596l-.707.707A5.483 5.483 0 0 1 11.025 8a5.483 5.483 0 0 1-1.61 3.89l.706.706z"/>
+                <path d="M8.707 11.182A4.486 4.486 0 0 0 10.025 8a4.486 4.486 0 0 0-1.318-3.182L8 5.525A3.489 3.489 0 0 1 9.025 8 3.49 3.49 0 0 1 8 10.475l.707.707zM6.717 3.55A.5.5 0 0 1 7 4v8a.5.5 0 0 1-.812.39L3.825 10.5H1.5A.5.5 0 0 1 1 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06z"/>
+            </svg>
+        </span>
+    </div>
+</div>
+<script>
+    const audio = document.getElementById('myAudio');
+    const playerVolumeOff = document.getElementById('playerVolumeOff');
+    const playerVolumeOn = document.getElementById('playerVolumeOn');
+
+    function togglePlay() {
+        if (audio.paused) {
+            audio.play();
+            playerVolumeOff.style.display = 'none';
+            playerVolumeOn.style.display = 'block';
+        } else {
+            audio.pause();
+            playerVolumeOff.style.display = 'block';
+            playerVolumeOn.style.display = 'none';
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const player = document.getElementById('player');
+
+        setTimeout(() => {
+            player.classList.add('show-sec');
+            setTimeout(() => {
+                player.classList.remove('show-sec');
+            }, 6000);
+        }, 2000);
+    });
 </script>
-<script src="common/calendar.js"></script>
-<script src="common/biicommon.min.js"></script>
-<script src="templates/template135/js/libs.js"></script>
-<script src="templates/template135/js/script.js"></script>
-<script src="common/emoji-picker/js/insertTextAtCursor.js"></script>
-<script src="common/emoji-picker/js/init.js" type="module"></script>
+<!--END PLAYER-->
+
+<!--BEGIN SNOWFLAKES-->
+<style>
+    /* customizable snowflake styling */
+    .snowflake {
+        color: #fff;
+        font-size: 1em;
+        font-family: Arial, sans-serif;
+        text-shadow: 0 0 5px #000;
+    }
+
+    .snowflake, .snowflake .inner {
+        animation-iteration-count: infinite;
+        animation-play-state: running
+    }
+
+    @keyframes snowflakes-fall {
+        0% {
+            transform: translateY(0)
+        }
+        100% {
+            transform: translateY(110vh)
+        }
+    }
+
+    @keyframes snowflakes-shake {
+        0%, 100% {
+            transform: translateX(0)
+        }
+        50% {
+            transform: translateX(80px)
+        }
+    }
+
+    .snowflake {
+        position: fixed;
+        top: -10%;
+        z-index: 9999;
+        -webkit-user-select: none;
+        user-select: none;
+        cursor: default;
+        animation-name: snowflakes-shake;
+        animation-duration: 3s;
+        animation-timing-function: ease-in-out
+    }
+
+    .snowflake .inner {
+        animation-duration: 10s;
+        animation-name: snowflakes-fall;
+        animation-timing-function: linear
+    }
+
+    .snowflake:nth-of-type(0) {
+        left: 1%;
+        animation-delay: 0s
+    }
+
+    .snowflake:nth-of-type(0) .inner {
+        animation-delay: 0s
+    }
+
+    .snowflake:first-of-type {
+        left: 10%;
+        animation-delay: 1s
+    }
+
+    .snowflake:first-of-type .inner, .snowflake:nth-of-type(8) .inner {
+        animation-delay: 1s
+    }
+
+    .snowflake:nth-of-type(2) {
+        left: 20%;
+        animation-delay: .5s
+    }
+
+    .snowflake:nth-of-type(2) .inner, .snowflake:nth-of-type(6) .inner {
+        animation-delay: 6s
+    }
+
+    .snowflake:nth-of-type(3) {
+        left: 30%;
+        animation-delay: 2s
+    }
+
+    .snowflake:nth-of-type(11) .inner, .snowflake:nth-of-type(3) .inner {
+        animation-delay: 4s
+    }
+
+    .snowflake:nth-of-type(4) {
+        left: 40%;
+        animation-delay: 2s
+    }
+
+    .snowflake:nth-of-type(10) .inner, .snowflake:nth-of-type(4) .inner {
+        animation-delay: 2s
+    }
+
+    .snowflake:nth-of-type(5) {
+        left: 50%;
+        animation-delay: 3s
+    }
+
+    .snowflake:nth-of-type(5) .inner {
+        animation-delay: 8s
+    }
+
+    .snowflake:nth-of-type(6) {
+        left: 60%;
+        animation-delay: 2s
+    }
+
+    .snowflake:nth-of-type(7) {
+        left: 70%;
+        animation-delay: 1s
+    }
+
+    .snowflake:nth-of-type(7) .inner {
+        animation-delay: 2.5s
+    }
+
+    .snowflake:nth-of-type(8) {
+        left: 80%;
+        animation-delay: 0s
+    }
+
+    .snowflake:nth-of-type(9) {
+        left: 90%;
+        animation-delay: 1.5s
+    }
+
+    .snowflake:nth-of-type(9) .inner {
+        animation-delay: 3s
+    }
+
+    .snowflake:nth-of-type(10) {
+        left: 25%;
+        animation-delay: 0s
+    }
+
+    .snowflake:nth-of-type(11) {
+        left: 65%;
+        animation-delay: 2.5s
+    }
+</style>
+<div class="snowflakes" aria-hidden="true">
+
+    <div class="snowflake">
+        <div class="inner"><img alt="snow" src="assets/images/common/heart.png"></div>
+    </div>
+    <div class="snowflake">
+        <div class="inner"><img alt="snow" src="assets/images/common/heart.png"></div>
+    </div>
+    <div class="snowflake">
+        <div class="inner"><img alt="snow" src="assets/images/common/heart.png"></div>
+    </div>
+    <div class="snowflake">
+        <div class="inner"><img alt="snow" src="assets/images/common/heart.png"></div>
+    </div>
+    <div class="snowflake">
+        <div class="inner"><img alt="snow" src="assets/images/common/heart.png"></div>
+    </div>
+    <div class="snowflake">
+        <div class="inner"><img alt="snow" src="assets/images/common/heart.png"></div>
+    </div>
+    <div class="snowflake">
+        <div class="inner"><img alt="snow" src="assets/images/common/heart.png"></div>
+    </div>
+    <div class="snowflake">
+        <div class="inner"><img alt="snow" src="assets/images/common/heart.png"></div>
+    </div>
+    <div class="snowflake">
+        <div class="inner"><img alt="snow" src="assets/images/common/heart.png"></div>
+    </div>
+    <div class="snowflake">
+        <div class="inner"><img alt="snow" src="assets/images/common/heart.png"></div>
+    </div>
+    <div class="snowflake">
+        <div class="inner"><img alt="snow" src="assets/images/common/heart.png"></div>
+    </div>
+    <div class="snowflake">
+        <div class="inner"><img alt="snow" src="assets/images/common/heart.png"></div>
+    </div>
+</div>
+<!--END SNOWFLAKES-->
 </body>
 </html>

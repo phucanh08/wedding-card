@@ -1,6 +1,6 @@
 import 'https://phucanh08.github.io/wedding-card/common/emoji-picker/js/index.js'
 
-$(".textarea-emoji-picker emoji-picker").dataSource = 'https://phucanh08.github.io/wedding-card/common/emoji-picker/js/data.json';
+$(".textarea-emoji-picker emoji-picker").dataSource = 'https://raw.githubusercontent.com/phucanh08/wedding-card/refs/heads/main/docs/common/emoji-picker/js/data.json';
 $(document).ready(function () {
     $(document).on('emoji-click', '.textarea-emoji-picker emoji-picker', function (e) {
         let formInput = $(this).parents('.textarea-emoji-picker').find("textarea");

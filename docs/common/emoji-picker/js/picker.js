@@ -2436,7 +2436,7 @@ class Picker extends SvelteComponent {
     }
 }
 
-const DEFAULT_DATA_SOURCE = 'https://phucanh08.github.io/wedding-card/common/emoji-picker/js/data.json';
+const DEFAULT_DATA_SOURCE = 'https://raw.githubusercontent.com/phucanh08/wedding-card/refs/heads/main/docs/common/emoji-picker/js/data.json';
 const DEFAULT_LOCALE = 'en';
 
 var enI18n = {
@@ -2554,10 +2554,10 @@ class PickerElement extends HTMLElement {
     }
 
     _dbCreate () {
-        const { locale, dataSource, database } = this._ctx;
+        const { locale, database } = this._ctx;
         // only create a new database if we really need to
         if (!database || database.locale !== locale || database.dataSource !== dataSource) {
-            this._set('database', new Database({ locale, dataSource }));
+            this._set('database', new Database({ locale }));
         }
     }
 
