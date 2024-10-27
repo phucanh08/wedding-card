@@ -1,3 +1,5 @@
+import {addWish} from "../../../firebase-config";
+
 (function ($) {
 
     "use strict";
@@ -80,39 +82,48 @@
                 }
             },
 
-            submitHandler: function (form) {
-                $("#loader").css("display", "inline-block");
-                $.ajax({
-                    type: "POST",
-                    url: "/wish",
-                    data: $(form).serialize(),
-                    success: function (res) {
-                        $("#loader").hide();
-                        if (!res.error) {
-                            $('#show-comments').scrollTop(0);
-                            $('#show-comments').prepend('<div class="box-comment pb-3"><h4 user-name-comment" class="mt-1">' + $(form).find("input[name='name']").val().replace(/&/g, "&amp;").replace(/>/g, "&gt;").replace(/</g, "&lt;").replace(/"/g, "&quot;") + '</h4><p id="comment-detail" class="m-0">' + $(form).find("textarea[name='content']").val().replace(/&/g, "&amp;").replace(/>/g, "&gt;").replace(/</g, "&lt;").replace(/"/g, "&quot;") + '</p></div>');
-                            $("#success").html(res.message).slideDown("slow");
-                            setTimeout(function () {
-                                $("#success").slideUp("slow");
-                            }, 5000);
-                        } else {
-                            $("#error").html(res.message).slideDown("slow");
-                            setTimeout(function () {
-                                $("#error").slideUp("slow");
-                            }, 5000);
-                        }
-
-                        form.reset();
-                    },
-                    error: function () {
-                        $("#loader").hide();
-                        $("#error").slideDown("slow");
-                        setTimeout(function () {
-                            $("#error").slideUp("slow");
-                        }, 5000);
-                    }
-                });
-                return false;
+            submitHandler: async function (form) {
+                try {
+                    const wish = {
+                        name: document.getElementById('name-comment').value,
+                        content: document.getElementById('detail-comment').value,
+                    };
+                    await addWish(wish);
+                    return true;
+                } catch (e) {
+                    return false;
+                }
+                // $("#loader").css("display", "inline-block");
+                // $.ajax({
+                //     type: "POST",
+                //     url: "/wish",
+                //     data: $(form).serialize(),
+                //     success: function (res) {
+                //         $("#loader").hide();
+                //         if (!res.error) {
+                //             $('#show-comments').scrollTop(0);
+                //             $('#show-comments').prepend('<div class="box-comment pb-3"><h4 user-name-comment" class="mt-1">' + $(form).find("input[name='name']").val().replace(/&/g, "&amp;").replace(/>/g, "&gt;").replace(/</g, "&lt;").replace(/"/g, "&quot;") + '</h4><p id="comment-detail" class="m-0">' + $(form).find("textarea[name='content']").val().replace(/&/g, "&amp;").replace(/>/g, "&gt;").replace(/</g, "&lt;").replace(/"/g, "&quot;") + '</p></div>');
+                //             $("#success").html(res.message).slideDown("slow");
+                //             setTimeout(function () {
+                //                 $("#success").slideUp("slow");
+                //             }, 5000);
+                //         } else {
+                //             $("#error").html(res.message).slideDown("slow");
+                //             setTimeout(function () {
+                //                 $("#error").slideUp("slow");
+                //             }, 5000);
+                //         }
+                //
+                //         form.reset();
+                //     },
+                //     error: function () {
+                //         $("#loader").hide();
+                //         $("#error").slideDown("slow");
+                //         setTimeout(function () {
+                //             $("#error").slideUp("slow");
+                //         }, 5000);
+                //     }
+                // });
             }
 
         });
