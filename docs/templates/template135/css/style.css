@@ -500,7 +500,7 @@ button#btn-submit-comment:hover {
 #wish-form .textAreaIcons span{color: #333;cursor:pointer;margin-right:4px;}
 .tooltip{ width: 160px;}
 .tooltip .tooltip-inner{padding: 8px 12px;font-size: 16px;}
-#wish-form .wishes-autocomplete-content{position: absolute;top: 50px;width: 100%;left: 0;z-index: 333;background: #fff;-webkit-box-shadow: 0 1px 2px 0 rgb(60 64 67 / 35%), 0 2px 6px 2px rgb(60 64 67 / 35%);box-shadow: 0 1px 2px 0 rgb(60 64 67 / 35%), 0 2px 6px 2px rgb(60 64 67 / 35%);}
+#wish-form .wishes-autocomplete-content{padding: 8px; border-radius: 20px; position: absolute;top: 50px;width: 100%;left: 0;z-index: 333;background: #fff;-webkit-box-shadow: 0 1px 2px 0 rgb(60 64 67 / 35%), 0 2px 6px 2px rgb(60 64 67 / 35%);box-shadow: 0 1px 2px 0 rgb(60 64 67 / 35%), 0 2px 6px 2px rgb(60 64 67 / 35%);}
 #wish-form .wishes-autocomplete-content input{
     background-image: url('https://phucanh08.github.io/wedding-card/assets/images/common/searchicon.png')!important;
     background-position: 10px!important;
@@ -510,11 +510,11 @@ button#btn-submit-comment:hover {
     padding: 12px 20px 12px 40px!important;
     border: 1px solid #ddd!important;
     margin-bottom: 0!important;
-    border-radius:0!important;
+    border-radius: 12px !important;
 }
 #wish-form .wishes-autocomplete-content ul{list-style-type: none;margin: 0;padding: 0;max-height: 300px;overflow: auto;display: block;height: auto;text-align:left;}
 #wish-form .wishes-autocomplete-content ul li a {
-    border: 1px solid #ddd!important;
+    border-bottom: 1px solid #ddd!important;
     margin-top: -1px!important;
     padding: 12px!important;
     text-decoration: none!important;
