@@ -1,12 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+<script>
+    document.addEventListener("contextmenu", event => event.preventDefault()); // Chặn chuột phải
+    document.addEventListener("keydown", event => {
+        if (event.key === "F12" ||
+            (event.ctrlKey && event.shiftKey && ["I", "J", "C"].includes(event.key)) ||
+            (event.ctrlKey && event.key === "U")) {
+            event.preventDefault();
+        }
+    });
+</script>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Lê Phúc Anh &amp; Nguyễn Thị Ngọc Wedding site!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description"
-          content="Lê Phúc Anh &amp; Nguyễn Thị Ngọc - Our wedding date: 2024-11-24 | Điều tuyệt vời nhất mà bạn từng học là yêu và được yêu để đáp lại">
+          content="Lê Phúc Anh &amp; Nguyễn Thị Ngọc - Our wedding date: 24-11-2024 | Điều tuyệt vời nhất mà bạn từng học là yêu và được yêu để đáp lại">
     <meta name="keywords" content="Wedding,Lê Phúc Anh,Nguyễn Thị Ngọc">
     <meta name="format-detection" content="telephone=no">
     <meta name="application-name" content="P.Anh & N.Ngọc Wedding">
@@ -16,10 +26,10 @@
     <meta property="og:title" content="Lê Phúc Anh &amp; Nguyễn Thị Ngọc Wedding site!">
     <meta property="og:url" content="https://phucanh08.github.io/wedding-card">
     <meta property="og:description"
-          content="Lê Phúc Anh &amp; Nguyễn Thị Ngọc - Our wedding date: 2024-11-24 | Điều tuyệt vời nhất mà bạn từng học là yêu và được yêu để đáp lại">
-    <meta property="og:image" content="assets/images/meta_image.webp">
-    <meta property="og:image:url" content="assets/images/meta_image.webp">
-    <meta property="og:image:secure_url" content="assets/images/meta_image.webp">
+          content="Lê Phúc Anh &amp; Nguyễn Thị Ngọc - Our wedding date: 24-11-2024 | Điều tuyệt vời nhất mà bạn từng học là yêu và được yêu để đáp lại">
+    <meta property="og:image" content="https://phucanh08.github.io/wedding-card/assets/images/main_image.webp">
+    <meta property="og:image:url" content="https://phucanh08.github.io/wedding-card/assets/images/main_image.webp">
+    <meta property="og:image:secure_url" content="https://phucanh08.github.io/wedding-card/assets/images/main_image.webp">
     <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon/favicon.webp">
 
     <link href="https://fonts.googleapis.com/css2?family=Texturina:opsz,wght@12..72,100&display=swap"
@@ -35,22 +45,6 @@
     <link rel="stylesheet" href="templates/template135/css/libs.css"/>
     <link rel="stylesheet" href="templates/template135/css/style.css"/>
     <link rel="stylesheet" href="common/calendar.css">
-
-    <script src="common/calendar.js"></script>
-    <script src="templates/template135/js/libs.js"></script>
-    <script src="templates/template135/js/script.js"></script>
-    <script src="common/emoji-picker/js/insertTextAtCursor.js"></script>
-    <script src="common/emoji-picker/js/init.js" type="module"></script>
-
-    <!-- Firebase SDK -->
-    <script type="module">
-        import {addWish, getAllWishes} from './firebase-config.js';
-
-        // Gọi hàm khi trang load
-        // document.addEventListener('DOMContentLoaded', () => {
-        //     getAllWishes();
-        // });
-    </script>
 </head>
 <script type="text/javascript">
     let photoGalleries = [];
@@ -951,18 +945,11 @@
             <div id="section-comment">
                 <form action="" id="wish-form" class="p-4 contact-validation-active">
                     <div class="col-auto mb-3 d-flex">
-                        <div class="w-50 me-2">
-                            <input name="name"
-                                   id="name-comment"
-                                   type="text"
-                                   class="form-control border-0"
-                                   placeholder="Nhập tên của bạn*"/>
-                        </div>
-                        <div class="w-50 ms-2 ">
-                            <input name="email" id="email-comment" type="text"
-                                   class="form-control border-0"
-                                   placeholder="E-mail"/>
-                        </div>
+                        <input name="name"
+                               id="name-comment"
+                               type="text"
+                               class="form-control border-0"
+                               placeholder="Nhập tên của bạn*"/>
                     </div>
                     <div class="col-auto mb-3">
                         <div class="textarea-emoji-picker position-relative">
@@ -1131,14 +1118,7 @@
                         </div>
                     </div>
                 </form>
-                <div class="mt-3 px-4 py-3 " id="show-comments">
-                    <div class="box-comment pb-3">
-                        <h4 id="user-name-comment" class="mt-1">jssssssssssssssssssssssssssssss</h4>
-                        <p id="comment-detail" class="m-0">
-                            Chúc mừng hạnh phúc! Chúc hai bạn trăm năm hạnh phúc!
-                        </p>
-                    </div>
-                </div>
+                <div class="mt-3 px-4 py-3" id="show-comments"></div>
             </div>
         </div>
     </section>
@@ -1734,4 +1714,10 @@
 </script>
 <!--END SNOWFLAKES-->
 </body>
+<script src="common/calendar.js"></script>
+<script src="templates/template135/js/libs.js"></script>
+<script type="module" src="firebase-config.js"></script>
+<script src="templates/template135/js/script.js"></script>
+<script src="common/emoji-picker/js/insertTextAtCursor.js"></script>
+<script src="common/emoji-picker/js/init.js" type="module"></script>
 </html>
