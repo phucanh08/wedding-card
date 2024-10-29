@@ -9,6 +9,11 @@
             event.preventDefault();
         }
     });
+    const currentUrl = window.location.href;
+    const url = new URL(currentUrl);
+    const params = new URLSearchParams(url.search);
+    const guestId = params.get('code');
+    let guests, currentGuest, rsvpData;
 </script>
 <head>
     <meta charset="utf-8">
@@ -22,22 +27,24 @@
     <meta name="application-name" content="P.Anh & N.Ngọc Wedding">
     <meta name="author" content="anhlp">
     <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon/favicon.webp">
-    
+
     <!-- facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Lê Phúc Anh &amp; Nguyễn Thị Ngọc">
-    <meta property="og:title" content="Lê Phúc Anh &amp; Nguyễn Thị Ngọc Wedding site!">
+    <meta property="og:site_name" content="Lễ cưới: Phúc Anh &amp; Nguyễn Ngọc">
+    <meta property="og:title" content="Lễ cưới: Phúc Anh &amp; Nguyễn Ngọc">
     <meta property="og:description"
           content="Ngày cưới: 24-11-2024 | Điều tuyệt vời nhất mà bạn từng học là yêu và được yêu để đáp lại">
     <meta property="og:url" content="https://phucanh08.github.io/wedding-card">
     <meta property="og:image" content="https://phucanh08.github.io/wedding-card/assets/images/main_image.webp">
     <meta property="og:image:url" content="https://phucanh08.github.io/wedding-card/assets/images/main_image.webp">
-    <meta property="og:image:secure_url" content="https://phucanh08.github.io/wedding-card/assets/images/main_image.webp">
+    <meta property="og:image:secure_url"
+          content="https://phucanh08.github.io/wedding-card/assets/images/main_image.webp">
 
     <!-- twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Wedding,Lê Phúc Anh,Nguyễn Thị Ngọc">
-    <meta name="twitter:description" content="Ngày cưới: 24-11-2024 | Điều tuyệt vời nhất mà bạn từng học là yêu và được yêu để đáp lại">
+    <meta name="twitter:title" content="Lễ cưới: Phúc Anh &amp; Nguyễn Ngọc">
+    <meta name="twitter:description"
+          content="Ngày cưới: 24-11-2024 | Điều tuyệt vời nhất mà bạn từng học là yêu và được yêu để đáp lại">
     <meta name="twitter:image" content="https://phucanh08.github.io/wedding-card/assets/images/main_image.webp">
     <meta name="twitter:label1" content="Được viết bởi">
     <meta name="twitter:data1" content="Lê Phúc Anh">
@@ -98,13 +105,14 @@
                 </div>
             </div>
             <div class="main_image_area pt-4 pb-8" data-aos="fade-up" data-aos-delay="50">
+
                 <div class="main_image">
                     <img alt="main_image"
                          src="assets/images/main_image.webp">
                 </div>
                 <img class="bg-title" src="templates/template135/img/main_title.webp"
                      alt=""/>
-                <div class="wrap-name pt-7 px-5 title">
+                <div id="title-wedding-card" class="wrap-name pt-7 px-5 title">
                     Phúc Anh <small>&amp;</small> Nguyễn Ngọc
                 </div>
             </div>
@@ -123,9 +131,12 @@
                         </span>
                     </a>
                 </div>
-                <div class="col-sm-4">
-                    <!-- todo: check later -->
-                    <!--                    <a href="https://preview.iwedding.info/rsvp" target="_blank"-->
+                <div
+                        class="col-sm-4"
+                        onclick="(() => {
+                        document.getElementById('rsvp-modal').style.display = 'flex';
+                    })()"
+                >
                     <a target="_blank"
                        class="w-100 mb-1 px-2 accessibility-btn btn btn-secondary"
                        data-aos="fade-up">
@@ -1125,9 +1136,6 @@
                     </div>
                     <div class="clearfix error-handling-messages">
                         <div id="success">Thank you</div>
-                        <div id="error"> Error occurred while sending email. Please try again
-                            later.
-                        </div>
                     </div>
                 </form>
                 <div class="mt-3 px-4 py-3" id="show-comments"></div>
@@ -1190,6 +1198,129 @@
         </ul>
     </div>
 </div>
+
+<div class="rsvp-modal section-bg-affect" id="rsvp-modal">
+    <div class="container-fluid donate-modal-content">
+        <span class="donate-modal-close text-danger">&times;</span>
+        <div class="w-100 p-4">
+            <h2 data-aos="fade-up" class="section-title text-body text-center m-0">
+                Xác nhận tham dự
+            </h2>
+            <h3 id="title-confirm-id" data-aos="fade-up" class="section-sub-title text-body mb-4 text-center">
+                Thật vui vì được gặp và đón tiếp các bạn trong một dịp đặc biệt như đám cưới của
+                chúng tôi.
+            </h3>
+            <div class="modal-body">
+                <form id="rsvp-form" method="post">
+                    <div class="row">
+                        <input type="hidden" id="event_id" name="event_id" value="65eb2608ebd9f4c0110a33d7">
+                        <input type="hidden" id="guest_id" name="guest_id" value="65ee6f8173ad745f4e037715">
+                        <div class="col-12" style="margin-bottom: 10px;">
+                            <select class="form-select"
+                                    onchange="(()=>{
+                                        const plusOne = document.getElementById('plus_ones_id');
+                                        if (document.getElementById('attendance_status_id').value !== 'Y') {
+                                            plusOne.style.display = 'none';
+                                            plusOne.value = '';
+                                            document.getElementById('send-confirm-btn').disabled = false;
+                                        } else {
+                                            plusOne.style.display = '';
+                                            document.getElementById('send-confirm-btn').disabled = true;
+                                        }
+                                    })()"
+                                    name="attendance_status"
+                                    id="attendance_status_id"
+                                    style="margin-top: 4px; ">
+                                <option value="" selected disabled>Bạn sẽ tham gia chứ?</option>
+                                <option value="none">Chưa xác định trước được</option>
+                                <option value="Y">Nhất định rồi!!!</option>
+                                <option value="N">Tôi không tham gia được</option>
+                            </select>
+                        </div>
+                        <div class="col-12" style="margin-bottom: 10px;">
+                            <select
+                                    class="form-select"
+                                    onchange="(()=>{
+                                        document.getElementById('send-confirm-btn').disabled=document.getElementById('attendance_status_id').value==='';
+                                    })()"
+                                    name="plus_ones"
+                                    id="plus_ones_id"
+                                    style="margin-top: 4px; display: none">
+                                <option value="" selected disabled>Bạn có người đi cùng không?</option>
+                                <option value=1>Đi một mình</option>
+                                <option value=2>Đi cùng 1 người</option>
+                                <option value=3>Đi cùng 2 người</option>
+                                <option value=4>Đi cùng 3 người</option>
+                                <option value=5>Đi cùng 4 người</option>
+                                <option value=6>Đi cùng 5 người</option>
+                            </select>
+                        </div>
+
+                        <div class="row-guest-questions">
+                        </div>
+                    </div>
+                    <div class="message-success" style="display: none;">
+                        <div class="form-message form-message-success">
+                            <svg width="17px" height="17px" viewBox="0 0 17 17" version="1.1"
+                                 xmlns="http://www.w3.org/2000/svg"
+                                 class="ng-scope"><title>F28A5059-2988-42E8-A07D-911419DD80B1</title>
+                                <desc>Created with sketchtool.</desc>
+                                <defs></defs>
+                                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <g id="Guest-List---Add-Inline-Dialogs"
+                                       transform="translate(-730.000000, -252.000000)" fill="#78CC61">
+                                        <g id="dialog" transform="translate(690.000000, 216.000000)">
+                                            <g id="message" transform="translate(40.000000, 26.000000)">
+                                                <path d="M8.5,10 C3.80553623,10 0,13.8055362 0,18.5 C0,23.1944638 3.80553623,27 8.5,27 C13.1944638,27 17,23.1944638 17,18.5 C17,13.8055362 13.1944638,10 8.5,10 Z M12.5538841,14.7117101 L13.5931014,15.7627536 C11.2406957,18.1151594 8.88878261,20.4670725 6.53686957,22.8194783 C5.50307246,21.7625217 4.45202899,20.7233043 3.40689855,19.6781739 L4.44611594,18.6384638 L6.53686957,20.7287246 L12.5538841,14.7117101 Z"
+                                                      id="icon-green-success"></path>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </svg>
+                            <span style="margin-left: 5px;"></span>
+                        </div>
+                    </div>
+                    <div class="message-error text-danger" style="display: none;color:red;">
+                        <div class="form-message form-message-error">
+                            <svg width="17px" height="17px" viewBox="0 0 17 17" version="1.1"
+                                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                 class="ng-scope"><title>Page 1</title>
+                                <desc></desc>
+                                <defs></defs>
+                                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <g id="Group-6" transform="translate(0.000000, -2.000000)" fill="#71D9BC">
+                                        <path d="M8.5,2 C3.79641481,2 0,5.79641481 0,10.5 C0,15.2035852 3.79641481,19 8.5,19 C13.2035852,19 17,15.2035852 17,10.5 C17,5.79641481 13.2035852,2 8.5,2 L8.5,2 Z M10,15.165872 C10,15.6130558 9.60377883,16 9.14587385,16 L7.854404,16 C7.39622117,16 7,15.6130558 7,15.165872 L7,9.83439935 C7,9.36577897 7.39622117,9 7.854404,9 L9.14587385,9 C9.60377883,9 10,9.38694422 10,9.83439935 L10,15.165872 Z M8.49124329,8 C7.67497633,8 7,7.32894118 7,6.5 C7,5.67082353 7.67497633,5 8.49124329,5 C9.32502367,5 10,5.67082353 10,6.5 C10,7.32894118 9.32502367,8 8.49124329,8 L8.49124329,8 Z"
+                                              id="Page-1"></path>
+                                    </g>
+                                </g>
+                            </svg>
+                            <span style="margin-left: 5px;"></span>
+                        </div>
+                    </div>
+
+                    <div class="action-btns" style="display: flex; justify-content: space-evenly; padding-top: 15px">
+                        <button id="send-confirm-btn" class="btn btn-dark btn-dark-1" style="width: 40%" disabled>
+                            Xác nhận
+                        </button>
+                        <button
+                                type="button"
+                                onclick="(() => {
+                                    document.getElementById('rsvp-modal').style.display = '';
+                                    document.getElementById('donate-modal').style.display = 'block';
+                                })()"
+                                class="btn btn-dark btn-dark-1 donate"
+                                style="width: 40%"
+                        >
+                            Mừng cưới
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <div class="py-5 donate-section donate-modal section-bg-affect" id="donate-modal">
     <div class="container-fluid donate-modal-content">
@@ -1326,9 +1457,11 @@
             </a>
         </li>
 
-        <li class="text-center">
-            <!-- todo: check later -->
-            <!-- <a href="https://preview.iwedding.info/rsvp" target="_blank" class="text-white">-->
+        <li class="text-center"
+            onclick="(()=>{
+                document.getElementById('rsvp-modal').style.display = 'flex';
+            })()"
+        >
             <a target="_blank" class="text-white">
                     <span class="content-button tooltipBtn">
                         <span class="tooltiptext">Xác nhận tham dự</span>
@@ -1338,8 +1471,10 @@
             </a>
         </li>
 
-        <li class="text-center">
-            <a href="#donate" class="text-white">
+        <li class="text-center" onclick="(() => {
+            document.getElementById('donate-modal').style.display = 'block';
+        })()">
+            <a class="text-white">
                     <span class="content-button tooltipBtn">
                         <span class="tooltiptext">Mừng cưới</span>
                         <img class="access-icon"

@@ -1,5 +1,4 @@
 import {initializeApp} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-import {getAnalytics} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-analytics.js";
 import {
     getFirestore,
     collection,
@@ -8,7 +7,7 @@ import {
     onSnapshot,
     query,
     orderBy,
-    serverTimestamp
+    serverTimestamp, limit, where
 } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -24,8 +23,72 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-// const analytics = getAnalytics(app);
 const db = getFirestore(app);
+
+
+async function getAllGuests() {
+    try {
+        const wishesQuery = query(
+            collection(db, "guests"),
+            orderBy("name"),
+        );
+        const querySnapshot = await getDocs(wishesQuery);
+        const guests = [];
+        querySnapshot.forEach((doc) => {
+            guests.push({
+                id: doc.id,
+                ...doc.data()
+            });
+        });
+        console.log('guests', guests);
+        return guests;
+    } catch (error) {
+        console.error("Error getting documents: ", error);
+        throw error;
+    }
+}
+
+
+// Hàm thêm confirm
+async function addConfirm(data) {
+    try {
+        const time = serverTimestamp();
+        const docRef = await addDoc(collection(db, 'rsvp'), {
+            ...data,
+            guestId: guestId,
+            guestName: currentGuest.name,
+            createdTime: time
+        });
+        console.log("Document written with ID: ", docRef.id);
+        return docRef.id;
+    } catch (error) {
+        console.error("Error adding document: ", error);
+        throw error;
+    }
+}
+
+async function getConfirm() {
+    try {
+        const rsvpQuery = query(
+            collection(db, "rsvp"),
+            where("guestId", "==", guestId),
+            orderBy("createdTime", "desc"),
+            limit(1),
+        );
+        const querySnapshot = await getDocs(rsvpQuery);
+        querySnapshot.forEach((doc) => {
+            rsvpData = {
+                id: doc.id,
+                ...doc.data()
+            };
+        });
+        return rsvpData;
+    } catch (error) {
+        console.error("Error adding document: ", error);
+        throw error;
+    }
+}
+
 
 // Hàm thêm lời chúc
 async function addWish(wish) {
@@ -80,6 +143,28 @@ function setWishesListener(callback) {
 
 // Tự động gọi hàm khi trang load
 $(document).ready(function () {
+    getAllGuests().then(result => {
+        guests = result;
+        currentGuest = result.find(e => e.id === guestId);
+        if (currentGuest) {
+            document.querySelector('#name-comment').value = currentGuest.name;
+            // document.querySelector('#title-wedding-card').innerHTML = `Kính gửi ${currentGuest.name}!`;
+            document.querySelector('#title-confirm-id').innerHTML = `Trân trọng kính mời ${currentGuest.name} đến tham dự buổi tiệc chung vui cùng gia đình chúng tôi!`;
+        }
+    });
+    getConfirm().then(result => {
+        console.log(result);
+        if (result.confirmStatus) {
+            document.getElementById('send-confirm-btn').disabled = false;
+        }
+        document.getElementById('attendance_status_id').value = result.confirmStatus;
+        if (result.numOfPerson) {
+            document.getElementById('plus_ones_id').value = result.numOfPerson;
+            document.getElementById('plus_ones_id').style.display = '';
+        }
+
+    });
+
     setWishesListener(wishes => {
         const comments = document.getElementById('show-comments');
         comments.innerHTML = '';
@@ -100,23 +185,25 @@ $(document).ready(function () {
     /*------------------------------------------
      = DONATE MODAL
      -------------------------------------------*/
-    if ($("#donate-modal").length && $(".buttonDonate").length && $(".donate-modal-close").length) {
-        $(document).on('click', '.buttonDonate', function () {
-            $("#donate-modal").show();
-            if ($('body').hasClass('offcanvas')) {
-                $('body').removeClass('offcanvas');
-                $('.js-oliven-nav-toggle').removeClass('active');
-            }
-        });
-        $(document).on('click', '.donate-modal-close', function () {
+    $(document).on('click', '.buttonDonate', function () {
+        $("#donate-modal").show();
+        if ($('body').hasClass('offcanvas')) {
+            $('body').removeClass('offcanvas');
+            $('.js-oliven-nav-toggle').removeClass('active');
+        }
+    });
+    $(document).on('click', '.donate-modal-close', function () {
+        $("#donate-modal").hide();
+        $("#rsvp-modal").hide();
+    });
+    $(document).on('click', 'body', function (e) {
+        if (e.target.id === $("#donate-modal").attr('id')) {
             $("#donate-modal").hide();
-        });
-        $(document).on('click', 'body', function (e) {
-            if (e.target.id == $("#donate-modal").attr('id')) {
-                $("#donate-modal").hide();
-            }
-        });
-    }
+        }
+        if (e.target.id === $("#rsvp-modal").attr('id')) {
+            $("#rsvp-modal").hide();
+        }
+    });
 
     $(document).on('click', '.crypto-item', function () {
         let parent = $(this).parents('.donate-card');
@@ -137,68 +224,75 @@ $(document).ready(function () {
     });
 
     /*------------------------------------------
+        = RSVP FORM SUBMISSION
+    -------------------------------------------*/
+
+    $(document).on('submit', '#rsvp-form', async function (event) {
+        try {
+            event.preventDefault();
+            const data = {
+                confirmStatus: document.getElementById('attendance_status_id').value,
+                numOfPerson: document.getElementById('plus_ones_id').value,
+            };
+            await addConfirm(data);
+            $('#rsvp-modal').hide();
+        } catch (e) {
+        }
+    });
+
+    /*------------------------------------------
         = WISH FORM SUBMISSION
     -------------------------------------------*/
-    if ($("#wish-form").length) {
-        $("#wish-form").validate({
-            rules: {
-                name: {
-                    required: true,
-                    minlength: 5
-                },
-                content: {
-                    required: true,
-                    minlength: 10
-                },
-                email: {
-                    required: false,
-                    email: true
-                },
+    $("#wish-form").validate({
+        rules: {
+            name: {
+                required: true,
+                minlength: 5
             },
+            content: {
+                required: true,
+                minlength: 10
+            },
+            email: {
+                required: false,
+                email: true
+            },
+        },
 
-            errorPlacement: function (error, element) {
-                if (element.attr("name") === "content") {
-                    error.insertAfter("#wish-form .vitualTextarea");
-                } else {
-                    error.insertAfter(element);
-                }
-            },
-            messages: {
-                name: {
-                    required: '<span style="color:red;">Vui lòng nhập tên của bạn.</span>',
-                    minlength: '<span style="color:red;">Tên phải lớn hơn 5 ký tự.</span>',
-                },
-                content: {
-                    required: '<span style="color:red;">Vui lòng nhập lời chúc.</span>',
-                    minlength: '<span style="color:red;">Lời chúc phải lớn hơn 10 ký tự.</span>',
-                },
-                email: {
-                    email: '<span style="color:red;">Địa chỉ email không hợp lệ.</span>'
-                }
-            },
-
-            submitHandler: async function (form, event) {
-                try {
-                    event.preventDefault();
-                    const wish = {
-                        name: document.getElementById('name-comment').value,
-                        content: document.getElementById('detail-comment').value,
-                    };
-                    $("#loader").css("display", "inline-block");
-                    addWish(wish).then((result) => {
-                        $("#loader").hide();
-                        form.reset();
-                    });
-                } catch (e) {
-                    $("#loader").hide();
-                    $("#error").slideDown("slow");
-                    setTimeout(function () {
-                        $("#error").slideUp("slow");
-                    }, 5000);
-                }
+        errorPlacement: function (error, element) {
+            if (element.attr("name") === "content") {
+                error.insertAfter("#wish-form .vitualTextarea");
+            } else {
+                error.insertAfter(element);
             }
-        });
-    }
+        },
+        messages: {
+            name: {
+                required: '<span style="color:red;">Vui lòng nhập tên của bạn.</span>',
+                minlength: '<span style="color:red;">Tên phải lớn hơn 5 ký tự.</span>',
+            },
+            content: {
+                required: '<span style="color:red;">Vui lòng nhập lời chúc.</span>',
+                minlength: '<span style="color:red;">Lời chúc phải lớn hơn 10 ký tự.</span>',
+            },
+            email: {
+                email: '<span style="color:red;">Địa chỉ email không hợp lệ.</span>'
+            }
+        },
+
+        submitHandler: async function (form, event) {
+            try {
+                event.preventDefault();
+                const wish = {
+                    name: document.getElementById('name-comment').value,
+                    content: document.getElementById('detail-comment').value,
+                };
+                await addWish(wish)
+                form.reset();
+            } catch (e) {
+            }
+        }
+    });
 
     /*------------------------------------------
         = TOGGLE MUSUC BIX

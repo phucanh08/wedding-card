@@ -24,8 +24,21 @@ body {
 }
 .story-section .timeline-1 li:before {
     border-color: #cbb788;
-    box-shadow: 3px 3px 0px #d3c4a1;
+    box-shadow: 3px 3px 0 #d3c4a1;
 }
+.rsvp-modal {
+    display: none;
+    padding-bottom: 10rem;
+    position: fixed;
+    z-index: 999999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5)!important;
+}
+
 .donate-section .donate-box .donate-card {
     width: 100%;
     border: 1px dashed #474747;
@@ -42,7 +55,7 @@ body {
 .donate-modal {
     display: none;
     position: fixed;
-    z-index: 199;
+    z-index: 999999;
     padding-top: 100px;
     padding-bottom: 100px;
     left: 0;
