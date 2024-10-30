@@ -9,9 +9,8 @@ Repository này là thiệp mời đám cưới di động để mời dự đá
 
 ## Thông tin lễ cưới
 
-* Ngày: 18 tháng 5 năm 2019 lúc 14:30
-* Địa điểm: Tầng 23, Centum Science Park, Centum City, Haeundae-gu, Busan
-* URL thiệp cưới: https://andersonchoi.github.io/wedding-card/
+* Ngày: 24 tháng 11 năm 2024 lúc 10:00
+* URL thiệp cưới: https://phucanh08.github.io/wedding-card/
 
 ## Lời chúc mừng
 

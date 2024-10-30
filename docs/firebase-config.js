@@ -1,13 +1,15 @@
 import {initializeApp} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
 import {
-    getFirestore,
-    collection,
     addDoc,
+    collection,
     getDocs,
+    getFirestore,
+    limit,
     onSnapshot,
-    query,
     orderBy,
-    serverTimestamp, limit, where
+    query,
+    serverTimestamp,
+    where
 } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -168,14 +170,13 @@ $(document).ready(function () {
     setWishesListener(wishes => {
         const comments = document.getElementById('show-comments');
         comments.innerHTML = '';
-
         wishes.forEach((wish, index) => {
             const item = document.createElement('div');
             item.className = 'box-comment pb-3';
             item.innerHTML = '<div class="box-comment pb-3">\n' +
                 `                        <h4 id="user-name-comment" class="mt-1">${wish.name}</h4>\n` +
                 '                        <p id="comment-detail" class="m-0">\n' +
-                `                            ${wish.content}\n` +
+                `                            <pre style="white-space: pre-wrap; word-wrap: break-word; overflow: hidden;">${wish.content}</pre>\n` +
                 '                        </p>\n' +
                 '                    </div>';
             comments.appendChild(item);
