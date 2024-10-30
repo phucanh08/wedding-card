@@ -40,7 +40,6 @@ async function getAllGuests() {
                 ...doc.data()
             });
         });
-        console.log('guests', guests);
         return guests;
     } catch (error) {
         console.error("Error getting documents: ", error);
@@ -59,7 +58,6 @@ async function addConfirm(data) {
             guestName: currentGuest.name,
             createdTime: time
         });
-        console.log("Document written with ID: ", docRef.id);
         return docRef.id;
     } catch (error) {
         console.error("Error adding document: ", error);
@@ -98,7 +96,6 @@ async function addWish(wish) {
             ...wish,
             createdTime: time
         });
-        console.log("Document written with ID: ", docRef.id);
         return docRef.id;
     } catch (error) {
         console.error("Error adding document: ", error);
@@ -120,7 +117,6 @@ async function getAllWishes() {
                 ...doc.data()
             });
         });
-        console.log('wishes', wishes);
         return wishes;
     } catch (error) {
         console.error("Error getting documents: ", error);
@@ -135,7 +131,6 @@ function setWishesListener(callback) {
         querySnapshot.forEach((doc) => {
             wishes.push({id: doc.id, ...doc.data()});
         });
-        console.log('wishes', wishes);
         callback(wishes)
     });
 }
@@ -153,14 +148,15 @@ $(document).ready(function () {
         }
     });
     getConfirm().then(result => {
-        console.log(result);
-        if (result.confirmStatus) {
-            document.getElementById('send-confirm-btn').disabled = false;
-        }
-        document.getElementById('attendance_status_id').value = result.confirmStatus;
-        if (result.numOfPerson) {
-            document.getElementById('plus_ones_id').value = result.numOfPerson;
-            document.getElementById('plus_ones_id').style.display = '';
+        if (result) {
+            if (result.confirmStatus) {
+                document.getElementById('send-confirm-btn').disabled = false;
+            }
+            document.getElementById('attendance_status_id').value = result.confirmStatus;
+            if (result.numOfPerson) {
+                document.getElementById('plus_ones_id').value = result.numOfPerson;
+                document.getElementById('plus_ones_id').style.display = '';
+            }
         }
 
     });
