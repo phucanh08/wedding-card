@@ -67,6 +67,7 @@ body {
     background-color: rgba(0,0,0,0.5)!important;
 }
 .donate-modal-content {
+    border-radius: 10px;
     position: relative;
     background-color: #fefefe;
     margin: auto;
@@ -217,6 +218,7 @@ header .navbar-brand {
 }
 .main_image {
     overflow: hidden;
+    border-radius: 20px;
 }
 .main_area .wedding_area {
     font-size: 2.2em;
@@ -249,6 +251,10 @@ header .navbar-brand {
 }
 .gallery-item {
     cursor: pointer;
+}
+
+.gallery-item img {
+    border-radius: 10px;
 }
 
 /* weddingdate-section */
@@ -322,6 +328,7 @@ header .navbar-brand {
 }
 .invitation-section .couple-img {
     overflow: hidden;
+    border-radius: 20px;
 }
 .invitation-section .invitation-content {
     width: 70%;
@@ -478,9 +485,13 @@ header .navbar-brand {
 /*new form*/
 #wish-form {
     background-color: #D8D8D8;
+    border-radius: 10px;
 }
 #show-comments {
     background-color: #D8D8D8;
+    scrollbar-color: #5C636A #e0e0e0;
+    scrollbar-width: thin;
+    border-radius: 10px;
 }
 .box-comment {
     border-bottom: 1px dashed black;
@@ -494,12 +505,8 @@ button#btn-submit-comment {
 button#btn-submit-comment:hover {
     background-color: #848484;
 }
-#show-comments::-webkit-scrollbar {
-    width: 8px;
-
-}
 #show-comments::-webkit-scrollbar-thumb {
-    background-color:#5C636A;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }
 
 .emoji-picker{max-width:100%;display:none;position: absolute;user-select: none!important;background: #fff;right: 0px;z-index: 9999;bottom: -355px;-webkit-box-shadow: 0 1px 2px 0 rgb(60 64 67 / 35%), 0 2px 6px 2px rgb(60 64 67 / 35%);box-shadow: 0 1px 2px 0 rgb(60 64 67 / 35%), 0 2px 6px 2px rgb(60 64 67 / 35%);border-radius: 0.5rem;overflow: hidden;}
