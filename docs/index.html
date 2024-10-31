@@ -48,7 +48,8 @@
                 const transform = `translate3d(${deltaX}px, ${deltaY}px, 0) scale(${imageElementScale})`;
                 imageElement.style.transform = transform;
                 imageElement.style.WebkitTransform = transform;
-                imageElement.style.zIndex = "9999";
+                imageElement.style.zIndex = "999999999";
+                imageElement.style.overflow = 'visible !important';
             }
         });
 
@@ -58,6 +59,7 @@
             imageElement.style.transform = "";
             imageElement.style.WebkitTransform = "";
             imageElement.style.zIndex = "";
+            imageElement.style.overflow = "";
         });
     }
 </script>
