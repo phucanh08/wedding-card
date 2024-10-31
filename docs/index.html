@@ -2,71 +2,62 @@
 <html lang="en">
 <script>
     const pinchZoom = (imageElement) => {
-        const minScale = 1;
-        const maxScale = 4;
-
-        const imageElementWidth = imageElement.offsetWidth;
-        const imageElementHeight = imageElement.offsetHeight;
-
         let imageElementScale = 1;
 
-        let rangeMaxX = 0;
-        let rangeMinX = 0;
+        let start = {};
 
-        let rangeMaxY = 0;
-        let rangeMinY = 0;
-
-        const updateRange = () => {
-            const rangeX = Math.max(0, Math.round(imageElementWidth * imageElementScale) - imageElementWidth);
-            const rangeY = Math.max(0, Math.round(imageElementHeight * imageElementScale) - imageElementHeight);
-
-            rangeMaxX = Math.round(rangeX / 2);
-            rangeMinX = Math.round(0 - rangeMaxX);
-
-            rangeMaxY = Math.round(rangeY / 2);
-            rangeMinY = Math.round(0 - rangeMaxY);
+        // Calculate distance between two fingers
+        const distance = (event) => {
+            return Math.hypot(event.touches[0].pageX - event.touches[1].pageX, event.touches[0].pageY - event.touches[1].pageY);
         };
 
-        const updateImage = (deltaX, deltaY) => {
-            const imageElementCurrentX = Math.min(Math.max(rangeMinX, deltaX), rangeMaxX) * 2;
-            const imageElementCurrentY = Math.min(Math.max(rangeMinY, deltaY), rangeMaxY) * 2;
+        imageElement.addEventListener('touchstart', (event) => {
+            console.log('touchstart', event);
+            if (event.touches.length === 2) {
+                event.preventDefault(); // Prevent page scroll
 
-            const transform = `translate3d(${imageElementCurrentX}px, ${imageElementCurrentY}px, 0) scale(${imageElementScale})`;
-            imageElement.style.transform = transform;
-            imageElement.style.WebkitTransform = transform;
-            imageElement.style.zIndex = "9999";
-        };
+                // Calculate where the fingers have started on the X and Y axis
+                start.x = (event.touches[0].pageX + event.touches[1].pageX) / 2;
+                start.y = (event.touches[0].pageY + event.touches[1].pageY) / 2;
+                start.distance = distance(event);
+            }
+        });
 
-        const resetImage = () => {
+        imageElement.addEventListener('touchmove', (event) => {
+            console.log('touchmove', event);
+            if (event.touches.length === 2) {
+                event.preventDefault(); // Prevent page scroll
+                let scale;
+
+                // Safari provides event.scale as two fingers move on the screen
+                // For other browsers just calculate the scale manually
+                if (event.scale) {
+                    scale = event.scale;
+                } else {
+                    const deltaDistance = distance(event);
+                    scale = deltaDistance / start.distance;
+                }
+
+                imageElementScale = Math.min(Math.max(1, scale), 4);
+
+                // Calculate how much the fingers have moved on the X and Y axis
+                const deltaX = (((event.touches[0].pageX + event.touches[1].pageX) / 2) - start.x) * 2; // x2 for accelarated movement
+                const deltaY = (((event.touches[0].pageY + event.touches[1].pageY) / 2) - start.y) * 2; // x2 for accelarated movement
+
+                // Transform the image to make it grow and move with fingers
+                const transform = `translate3d(${deltaX}px, ${deltaY}px, 0) scale(${imageElementScale})`;
+                imageElement.style.transform = transform;
+                imageElement.style.WebkitTransform = transform;
+                imageElement.style.zIndex = "9999";
+            }
+        });
+
+        imageElement.addEventListener('touchend', (event) => {
+            console.log('touchend', event);
+            // Reset image to it's original format
             imageElement.style.transform = "";
             imageElement.style.WebkitTransform = "";
             imageElement.style.zIndex = "";
-        };
-
-        imageElement.parentNode.style.overflow = 'visible';
-        imageElement.classList.add('pz-Image');
-
-        const hammertime = new Hammer.Manager(imageElement, {
-            touchAction: "auto",
-            recognizers: [
-                [Hammer.Pinch, { enable: true }]
-            ]
-        });
-
-        hammertime.on('pinchstart', event => {
-            console.log('pinchstart', event);
-        });
-
-        hammertime.on('pinchmove', event => {
-            // console.log('pinchmove', event);
-            imageElementScale = Math.min(Math.max(minScale, event.scale), maxScale);
-            updateRange();
-            updateImage(event.deltaX, event.deltaY);
-        });
-
-        hammertime.on('pinchend', event => {
-            console.log('pinchend', event);
-            resetImage();
         });
     }
 </script>
