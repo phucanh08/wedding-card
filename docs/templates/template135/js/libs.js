@@ -8386,6 +8386,22 @@ $("document").ready(function ($) {
     $(document).on('click', '.btn-see-more-gallery', function () {
         let indexNumber = $(this).data('index') || 0;
         $(this).lightGallery({
+            // Zoom settings
+            zoom: true,
+            zoomFromOrigin: true,
+            zoomIcons: {
+                zoomIn: true,
+                zoomOut: true
+            },
+
+            // Touch zoom specific settings
+            touchZoom: true,
+            touchZoomScale: 1.5, // Adjust zoom level
+
+            // Additional options for smoother experience
+            mousewheel: true, // Enable mousewheel zoom on desktop
+            actualSize: true,  // Allow zooming to actual image size
+
             dynamic: true,
             dynamicEl: photoGalleries,
             download: false,
