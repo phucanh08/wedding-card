@@ -62,6 +62,10 @@
             imageElement.style.overflow = "";
         });
     }
+
+    // document.querySelectorAll("img").forEach(element => {
+    // pinchZoom(element);
+    // });
 </script>
 <script>
     document.addEventListener("contextmenu", event => event.preventDefault()); // Chặn chuột phải
@@ -98,17 +102,16 @@
     <meta property="og:description"
           content="Ngày cưới: 24-11-2024 | Điều tuyệt vời nhất mà bạn từng học là yêu và được yêu để đáp lại">
     <meta property="og:url" content="https://phucanh08.github.io/wedding-card">
-    <meta property="og:image" content="https://phucanh08.github.io/wedding-card/assets/images/main_image.webp">
-    <meta property="og:image:url" content="https://phucanh08.github.io/wedding-card/assets/images/main_image.webp">
-    <meta property="og:image:secure_url"
-          content="https://phucanh08.github.io/wedding-card/assets/images/main_image.webp">
+    <meta property="og:image" content="https://phucanh08.github.io/wedding-card/assets/images/preview_image.webp">
+    <meta property="og:image:url" content="https://phucanh08.github.io/wedding-card/assets/images/preview_image.webp">
+    <meta property="og:image:secure_url" content="https://phucanh08.github.io/wedding-card/assets/images/preview_image.webp">
 
     <!-- twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Lễ cưới: Phúc Anh &amp; Nguyễn Ngọc">
     <meta name="twitter:description"
           content="Ngày cưới: 24-11-2024 | Điều tuyệt vời nhất mà bạn từng học là yêu và được yêu để đáp lại">
-    <meta name="twitter:image" content="https://phucanh08.github.io/wedding-card/assets/images/main_image.webp">
+    <meta name="twitter:image" content="https://phucanh08.github.io/wedding-card/assets/images/preview_image.webp">
     <meta name="twitter:label1" content="Được viết bởi">
     <meta name="twitter:data1" content="Lê Phúc Anh">
     <meta name="twitter:label2" content="Thời gian để đọc">
@@ -289,9 +292,7 @@
     window.onload = function () {
         document.querySelector('#preloader').style.display = 'none'; // Ẩn preloader
         document.querySelector('.wrapper').style.display = ''; // Hiện nội dung
-        document.querySelectorAll("img").forEach(element => {
-            pinchZoom(element);
-        });
+
     };
 </script>
 <style>
