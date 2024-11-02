@@ -290,7 +290,16 @@ header .navbar-brand {
 .weddingdate-section .mini_calendar td {
     color: #808080;
 }
-.weddingdate-section .mini_calendar td #today {
+.weddingdate-section .mini_calendar td #wedding_party_date {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    line-height: 20px;
+    padding: 5px;
+    border: 1px solid #726e6e;
+    border-radius: 50%;
+}
+.weddingdate-section .mini_calendar td #wedding_date {
     display: inline-block;
     width: 30px;
     height: 30px;
