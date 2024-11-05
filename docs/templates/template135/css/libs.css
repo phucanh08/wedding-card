@@ -10581,7 +10581,7 @@ fieldset:disabled .btn {
 [class^="bi-"]::before,
 [class*=" bi-"]::before {
   display: inline-block;
-  font-family: bootstrap-icons !important;
+  font-family: bootstrap-icons, serif !important;
   font-style: normal;
   font-weight: 400 !important;
   font-variant: normal;
