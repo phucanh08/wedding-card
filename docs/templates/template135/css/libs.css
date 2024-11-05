@@ -6560,6 +6560,9 @@ fieldset:disabled .btn {
   outline: 0;
   transition: transform 0.3s ease-in-out;
 }
+.offcanvas#offcanvasNavbar {
+  z-index: 999999 !important;
+}
 @media (prefers-reduced-motion: reduce) {
   .offcanvas {
     transition: none;
