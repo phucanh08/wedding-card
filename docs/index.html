@@ -1858,19 +1858,14 @@
     function togglePlay() {
         if (audio.paused) {
             audio.play();
+            playerVolumeOff.style.display = 'block';
+            playerVolumeOn.style.display = 'none';
         } else {
             audio.pause();
+            playerVolumeOff.style.display = 'none';
+            playerVolumeOn.style.display = 'block';
         }
     }
-
-    audio.addEventListener('pause', function () {
-        playerVolumeOff.style.display = 'none';
-        playerVolumeOn.style.display = 'block';
-    });
-    audio.addEventListener('pause', function () {
-        playerVolumeOff.style.display = 'block';
-        playerVolumeOn.style.display = 'none';
-    });
 
     document.addEventListener('DOMContentLoaded', function () {
         const player = document.getElementById('player');
