@@ -18023,6 +18023,7 @@ body:not(.lg-from-hash)
   content: "\e311";
 }
 #lg-actual-size {
+  display: none;
   font-size: 20px;
 }
 #lg-actual-size:after {
@@ -18118,6 +18119,9 @@ body:not(.lg-from-hash)
   position: absolute;
   vertical-align: middle;
   width: 0;
+}
+.lg-fullscreen {
+  display: none;
 }
 .lg-fullscreen:after {
   content: "\e20c";
