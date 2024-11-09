@@ -12,7 +12,7 @@
     const currentUrl = window.location.href;
     const url = new URL(currentUrl);
     const params = new URLSearchParams(url.search);
-    const guestId = params.get('code');
+    let guestId = params.get('code');
     let guests, currentGuest, rsvpData;
 </script>
 <head>
@@ -1326,18 +1326,16 @@
                         <input type="hidden" id="event_id" name="event_id" value="65eb2608ebd9f4c0110a33d7">
                         <input type="hidden" id="guest_id" name="guest_id" value="65ee6f8173ad745f4e037715">
                         <div class="col-12" style="margin-bottom: 10px;">
+                            <input name="guest-name"
+                                   id="guest-name"
+                                   type="text"
+                                   class="form-input"
+                                   oninput="validateSendConfirmBtn()"
+                                   placeholder="Nhập tên của bạn*"/>
+                        </div>
+                        <div class="col-12" style="margin-bottom: 10px;">
                             <select class="form-select"
-                                    onchange="(()=>{
-                                        const plusOne = document.getElementById('plus_ones_id');
-                                        if (document.getElementById('attendance_status_id').value !== 'Y') {
-                                            plusOne.style.display = 'none';
-                                            plusOne.value = '';
-                                            document.getElementById('send-confirm-btn').disabled = false;
-                                        } else {
-                                            plusOne.style.display = '';
-                                            document.getElementById('send-confirm-btn').disabled = true;
-                                        }
-                                    })()"
+                                    onchange="validateSendConfirmBtn()"
                                     name="attendance_status"
                                     id="attendance_status_id"
                                     style="margin-top: 4px; ">
@@ -1350,9 +1348,7 @@
                         <div class="col-12" style="margin-bottom: 10px;">
                             <select
                                     class="form-select"
-                                    onchange="(()=>{
-                                        document.getElementById('send-confirm-btn').disabled=document.getElementById('attendance_status_id').value==='';
-                                    })()"
+                                    onchange="validateSendConfirmBtn()"
                                     name="plus_ones"
                                     id="plus_ones_id"
                                     style="margin-top: 4px; display: none">
@@ -1365,7 +1361,33 @@
                                 <option value=6>Đi cùng 5 người</option>
                             </select>
                         </div>
+                        <script>
+                            function validateSendConfirmBtn() {
+                                const plusOne = document.getElementById('plus_ones_id');
+                                const guestName = document.getElementById('guest-name');
+                                const attendanceStatus = document.getElementById('attendance_status_id');
+                                const sentBtn = document.getElementById('send-confirm-btn');
+                                if (guestName.value.trim() === '') {
+                                    sentBtn.disabled = true;
+                                    return;
+                                }
 
+                                switch(attendanceStatus.value) {
+                                    case 'none':
+                                    case 'N':
+                                        plusOne.style.display = 'none';
+                                        sentBtn.disabled = false;
+                                        break;
+                                    case 'Y':
+                                        plusOne.style.display = '';
+                                        sentBtn.disabled = plusOne.value === '';
+                                        break;
+                                    default:
+                                        sentBtn.disabled = true;
+                                        break;
+                                }
+                            }
+                        </script>
                         <div class="row-guest-questions">
                         </div>
                     </div>

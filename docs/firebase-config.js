@@ -1,7 +1,7 @@
 import {initializeApp} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
 import {
     addDoc,
-    collection,
+    collection, doc,
     getDocs,
     getFirestore,
     limit,
@@ -53,11 +53,27 @@ async function getAllGuests() {
 // Hàm thêm confirm
 async function addConfirm(data) {
     try {
+        if (!guestId) {
+            const createdTime = serverTimestamp();
+            const docRef = await addDoc(collection(db, 'guests'), {
+                name: data.guestName,
+                createdTime: createdTime
+            });
+            guestId = docRef.id;
+            currentGuest = {
+                id: guestId,
+                name: data.name,
+                createdTime: createdTime,
+            }
+            guests.push(currentGuest);
+            url.searchParams.append('code', guestId);
+            history.pushState(null, '', url.href)
+        }
         const time = serverTimestamp();
         const docRef = await addDoc(collection(db, 'rsvp'), {
             ...data,
             guestId: guestId,
-            guestName: currentGuest.name,
+            _name: currentGuest.name,
             createdTime: time
         });
         return docRef.id;
@@ -144,6 +160,7 @@ $(document).ready(function () {
         guests = result;
         currentGuest = result.find(e => e.id === guestId);
         if (currentGuest) {
+            document.getElementById('guest-name').value = currentGuest.name;
             document.querySelector('#name-comment').value = currentGuest.name;
             // document.querySelector('#title-wedding-card').innerHTML = `Kính gửi ${currentGuest.name}!`;
             document.querySelector('#title-confirm-id').innerHTML = `Trân trọng kính mời ${currentGuest.name} đến tham dự buổi tiệc chung vui cùng gia đình chúng tôi!`;
@@ -228,6 +245,7 @@ $(document).ready(function () {
         try {
             event.preventDefault();
             const data = {
+                guestName: document.getElementById('guest-name').value.trim() || currentGuest.name,
                 confirmStatus: document.getElementById('attendance_status_id').value,
                 numOfPerson: document.getElementById('plus_ones_id').value,
             };
