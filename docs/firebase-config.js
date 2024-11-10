@@ -155,7 +155,7 @@ function setWishesListener(callback) {
 
 
 // Tự động gọi hàm khi trang load
-$(document).ready(function () {
+window.addEventListener('load',function () {
     getAllGuests().then(result => {
         guests = result;
         currentGuest = result.find(e => e.id === guestId);

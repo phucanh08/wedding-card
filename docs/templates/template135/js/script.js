@@ -1,4 +1,4 @@
-$(document).ready(function () {
+window.addEventListener('load',function () {
     function shakeTooltip() {
         var arrTooltip = $('ul.list-menu-icon').children();
         arrTooltip.each(function (index) {
@@ -23,16 +23,15 @@ $(document).ready(function () {
             myInterval = setInterval(shakeTooltip, 20000);
         }, 3000);
     }
-    setTimeout(() => {
-        $('.btn-menu-close').click(function () {
-            $('tooltiptext').css('visibility', '');
-            clearInterval(myInterval);
-        });
 
-        $(function () {
-            $('[data-toggle="tooltip"]').tooltip()
-        });
+    $('.btn-menu-close').click(function () {
+        $('tooltiptext').css('visibility', '');
+        clearInterval(myInterval);
+    });
 
-        $('[data-bs-toggle="popover"]').popover();
-    }, 3000);
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    });
+
+    $('[data-bs-toggle="popover"]').popover();
 });
