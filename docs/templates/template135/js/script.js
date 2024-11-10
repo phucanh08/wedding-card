@@ -23,14 +23,16 @@ $(document).ready(function () {
             myInterval = setInterval(shakeTooltip, 20000);
         }, 3000);
     }
-    $('.btn-menu-close').click(function () {
-        $('tooltiptext').css('visibility', '');
-        clearInterval(myInterval);
-    });
+    setTimeout(() => {
+        $('.btn-menu-close').click(function () {
+            $('tooltiptext').css('visibility', '');
+            clearInterval(myInterval);
+        });
 
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-    });
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        });
 
-    $('[data-bs-toggle="popover"]').popover();
+        $('[data-bs-toggle="popover"]').popover();
+    }, 3000);
 });
