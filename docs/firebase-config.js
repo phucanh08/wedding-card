@@ -73,7 +73,7 @@ async function addConfirm(data) {
         const docRef = await addDoc(collection(db, 'rsvp'), {
             ...data,
             guestId: guestId,
-            _name: currentGuest.name,
+            name2: currentGuest.name,
             createdTime: time
         });
         return docRef.id;
