@@ -172,7 +172,71 @@
     <link rel="stylesheet" href="common/calendar.css">
 </head>
 <script type="text/javascript">
-    let photoGalleries = [];
+    let photoGalleries = [
+        {
+            src: "assets/images/galleries/pic1/large.webp",
+            thumb: "assets/images/galleries/pic1/small.webp",
+            subHtml: `<div class="lg-sub-html"><h4>Tình yêu là điều kiện trong đó hạnh phúc của người khác là điều cần thiết cho chính bạn</h4></div>`
+        },
+        {
+            src: "assets/images/galleries/pic2/large.webp",
+            thumb: "assets/images/galleries/pic2/small.webp",
+            subHtml: `<div class="lg-sub-html"><h4>Tình yêu không chỉ là một danh từ - nó là một động từ; nó còn hơn cả một cảm giác - đó là sự quan tâm, chia sẻ, giúp đỡ, hy sinh</h4></div>`
+        },
+        {
+            src: "assets/images/galleries/pic3/large.webp",
+            thumb: "assets/images/galleries/pic3/small.webp",
+            subHtml: `<div class="lg-sub-html"><h4>Vì vậy, để được ai đó nhìn thấy đầy đủ và được yêu mến dù thế nào đi nữa — đây là một sự dâng hiến của con người có thể là điều kỳ diệu</h4></div>`
+        },
+        {
+            src: "assets/images/galleries/pic4/large.webp",
+            thumb: "assets/images/galleries/pic4/small.webp",
+            subHtml: `<div class="lg-sub-html"><h4>Tình yêu không làm cho thế giới quay tròn. Tình yêu là những gì làm cho chuyến đi đáng giá</h4></div>`
+        },
+        {
+            src: "assets/images/galleries/pic5/large.webp",
+            thumb: "assets/images/galleries/pic5/small.webp",
+            subHtml: `<div class="lg-sub-html"><h4>Tình yêu không có rào cản. Nó nhảy rào, nhảy rào, xuyên tường để đến đích với đầy hy vọng</h4></div>`
+        },
+        {
+            src: "assets/images/galleries/pic6/large.webp",
+            thumb: "assets/images/galleries/pic6/small.webp",
+            subHtml: `<div class="lg-sub-html"><h4>Tôi có thể chinh phục thế giới bằng một tay miễn là bạn đang nắm tay kia</h4></div>`
+        },
+        {
+            src: "assets/images/galleries/pic7/large.webp",
+            thumb: "assets/images/galleries/pic7/small.webp",
+            subHtml: `<div class="lg-sub-html"><h4>Tình yêu đích thực đứng về phía nhau trong những ngày tốt đẹp và sát cánh hơn trong những ngày tồi tệ</h4></div>`
+        },
+        {
+            src: "assets/images/galleries/pic8/large.webp",
+            thumb: "assets/images/galleries/pic8/small.webp",
+            subHtml: `<div class="lg-sub-html"><h4>Được ai đó yêu sâu sắc sẽ mang lại cho bạn sức mạnh, trong khi yêu ai đó sâu sắc sẽ cho bạn dũng khí</h4></div>`
+        },
+        {
+            src: "assets/images/galleries/pic9/large.webp",
+            thumb: "assets/images/galleries/pic9/small.webp",
+            subHtml: `<div class="lg-sub-html"><h4>Đối với thế giới, bạn có thể là một người, nhưng với một người, bạn là cả thế giới</h4></div>`
+        },
+        {
+            src: "assets/images/galleries/pic10/large.webp",
+            thumb: "assets/images/galleries/pic10/small.webp",
+            subHtml: `<div class="lg-sub-html"><h4>Tôi yêu bạn vì tất cả những gì bạn đang có, tất cả những gì bạn đã có, và tất cả những gì bạn chưa hiện hữu</h4></div>`
+        },
+        {
+            src: "assets/images/galleries/pic11/large.webp",
+            thumb: "assets/images/galleries/pic11/small.webp",
+            subHtml: `<div class="lg-sub-html"><h4>Bước đi với bàn tay của bạn trong tay tôi và bàn tay của tôi trong tay bạn, đó chính xác là nơi tôi muốn luôn ở đó</h4></div>`
+        }
+    ];
+    for (let i = 12; i <= 36; i++) {
+        photoGalleries.push(
+            {
+                src: `assets/images/galleries/pic${i}/large.webp`,
+                thumb: `assets/images/galleries/pic${i}/small.webp`,
+            }
+        )
+    }
 </script>
 <body>
 <!--BEGIN PRELOADER-->
@@ -500,124 +564,36 @@
                 Yêu cậu yêu cả một đời, thương cậu thương cả một thời thanh xuân.
             </h3>
             <div class="row gx-2" id="photoGalleryContainer">
-                <script type="text/javascript">
-                    photoGalleries.push({
-                        src: "assets/images/galleries/pic1/large.webp",
-                        thumb: "assets/images/galleries/pic1/small.webp",
-                        subHtml: `<div class="lg-sub-html"><h4>Tình yêu là điều kiện trong đó hạnh phúc của người khác là điều cần thiết cho chính bạn</h4></div>`
-                    });
-                </script>
                 <div class="col-6 gallery-item section-sub-title mb-2 btn-see-more-gallery"
                      data-aos="fade-right"
-                     data-index="0">
-                    <img loading="lazy" src="assets/images/galleries/pic1/small.webp" alt="pic1"/>
+                     data-index="22">
+                    <img loading="lazy" src="assets/images/galleries/pic23/small.webp" alt="pic23"/>
                 </div>
-
-                <script type="text/javascript">
-                    photoGalleries.push({
-                        src: "assets/images/galleries/pic2/large.webp",
-                        thumb: "assets/images/galleries/pic2/small.webp",
-                        subHtml: `<div class="lg-sub-html"><h4>Tình yêu không chỉ là một danh từ - nó là một động từ; nó còn hơn cả một cảm giác - đó là sự quan tâm, chia sẻ, giúp đỡ, hy sinh</h4></div>`
-                    });
-                </script>
                 <div class="col-6 gallery-item section-sub-title mb-2 btn-see-more-gallery"
                      data-aos="fade-left"
-                     data-index="1">
-                    <img loading="lazy" src="assets/images/galleries/pic2/small.webp" alt="pic2"/>
+                     data-index="25">
+                    <img loading="lazy" src="assets/images/galleries/pic26/small.webp" alt="pic26"/>
                 </div>
-
-                <script type="text/javascript">
-                    photoGalleries.push({
-                        src: "assets/images/galleries/pic3/large.webp",
-                        thumb: "assets/images/galleries/pic3/small.webp",
-                        subHtml: `<div class="lg-sub-html"><h4>Vì vậy, để được ai đó nhìn thấy đầy đủ và được yêu mến dù thế nào đi nữa — đây là một sự dâng hiến của con người có thể là điều kỳ diệu</h4></div>`
-                    });
-                </script>
                 <div class="col-6 gallery-item section-sub-title mb-2 btn-see-more-gallery"
                      data-aos="fade-right"
-                     data-index="2">
-                    <img loading="lazy" src="assets/images/galleries/pic3/small.webp" alt="pic3"/>
+                     data-index="17">
+                    <img loading="lazy" src="assets/images/galleries/pic18/small.webp" alt="pic18"/>
                 </div>
-
-                <script type="text/javascript">
-                    photoGalleries.push({
-                        src: "assets/images/galleries/pic4/large.webp",
-                        thumb: "assets/images/galleries/pic4/small.webp",
-                        subHtml: `<div class="lg-sub-html"><h4>Tình yêu không làm cho thế giới quay tròn. Tình yêu là những gì làm cho chuyến đi đáng giá</h4></div>`
-                    });
-                </script>
                 <div class="col-6 gallery-item section-sub-title mb-2 btn-see-more-gallery"
                      data-aos="fade-left"
-                     data-index="3">
-                    <img loading="lazy" src="assets/images/galleries/pic4/small.webp" alt="pic4"/>
+                     data-index="15">
+                    <img loading="lazy" src="assets/images/galleries/pic16/small.webp" alt="pic16"/>
                 </div>
-
-                <script type="text/javascript">
-                    photoGalleries.push({
-                        src: "assets/images/galleries/pic5/large.webp",
-                        thumb: "assets/images/galleries/pic5/small.webp",
-                        subHtml: `<div class="lg-sub-html"><h4>Tình yêu không có rào cản. Nó nhảy rào, nhảy rào, xuyên tường để đến đích với đầy hy vọng</h4></div>`
-                    });
-                </script>
                 <div class="col-6 gallery-item section-sub-title mb-2 btn-see-more-gallery"
                      data-aos="fade-right"
-                     data-index="4">
-                    <img loading="lazy" src="assets/images/galleries/pic5/small.webp" alt="pic5"/>
+                     data-index="10">
+                    <img loading="lazy" src="assets/images/galleries/pic11/small.webp" alt="pic11"/>
                 </div>
-
-                <script type="text/javascript">
-                    photoGalleries.push({
-                        src: "assets/images/galleries/pic6/large.webp",
-                        thumb: "assets/images/galleries/pic6/small.webp",
-                        subHtml: `<div class="lg-sub-html"><h4>Tôi có thể chinh phục thế giới bằng một tay miễn là bạn đang nắm tay kia</h4></div>`
-                    });
-                </script>
                 <div class="col-6 gallery-item section-sub-title mb-2 btn-see-more-gallery"
                      data-aos="fade-left"
                      data-index="5">
                     <img loading="lazy" src="assets/images/galleries/pic6/small.webp" alt="pic6"/>
                 </div>
-
-                <script type="text/javascript">
-                    photoGalleries.push({
-                        src: "assets/images/galleries/pic7/large.webp",
-                        thumb: "assets/images/galleries/pic7/small.webp",
-                        subHtml: `<div class="lg-sub-html"><h4>Tình yêu đích thực đứng về phía nhau trong những ngày tốt đẹp và sát cánh hơn trong những ngày tồi tệ</h4></div>`
-                    });
-                </script>
-
-                <script type="text/javascript">
-                    photoGalleries.push({
-                        src: "assets/images/galleries/pic8/large.webp",
-                        thumb: "assets/images/galleries/pic8/small.webp",
-                        subHtml: `<div class="lg-sub-html"><h4>Được ai đó yêu sâu sắc sẽ mang lại cho bạn sức mạnh, trong khi yêu ai đó sâu sắc sẽ cho bạn dũng khí</h4></div>`
-                    });
-                </script>
-
-                <script type="text/javascript">
-                    photoGalleries.push({
-                        src: "assets/images/galleries/pic9/large.webp",
-                        thumb: "assets/images/galleries/pic9/small.webp",
-                        subHtml: `<div class="lg-sub-html"><h4>Đối với thế giới, bạn có thể là một người, nhưng với một người, bạn là cả thế giới</h4></div>`
-                    });
-                </script>
-
-                <script type="text/javascript">
-                    photoGalleries.push({
-                        src: "assets/images/galleries/pic10/large.webp",
-                        thumb: "assets/images/galleries/pic10/small.webp",
-                        subHtml: `<div class="lg-sub-html"><h4>Tôi yêu bạn vì tất cả những gì bạn đang có, tất cả những gì bạn đã có, và tất cả những gì bạn chưa hiện hữu</h4></div>`
-                    });
-                </script>
-
-                <script type="text/javascript">
-                    photoGalleries.push({
-                        src: "assets/images/galleries/pic11/large.webp",
-                        thumb: "assets/images/galleries/pic11/small.webp",
-                        subHtml: `<div class="lg-sub-html"><h4>Bước đi với bàn tay của bạn trong tay tôi và bàn tay của tôi trong tay bạn, đó chính xác là nơi tôi muốn luôn ở đó</h4></div>`
-                    });
-                </script>
-
             </div>
 
             <div class="text-center aos-init aos-animate" data-aos="fade-up">
