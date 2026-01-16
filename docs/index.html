@@ -1,1900 +1,266 @@
-<!DOCTYPE html>
-<html lang="en">
-<script>
-    document.addEventListener("contextmenu", event => event.preventDefault()); // Chặn chuột phải
-    document.addEventListener("keydown", event => {
-        if (event.key === "F12" ||
-            (event.ctrlKey && event.shiftKey && ["I", "J", "C"].includes(event.key)) ||
-            (event.ctrlKey && event.key === "U")) {
-            event.preventDefault();
+<!DOCTYPE html><html lang="en"><script>document.addEventListener("contextmenu", event => event.preventDefault()); // Chặn chuột phải
+document.addEventListener("keydown", event => {
+    if (event.key === "F12" ||
+        (event.ctrlKey && event.shiftKey && ["I", "J", "C"].includes(event.key)) ||
+        (event.ctrlKey && event.key === "U")) {
+        event.preventDefault();
+    }
+});
+const currentUrl = window.location.href;
+const url = new URL(currentUrl);
+const params = new URLSearchParams(url.search);
+let guestId = params.get('code');
+let guests, currentGuest, rsvpData;</script><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Phúc Anh &amp; Nguyễn Ngọc Wedding site!</title><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Ngày cưới: 24-11-2024 | Điều tuyệt vời nhất mà bạn từng học là yêu và được yêu để đáp lại"><meta name="keywords" content="Wedding,Lê Phúc Anh,Nguyễn Thị Ngọc"><meta name="format-detection" content="telephone=no"><meta name="application-name" content="P.Anh & N.Ngọc Wedding"><meta name="author" content="anhlp"><link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon/favicon.webp"><meta property="og:type" content="website"><meta property="og:site_name" content="Lễ cưới: Phúc Anh &amp; Nguyễn Ngọc"><meta property="og:title" content="Lễ cưới: Phúc Anh &amp; Nguyễn Ngọc"><meta property="og:description" content="Ngày cưới: 24-11-2024 | Điều tuyệt vời nhất mà bạn từng học là yêu và được yêu để đáp lại"><meta property="og:url" content="https://phucanh08.github.io/wedding-card"><meta property="og:image" content="https://phucanh08.github.io/wedding-card/assets/images/preview_image.webp"><meta property="og:image:url" content="https://phucanh08.github.io/wedding-card/assets/images/preview_image.webp"><meta property="og:image:secure_url" content="https://phucanh08.github.io/wedding-card/assets/images/preview_image.webp"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Lễ cưới: Phúc Anh &amp; Nguyễn Ngọc"><meta name="twitter:description" content="Ngày cưới: 24-11-2024 | Điều tuyệt vời nhất mà bạn từng học là yêu và được yêu để đáp lại"><meta name="twitter:image" content="https://phucanh08.github.io/wedding-card/assets/images/preview_image.webp"><meta name="twitter:label1" content="Được viết bởi"><meta name="twitter:data1" content="Lê Phúc Anh"><meta name="twitter:label2" content="Thời gian để đọc"><meta name="twitter:data2" content="6 phút"><style>@font-face{font-family:'Bellota Text';font-style:normal;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/bellotatext/v18/0FlTVP2VnlWS4f3-UE9hHXMx-tkPVy38Sxer.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}@font-face{font-family:'Bellota Text';font-style:normal;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/bellotatext/v18/0FlTVP2VnlWS4f3-UE9hHXMx8dkPVy38Sxer.woff2) format('woff2');unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB}@font-face{font-family:'Bellota Text';font-style:normal;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/bellotatext/v18/0FlTVP2VnlWS4f3-UE9hHXMx8NkPVy38Sxer.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Bellota Text';font-style:normal;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/bellotatext/v18/0FlTVP2VnlWS4f3-UE9hHXMx_tkPVy38Sw.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Bonheur Royale';font-style:normal;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/bonheurroyale/v13/c4m51nt_GMTrtX-b9GcG4-YRmbK3eUbXNIIiMQI.woff2) format('woff2');unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB}@font-face{font-family:'Bonheur Royale';font-style:normal;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/bonheurroyale/v13/c4m51nt_GMTrtX-b9GcG4-YRmbK2eUbXNIIiMQI.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Bonheur Royale';font-style:normal;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/bonheurroyale/v13/c4m51nt_GMTrtX-b9GcG4-YRmbK4eUbXNIIi.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:Marmelad;font-style:normal;font-weight:400;src:url(https://fonts.gstatic.com/s/marmelad/v18/Qw3eZQdSHj_jK2e-8uFBEecuCFR9RHw.woff2) format('woff2');unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F}@font-face{font-family:Marmelad;font-style:normal;font-weight:400;src:url(https://fonts.gstatic.com/s/marmelad/v18/Qw3eZQdSHj_jK2e-8uFIEecuCFR9RHw.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}@font-face{font-family:Marmelad;font-style:normal;font-weight:400;src:url(https://fonts.gstatic.com/s/marmelad/v18/Qw3eZQdSHj_jK2e-8uFDEecuCFR9RHw.woff2) format('woff2');unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB}@font-face{font-family:Marmelad;font-style:normal;font-weight:400;src:url(https://fonts.gstatic.com/s/marmelad/v18/Qw3eZQdSHj_jK2e-8uFCEecuCFR9RHw.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:Marmelad;font-style:normal;font-weight:400;src:url(https://fonts.gstatic.com/s/marmelad/v18/Qw3eZQdSHj_jK2e-8uFMEecuCFR9.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}</style><link rel="stylesheet" href="templates/template135/css/libs.css"><link rel="stylesheet" href="templates/template135/css/style.css"><link rel="stylesheet" href="common/calendar.css"></head><script type="text/javascript">const subs = [
+    "Tình yêu là điều kiện trong đó hạnh phúc của người khác là điều cần thiết cho chính bạn",
+    "Tình yêu không chỉ là một danh từ - nó là một động từ; nó còn hơn cả một cảm giác - đó là sự quan tâm, chia sẻ, giúp đỡ, hy sinh",
+    "Vì vậy, để được ai đó nhìn thấy đầy đủ và được yêu mến dù thế nào đi nữa — đây là một sự dâng hiến của con người có thể là điều kỳ diệu",
+    "Tình yêu không làm cho thế giới quay tròn. Tình yêu là những gì làm cho chuyến đi đáng giá",
+    "Tình yêu không có rào cản. Nó nhảy rào, nhảy rào, xuyên tường để đến đích với đầy hy vọng",
+    "Tôi có thể chinh phục thế giới bằng một tay miễn là bạn đang nắm tay kia",
+    "Tình yêu đích thực đứng về phía nhau trong những ngày tốt đẹp và sát cánh hơn trong những ngày tồi tệ",
+    "Được ai đó yêu sâu sắc sẽ mang lại cho bạn sức mạnh, trong khi yêu ai đó sâu sắc sẽ cho bạn dũng khí",
+    "Đối với thế giới, bạn có thể là một người, nhưng với một người, bạn là cả thế giới",
+    "Tôi yêu bạn vì tất cả những gì bạn đang có, tất cả những gì bạn đã có, và tất cả những gì bạn chưa hiện hữu",
+    "Bước đi với bàn tay của bạn trong tay tôi và bàn tay của tôi trong tay bạn, đó chính xác là nơi tôi muốn luôn ở đó",
+    "Tình yêu là khi hạnh phúc của người kia trở thành ưu tiên của trái tim bạn",
+    "Yêu không phải là tìm một người hoàn hảo, mà là học cách yêu sự không hoàn hảo một cách hoàn hảo",
+    "Tình yêu bắt đầu từ ánh mắt, lớn lên bằng sự quan tâm và tồn tại bằng sự thấu hiểu",
+    "Ở bên đúng người, im lặng cũng trở nên ấm áp",
+    "Tình yêu không cần quá nhiều lời hứa, chỉ cần ở lại khi mọi thứ trở nên khó khăn",
+    "Yêu là khi bạn muốn trở về nhà, dù bạn đang ở bất cứ đâu",
+    "Tình yêu là cùng nhau già đi, nhưng vẫn nắm tay như thuở ban đầu",
+    "Không phải ai bước vào cuộc đời bạn cũng ở lại, nhưng người yêu bạn thật lòng sẽ không rời đi",
+    "Tình yêu không đo bằng thời gian, mà bằng những khoảnh khắc khiến tim rung động",
+    "Yêu đúng người là khi bạn được là chính mình mà không cần cố gắng",
+    "Tình yêu là một cuộc hành trình, không phải đích đến",
+    "Chúng ta yêu không phải vì cần nhau, mà vì chọn nhau mỗi ngày",
+    "Tình yêu thật sự không làm bạn mệt mỏi, nó khiến bạn mạnh mẽ hơn",
+    "Yêu là nhìn về cùng một hướng, dù con đường có gập ghềnh",
+    "Tình yêu là kiên nhẫn lắng nghe, ngay cả khi không đồng ý",
+    "Người yêu bạn sẽ không hứa một đời hoàn hảo, nhưng sẽ hứa không bỏ bạn một mình",
+    "Tình yêu là khi một tin nhắn ngắn cũng đủ làm bạn mỉm cười cả ngày",
+    "Yêu không phải là chiếm hữu, mà là trân trọng",
+    "Tình yêu là nơi bạn tìm thấy bình yên giữa thế giới đầy ồn ào",
+    "Yêu là cùng nhau vượt qua giông bão, chứ không phải tránh né nó",
+    "Tình yêu không cần phô trương, chỉ cần chân thành",
+    "Ở bên người mình yêu, thời gian trôi chậm lại",
+    "Tình yêu là sự lựa chọn lặp đi lặp lại, mỗi ngày",
+    "Yêu là khi bạn sẵn sàng thay đổi, không phải vì bị ép buộc",
+    "Tình yêu là nhà, nơi trái tim muốn quay về"
+]
+let photoGalleries = [];
+for (let i = 1; i <= 36; i++) {
+    photoGalleries.push(
+        {
+            src: `assets/images/galleries/pic${i}/large.webp`,
+            thumb: `assets/images/galleries/pic${i}/small.webp`,
+            subHtml: `<div class="lg-sub-html"><h4>${subs[i-1]}</h4></div>`
+        }
+    )
+}</script><body><script>window.onload=function(){document.querySelector("#preloader").style.display="none",document.querySelector(".wrapper").style.display=""}</script><style>#preloader{position:fixed;background:#fff;top:0;left:0;width:100%;height:100%;z-index:99999999;text-align:center}#preloader .preloader-title{font-size:20pt;color:currentColor;line-height:.9;position:absolute;top:60px;left:50%;-webkit-transform:translateX(-50%);-moz-transform:translateX(-50%);-ms-transform:translateX(-50%);-o-transform:translateX(-50%);transform:translateX(-50%);font-family:Marmelad,sans-serif}#preloader .preloader-title small{color:currentColor;line-height:.9;font-size:12pt}.loading-heart{fill:transparent;stroke:#ff0012;stroke-width:11;position:absolute;top:50%;left:50%;-webkit-transform:translate(-50%,-50%);-moz-transform:translate(-50%,-50%);-ms-transform:translate(-50%,-50%);-o-transform:translate(-50%,-50%);transform:translate(-50%,-50%);text-align:center;display:inline-block}.loading-heart svg{overflow:visible;width:11rem}.loading-heart path{stroke-dashoffset:0;stroke-dasharray:1550;transform-origin:center;-webkit-animation:stroke-animation 3s ease-in-out infinite forwards;-khtml-animation:stroke-animation 3s ease-in-out infinite forwards;-moz-animation:stroke-animation 3s ease-in-out infinite forwards;-ms-animation:stroke-animation 3s ease-in-out infinite forwards;-o-animation:stroke-animation 3s ease-in-out infinite forwards;animation:stroke-animation 3s ease-in-out infinite forwards}@keyframes stroke-animation{0%{stroke-dashoffset:0}30%{stroke-dashoffset:1550}60%{stroke-dashoffset:3100;fill:transparent;-webkit-transform:scale(1);-moz-transform:scale(1);-ms-transform:scale(1);-o-transform:scale(1);transform:scale(1)}100%{stroke-dashoffset:3100}}</style><div id="preloader"><div class="loading-heart"><svg viewBox="0 0 512 512" width="100"><path d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"></path></svg><div class="preloader-title">A<small>&amp;</small>N</div></div></div><div class="wrapper"><header id="header" class="site-header header-style-1 d-none"><meta name="format-detection" content="telephone=no"><nav class="navbar bg-white shadow-sm py-1"><div class="container-fluid"><div class="w-100 d-flex align-items-center justify-content-between"><a class="section-title navbar-brand" href="#">A & N</a><button class="navbar-toggler rounded-0 border-0 p-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar"><i class="bi bi-list fs-3 text-black"></i></button></div></div></nav></header><section class="banner-section"><div class="main_area p-3"><div class="day_wrapper" data-aos="fade-up" data-aos-delay="500"><div class="day_area p-1 text-center"><div class="section-sub-title d-flex day_area_inner text-center p-2 py-3"><p class="m-0 we">Chúng tôi</p><div class="wrap-text"><p class="day m-0">24</p><p class="month m-0">11</p></div><p class="m-0">Sắp kết hôn.</p></div></div></div><div class="main_image_area pt-4 pb-8" data-aos="fade-up" data-aos-delay="50"><div class="main_image"><img loading="lazy" alt="main_image" src="assets/images/main_image.webp"></div><img loading="lazy" class="bg-title" src="templates/template135/img/main_title.webp" alt=""><div id="title-wedding-card" class="wrap-name pt-7 title" style="padding:0 25px">Phúc Anh<small>&amp;</small>Nguyễn Ngọc</div></div></div></section><section class="py-4 accessibilities-section"><div class="container-fluid"><div class="row gx-2 justify-content-center"><div class="col-sm-4"><a href="#wishes" class="w-100 mb-1 px-2 accessibility-btn btn btn-secondary" data-aos="fade-right"><span class="content-button"><img loading="lazy" class="access-section-icon" src="assets/images/common/wishes.webp" alt="access-btn"> Gửi lời chúc</span></a></div><div class="col-sm-4" onclick="(() => {
+                        document.getElementById('rsvp-modal').style.display = 'flex';
+                    })()"><a target="_blank" class="w-100 mb-1 px-2 accessibility-btn btn btn-secondary" data-aos="fade-up"><span class="content-button"><img loading="lazy" class="access-section-icon" src="assets/images/common/rsvp4.webp" alt="access-btn"> Xác nhận tham dự</span></a></div><div class="col-sm-4"><a href="javascript:void(0)" class="w-100 mb-1 accessibility-btn btn btn-secondary buttonDonate" data-aos="fade-left"><span class="content-button"><img loading="lazy" class="access-section-icon" src="assets/images/common/money_bag.webp" alt="access-btn"> Mừng cưới</span></a></div></div></div></section><section class="py-5 couple-section section-bg-affect" id="couple"><div class="container-fluid"><h2 data-aos="fade-up" class="section-title text-center m-0">Cô Dâu &amp; Chú Rể</h2><div class="section-title wrap-people mt-5"><div class="member member-groom mb-5"><div data-aos="flip-left" class="member-image animation mb-3 text-center"><img loading="lazy" src="assets/images/groom.webp" alt="groom"></div><div class="parent d-flex flex-column mx-auto text-center my-2"><div class="parent-name">Con ông:<span>Lê Văn Luận</span></div><div class="parent-name">Con bà:<span>Lê Thị Kim Giang</span></div></div><div class="groom-story d-flex flex-column"><p class="text-story fs-6 text-center m-0">Là lập trình viên hiện đang công tác tại một công ty ở Cầu Giấy, Hà Nội. Là một người hiền lành và ít nói. Luôn coi trọng tình cảm và yêu thương gia đình. Với anh: “Gia đình là điểm tựa vững chắc nhất và là bến đỗ bình yên không đâu sánh bằng đối với mỗi con người. Đó luôn là nơi tràn ngập tình yêu thương để ta trở về.”</p><a class="fs-6 fw-bold text-center mb-2 text-decoration-none" tabindex="0" role="button" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="bottom" data-bs-content="Là lập trình viên hiện đang công tác tại một công ty ở Cầu Giấy, Hà
+                            Nội.
+                            Là một người hiền lành và ít nói. Luôn coi trọng tình cảm và yêu thương
+                            gia đình.
+                            Với anh: “Gia đình là điểm tựa vững chắc nhất và là bến đỗ bình yên
+                            không đâu sánh bằng đối với mỗi con người.
+                            Đó luôn là nơi tràn ngập tình yêu thương để ta trở về.”">Xem thêm</a></div><div class="d-flex justify-content-center"><span data-aos="fade-left" class="member-name m-0">Phúc Anh /</span><ul data-aos="fade-up" class="member-contact social-links d-flex p-0 m-0 mx-2"><li><a href="https://web.facebook.com/phucanh24" target="_blank"><i class="bi bi-facebook"></i></a></li></ul></div></div><div class="member member-bride mt-5"><div data-aos="flip-right" class="member-image animation mb-3 text-center"><img loading="lazy" src="assets/images/bride.webp" alt="bride"></div><div class="parent d-flex flex-column mx-auto text-center my-2"><div class="parent-name">Con ông:<span>Nguyễn Đức Long</span></div><div class="parent-name">Con bà:<span>Hồ Thị Huế</span></div></div><div class="bride-story d-flex flex-column"><p class="text-story fs-6 text-center m-0">Cô gái đến từ chùa Hương, hiện là dược sĩ đang công tác ở một bệnh viện tại Hà Nội. Là một người hay cười nhưng dễ xúc động; sống chân thành, tình cảm và luôn được mọi người yêu thương.</p><a class="fs-6 fw-bold text-center mb-2 text-decoration-none" tabindex="0" role="button" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="bottom" data-bs-content="Cô gái đến từ chùa Hương, hiện là dược sĩ đang công tác ở một bệnh viện tại Hà Nội.
+                            Là một người hay cười nhưng dễ xúc động; sống chân thành, tình cảm và luôn được mọi người yêu thương.">Xem thêm</a></div><div class="d-flex justify-content-center"><span data-aos="fade-left" class="member-name m-0">Nguyễn Ngọc /</span><ul data-aos="fade-up" class="member-contact social-links d-flex p-0 m-0 mx-2"><li><a href="https://web.facebook.com/RupyCapricornus" target="_blank"><i class="bi bi-facebook"></i></a></li></ul></div></div></div></div></section><section class="py-5 video-section section-bg-affect" id="video"><div class="container-fluid"><h2 class="section-title text-center" data-aos="fade-up">Video Cưới</h2><h3 class="section-sub-title mb-4 text-center" data-aos="fade-up">Tình yêu không làm cho thế giới quay tròn.</h3><div class="ratio ratio-16x9" data-aos="zoom-in"><iframe width="100%" src="https://www.youtube.com/embed/CSstEz-prSY?si=upaPaIewybtlZxM3" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div></div></section><section class="py-5 gallery-section section-bg-affect" id="gallery"><div class="container-fluid"><h2 class="section-title text-center" data-aos="zoom-in-up">Album Hình Cưới</h2><h3 class="section-sub-title mb-4 text-center" data-aos="zoom-in-up">Yêu cậu yêu cả một đời, thương cậu thương cả một thời thanh xuân.</h3><div class="row gx-2" id="photoGalleryContainer"><div class="col-6 gallery-item section-sub-title mb-2 btn-see-more-gallery" data-aos="fade-right" data-index="22"><img loading="lazy" src="assets/images/galleries/pic23/small.webp" alt="pic23"></div><div class="col-6 gallery-item section-sub-title mb-2 btn-see-more-gallery" data-aos="fade-left" data-index="25"><img loading="lazy" src="assets/images/galleries/pic26/small.webp" alt="pic26"></div><div class="col-6 gallery-item section-sub-title mb-2 btn-see-more-gallery" data-aos="fade-right" data-index="17"><img loading="lazy" src="assets/images/galleries/pic18/small.webp" alt="pic18"></div><div class="col-6 gallery-item section-sub-title mb-2 btn-see-more-gallery" data-aos="fade-left" data-index="15"><img loading="lazy" src="assets/images/galleries/pic16/small.webp" alt="pic16"></div><div class="col-6 gallery-item section-sub-title mb-2 btn-see-more-gallery" data-aos="fade-right" data-index="10"><img loading="lazy" src="assets/images/galleries/pic11/small.webp" alt="pic11"></div><div class="col-6 gallery-item section-sub-title mb-2 btn-see-more-gallery" data-aos="fade-left" data-index="2"><img loading="lazy" src="assets/images/galleries/pic3/small.webp" alt="pic3"></div></div><div class="text-center aos-init aos-animate" data-aos="fade-up"><a href="javascript:void(0)" id="btn-see-more-gallery" class="btn btn-secondary mt-4 btn-see-more-gallery"><span>Tất cả hình ảnh</span></a></div></div></section><section class="py-5 section-sub-title weddingdate-section section-bg-affect" id="weddingdate"><div class="container-fluid"><div class="w-100"><div class="mini_calendar m-auto pb-3" data-aos="fade-up-right"><div class="mini_calendar"><table><caption class="calendar-month">Th&aacute;ng 11 / 2024</caption><tr><th abbr="Monday">Thứ 2</th><th abbr="Tuesday">Thứ 3</th><th abbr="Wednesday">Thứ 4</th><th abbr="Thursday">Thứ 5</th><th abbr="Friday">Thứ 6</th><th abbr="Saturday">Thứ 7</th><th abbr="Sunday">CN</th></tr><tr><td class="emptydays" colspan="4">&nbsp;</td><td>1</td><td>2</td><td>3</td></tr><tr><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td></tr><tr><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td></tr><tr><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td><td><div id="wedding_party_date">23</div></td><td><div id="wedding_date">24</div></td></tr><tr><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td class="emptydays" colspan="1">&nbsp;</td></tr></table></div></div><div class="countdown" data-aos="fade-up-left"><div class="m-auto" id="clock" data-date="2024-11-24" data-text-day="Ngày" data-text-hour="Giờ" data-text-minute="Phút" data-text-second="Giây"></div></div></div></div></section><section class="py-5 story-section section-bg-affect" id="story"><div class="container-fluid"><h2 data-aos="fade-up" class="section-title text-center">Chuyện tình yêu</h2><h3 data-aos="fade-up" class="section-sub-title mb-4 text-center">Tình cảm đẹp nhất là khi cả hai cùng chân thành.<br>Tình yêu đẹp nhất là khi cả hai không ai có ý định rời đi,<br>cho dù có bất cứ chuyện gì xảy ra đi chăng nữa.</h3><div class="story-content"><div class="timeline"><div class="outer"><div class="timeline-card" data-aos="fade-right"><div class="info"><span class="date">❤️❤️❤️️❤️❤️</span><h3 class="title">Phút giây đầu tiên</h3><p>Có những sự tình cờ mà có lẽ anh đã phải dành hết sự may mắn mới có được. Cụ thể là việc gặp em!</p><div class="img-holder"><img loading="lazy" src="assets/images/love_story_1.webp" alt="love_story_1"></div></div></div><div class="timeline-card" data-aos="fade-left"><div class="info"><span class="date">❤️❤️❤️❤️❤️</span><h3 class="title">Lời tỏ tình dễ thương^^</h3><p>Bình yên thì cũng tốt, nhưng gặp khó chẳng nỡ buông thì lại càng trân trọng nhiều hơn. Anh thích tụi mình của những ngày mệt nhoài gắng gượng, vẫn tranh thủ chút thời gian dành cho nhau. Anh thích em giận hờn chỉ cần anh dỗ một chút lại tươi cười ngay, thích tụi mình với những lần nắm tay bất kỳ đâu. Và anh thích những câu chuyện dài lâu.</p><div class="img-holder"><img loading="lazy" src="assets/images/love_story_2.webp" alt="love_story_2"></div></div></div><div class="timeline-card" data-aos="fade-right"><div class="info"><span class="date">September 28 2024</span><h3 class="title">Phút giây cầu hôn</h3><p>Có rất nhiều nỗi nhớ được gói gọn bằng một cái ôm, vậy nên lần nào được gặp em, anh đều muốn chạy đến ôm lấy em lâu một chút. Anh không biết việc mình thương và được thương bởi một người có đáng tự hào không, nhưng chỉ cần nghĩ tới chuyện có em là của riêng mình giữa biết bao nhiêu người, anh vẫn cảm thấy bản thân là một người thật sự hạnh phúc.</p><div class="img-holder"><img loading="lazy" src="assets/images/love_story_3.webp" alt="love_story_3"></div></div></div><div class="timeline-card" data-aos="fade-left"><div class="info"><span class="date">October 13 2024</span><h3 class="title">Ngày lễ đính hôn</h3><p>Cảm ơn vì chúng ta đã gắn bó với nhau 10 năm, từ là bạn thân tới là bạn đời. Mãi bên cạnh nhau em nhé!</p><div class="img-holder"><img loading="lazy" src="assets/images/love_story_4.webp" alt="love_story_4"></div></div></div></div></div></div></div></section><section class="py-5 invitation-section section-bg-affect" id="invitation"><div class="container-fluid"><div class="w-100"><div data-aos="fade-up" class="invation-title"><h3 class="text-center title m-0">Lời Ngỏ</h3><p class="text-center m-0"></p></div><div><div data-aos="fade-up" class="invitation-content my-5 text-center sub-title">Cảm ơn tất cả những người bạn thân yêu của tôi!<br>Tôi biết các bạn rất bận rộn, bận rộn với công việc, bận rộn với gia đình nhỏ của mình…<br>Nhưng tất cả đã có mặt hôm nay để chúc mừng tinh yêu và hạnh phúc của chúng tôi.<br>Một lần nữa chân thành cảm ơn tất cả các bạn!</div><div data-aos="fade-up" class="couple-img mb-5"><img loading="lazy" src="assets/images/introduction.webp" alt="introduction"></div><div data-aos="fade-up" class="section-title invitation-couple text-center my-5 fs-4"><p>*Groom/<span>Phúc Anh</span></p><p>*Bride/<span>Nguyễn Ngọc</span></p></div></div></div></div></section><section class="py-5 event-section section-bg-affect" id="event"><div class="container-fluid"><h2 data-aos="fade-up" class="section-title text-center">Sự Kiện Cưới</h2><h3 data-aos="fade-up" class="section-sub-title mb-4 text-center">Cảm ơn bạn rất nhiều vì đã gửi những lời chúc mừng tốt đẹp nhất đến đám cưới của chúng tôi!</h3><div data-aos="flip-right" class="event-item d-flex flex-row p-0 border-0 rounded overflow-hidden"><div class="image-wrap position-relative" style="background-image:url(assets/images/bride_wedding.webp)"><div class="dresscode-colors-wrap w-100"><div class="dresscode-colors-event"><span class="tooltip-dresscode">Dress Code</span><div class="dresscode-colors-item" style="background:#eda2b6"></div><div class="dresscode-colors-item" style="background:#fff"></div><div class="dresscode-colors-item" style="background:#623262"></div></div></div></div><div class="info-wrap p-3"><h5 class="section-sub-title">LỄ CƯỚI NHÀ GÁI</h5><strong>09:00 24/11/2024</strong><p class="card-text"><span>Tư gia nhà gái -</span>Số 63, đường Đền Trình Tuyết Sơn, Phú Yên, Hương Sơn, Mỹ Đức, Hà Nội</p><div class="calendar-button" style="display:none"><div class="atcb" style="display:none">{ "name":"LỄ CƯỚI NHÀ GÁI (Đám cưới Phúc Anh và Nguyễn Ngọc)", "description":"Cảm ơn bạn đã dành thời gian tham dự đám cưới của chúng tôi!", "startDate":"2024-11-24", "endDate":"2024-11-24", "startTime":"09:00", "endTime":"10:00", "location":"Số 63, đường Đền Trình Tuyết Sơn, Phú Yên, Hương Sơn, Mỹ Đức, Hà Nội", "options":["Apple","Google","iCal","Microsoft365","MicrosoftTeams","Outlook.com","Yahoo"], "timeZone":"Asia/Ho_Chi_Minh", "iCalFileName":"Reminder-Event", "listStyle":"modal", "label":"Thêm vào lịch", "trigger":"click" }</div></div><a href="#" data-index="1" class="section-sub-title btn btn-sm btn-secondary calendar-button-custom-click">Thêm vào lịch</a><a href="https://maps.app.goo.gl/sCifnHivgFWN3GCu6" target="_blank" class="section-sub-title btn btn-sm btn-secondary">Xem bản đồ</a></div></div><div data-aos="flip-left " class="event-item d-flex flex-row p-0 border-0 rounded overflow-hidden"><div class="image-wrap position-relative" style="background-image:url(assets/images/bride_wedding_party.webp)"><div class="dresscode-colors-wrap w-100"><div class="dresscode-colors-event"><span class="tooltip-dresscode">Dress Code</span><div class="dresscode-colors-item" style="background:#504e63"></div><div class="dresscode-colors-item" style="background:#cc8a4d"></div><div class="dresscode-colors-item" style="background:#bc5f6a"></div></div></div></div><div class="info-wrap p-3"><h5 class="section-sub-title">TIỆC CƯỚI NHÀ GÁI</h5><strong>16:00 23/11/2024</strong><p class="card-text"><span>Tư gia nhà gái -</span>Số 63, đường Đền Trình Tuyết Sơn, Phú Yên, Hương Sơn, Mỹ Đức, Hà Nội</p><div class="calendar-button" style="display:none"><div class="atcb" style="display:none">{ "name":"TIỆC CƯỚI NHÀ GÁI (Đám cưới Phúc Anh và Nguyễn Ngọc)", "description":"Cảm ơn bạn đã dành thời gian tham dự đám cưới của chúng tôi!", "startDate":"2024-11-23", "endDate":"2024-11-23", "startTime":"16:00", "endTime":"19:00", "location":"Số 63, đường Đền Trình Tuyết Sơn, Phú Yên, Hương Sơn, Mỹ Đức, Hà Nội", "options":["Apple","Google","iCal","Microsoft365","MicrosoftTeams","Outlook.com","Yahoo"], "timeZone":"Asia/Ho_Chi_Minh", "iCalFileName":"Reminder-Event", "listStyle":"modal", "label":"Thêm vào lịch", "trigger":"click" }</div></div><a href="#" data-index="2" class="section-sub-title btn btn-sm btn-secondary calendar-button-custom-click">Thêm vào lịch</a><a href="https://maps.app.goo.gl/sCifnHivgFWN3GCu6" target="_blank" class="section-sub-title btn btn-sm btn-secondary">Xem bản đồ</a></div></div><div data-aos="flip-right" class="event-item d-flex flex-row p-0 border-0 rounded overflow-hidden"><div class="image-wrap position-relative" style="background-image:url(assets/images/groom_wedding.webp)"><div class="dresscode-colors-wrap w-100"><div class="dresscode-colors-event"><span class="tooltip-dresscode">Dress Code</span><div class="dresscode-colors-item" style="background:#32435f"></div><div class="dresscode-colors-item" style="background:#fff"></div><div class="dresscode-colors-item" style="background:#57233a"></div></div></div></div><div class="info-wrap p-3"><h5 class="section-sub-title">LỄ CƯỚI NHÀ TRAI</h5><strong>10:00 24/11/2024</strong><p class="card-text"><span>Tư gia nhà trai -</span>Số 19, ngõ 81, Văn Giang, Đại Nghĩa, Mỹ Đức, Hà Nội</p><div class="calendar-button" style="display:none"><div class="atcb" style="display:none">{ "name":"LỄ CƯỚI NHÀ TRAI (Đám cưới Phúc Anh và Nguyễn Ngọc)", "description":"Cảm ơn bạn đã dành thời gian tham dự đám cưới của chúng tôi!", "startDate":"2024-11-23", "endDate":"2024-11-23", "startTime":"10:00", "endTime":"12:00", "location":"Số 19, ngõ 81, Văn Giang, Đại Nghĩa, Mỹ Đức, Hà Nội", "options":["Apple","Google","iCal","Microsoft365","MicrosoftTeams","Outlook.com","Yahoo"], "timeZone":"Asia/Ho_Chi_Minh", "iCalFileName":"Reminder-Event", "listStyle":"modal", "label":"Thêm vào lịch", "trigger":"click" }</div></div><a href="#" data-index="3" class="section-sub-title btn btn-sm btn-secondary calendar-button-custom-click">Thêm vào lịch</a><a href="https://maps.app.goo.gl/5w4rfJMSM8PZU5NU6" target="_blank" class="section-sub-title btn btn-sm btn-secondary">Xem bản đồ</a></div></div><div data-aos="flip-left " class="event-item d-flex flex-row p-0 border-0 rounded overflow-hidden"><div class="image-wrap position-relative" style="background-image:url(assets/images/groom_wedding_party.webp)"><div class="dresscode-colors-wrap w-100"><div class="dresscode-colors-event"><span class="tooltip-dresscode">Dress Code</span><div class="dresscode-colors-item" style="background:#7fb174"></div><div class="dresscode-colors-item" style="background:#504e63"></div><div class="dresscode-colors-item" style="background:#632a7e"></div></div></div></div><div class="info-wrap p-3"><h5 class="section-sub-title">TIỆC CƯỚI NHÀ TRAI</h5><strong>15:00 23/11/2024</strong><p class="card-text"><span>Nhà văn hoá thôn Văn Giang -</span>Văn Giang, Đại Nghĩa, Mỹ Đức, Hà Nội</p><div class="calendar-button" style="display:none"><div class="atcb" style="display:none">{ "name":"TIỆC CƯỚI NHÀ TRAI (Đám cưới Phúc Anh và Nguyễn Ngọc)", "description":"Cảm ơn bạn đã dành thời gian tham dự đám cưới của chúng tôi!", "startDate":"2024-11-23", "endDate":"2024-11-23", "startTime":"15:00", "endTime":"19:00", "location":"Nhà văn hoá thôn Văn Giang, Văn Giang, Đại Nghĩa, Mỹ Đức, Hà Nội", "options":["Apple","Google","iCal","Microsoft365","MicrosoftTeams","Outlook.com","Yahoo"], "timeZone":"Asia/Ho_Chi_Minh", "iCalFileName":"Reminder-Event", "listStyle":"modal", "label":"Thêm vào lịch", "trigger":"click" }</div></div><a href="#" data-index="4" class="section-sub-title btn btn-sm btn-secondary calendar-button-custom-click">Thêm vào lịch</a><a href="https://maps.app.goo.gl/JCrtjNu25NJVHe387" target="_blank" class="section-sub-title btn btn-sm btn-secondary">Xem bản đồ</a></div></div></div></section><section class="py-5 donate-section section-bg-affect" id="donate"><div class="container-fluid"><div class="w-100"><h2 data-aos="fade-up" class="section-title text-center m-0">Hộp mừng cưới</h2><h3 data-aos="fade-up" class="section-sub-title mb-4 text-center">Thật vui vì được gặp và đón tiếp các bạn trong một dịp đặc biệt như đám cưới của chúng tôi.</h3><div class="row d-flex justify-content-around donate-box mb-1"><div data-aos="fade-right" class="col-6 mb-4 donate-wrap"><div class="donate-card p-3 px-3 rounded text-center"><strong class="d-block sub-title mb-2 text-uppercase">Đến chú rể</strong><img loading="lazy" class="qr-code-image m-auto mb-2" src="assets/images/groom_qr_donate.webp" alt="groom_qr_donate"><p class="mb-1"><strong>Vietcombank</strong></p><p class="mb-1"><strong>LE PHUC ANH</strong></p><p class="mb-1"><strong>9375221238</strong></p><p class="mb-1"><strong>Trụ sở CN Thành Công</strong><br><br></p></div></div><div data-aos="fade-left" class="col-6 donate-wrap"><div class="donate-card p-3 px-4 rounded text-center"><strong class="d-block sub-title mb-2 text-uppercase">Đến cô dâu</strong><img loading="lazy" class="qr-code-image m-auto mb-2" src="assets/images/bride_qr_donate.webp" alt="bride_qr_donate"><p class="mb-1"><strong>BIDV</strong></p><p class="mb-1"><strong>NGUYEN THI NGOC</strong></p><p class="mb-1"><strong>8873029124</strong></p><p class="mb-1"><strong>CN sở giao dịch 3 PGD Nguyễn Thanh Bình</strong></p></div></div></div></div></div></section><section class="py-5 wishes-section section-bg-affect" id="wishes"><div class="container-fluid"><h2 data-aos="fade-up" class="section-title text-center">Sổ Lưu Bút</h2><h3 data-aos="fade-up" class="section-sub-title mb-4 text-center">Cảm ơn bạn rất nhiều vì đã gửi những lời chúc mừng tốt đẹp nhất đến đám cưới của chúng tôi!</h3><div id="section-comment"><form action="" id="wish-form" class="p-4 contact-validation-active"><div class="col-auto mb-3 d-flex"><input name="name" id="name-comment" type="text" class="form-control border-0" placeholder="Nhập tên của bạn*"></div><div class="col-auto mb-3"><div class="textarea-emoji-picker position-relative"><div class="vitualTextarea form-control px-0"><textarea name="content" class="form-control border-0" id="detail-comment" rows="3" placeholder="Nhập lời chúc của bạn*"></textarea><div class="textAreaIcons"><span class="show-autocomplete tooltip-custom" onclick="toggleWishesAutocompleteContent()" data-toggle="tooltip" data-placement="top" title="Lời chúc gợi ý"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-lightbulb" viewBox="0 0 16 16"><path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a2 2 0 0 0-.453-.618A5.98 5.98 0 0 1 2 6m6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1"/></svg></span><span class="hide-autocomplete tooltip-custom" onclick="toggleWishesAutocompleteContent()" style="display:none"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-lightbulb-off" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M2.23 4.35A6 6 0 0 0 2 6c0 1.691.7 3.22 1.826 4.31.203.196.359.4.453.619l.762 1.769A.5.5 0 0 0 5.5 13a.5.5 0 0 0 0 1 .5.5 0 0 0 0 1l.224.447a1 1 0 0 0 .894.553h2.764a1 1 0 0 0 .894-.553L10.5 15a.5.5 0 0 0 0-1 .5.5 0 0 0 0-1 .5.5 0 0 0 .288-.091L9.878 12H5.83l-.632-1.467a3 3 0 0 0-.676-.941 4.98 4.98 0 0 1-1.455-4.405zm1.588-2.653.708.707a5 5 0 0 1 7.07 7.07l.707.707a6 6 0 0 0-8.484-8.484zm-2.172-.051a.5.5 0 0 1 .708 0l12 12a.5.5 0 0 1-.708.708l-12-12a.5.5 0 0 1 0-.708"/></svg></span><span class="emoji-picker-button tooltip-custom" data-toggle="tooltip" data-placement="top" title="Chèn biểu tượng"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-emoji-smile" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/><path d="M4.285 9.567a.5.5 0 0 1 .683.183A3.5 3.5 0 0 0 8 11.5a3.5 3.5 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683M7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5m4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5"/></svg></span><div class="wishes-autocomplete-content" style="display:none"><div><label for="searchWishSuggestions" style="display:flex"><input type="text" id="searchWishSuggestions" onkeyup="searchWishSuggestionsFunction()" placeholder="Tìm kiếm..."></label></div><ul id="wishSuggestions"></ul></div></div></div><script>// Hàm chuyển có dấu thành không dấu
+function removeAccents(str) {
+    return str.normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/đ/g, 'd')
+        .replace(/Đ/g, 'D');
+}
+
+const wishSuggestions = [
+    'Chúc mừng hạnh phúc! Chúc hai bạn trăm năm hạnh phúc!',
+    'Chúc mừng ngày trọng đại tới hai bạn. Hạnh phúc bền lâu và trọn vẹn nhé!',
+    'Chúc mừng hạnh phúc hai bạn. Chúc hai bạn bên nhau đầu bạc răng long, sớm có thiên thần nhỏ nhé!',
+    'Chúc hai bạn ngày vui hạnh phúc. Hãy yêu thương nhau thật nhiều và sống thật hạnh phúc nha!',
+    'Chúc hai bạn sớm có con đàn cháu đống, cửa nhà lúc nào cũng đầm ấm, yên vui nhé!',
+    'Thật vui vì cuối cùng ngày này cũng tới với bạn. Tôi thành tâm chúc hai bạn thật nhiều hạnh phúc và sống đời vui vẻ cùng nhau mãi mãi!',
+    'Một chương mới đã mở ra với hai bạn rồi. Tôi mong cuộc sống mới của cả hai sẽ tràn ngập hy vọng, hạnh phúc và niềm vui!',
+    'Chúc đôi trai tài gái sắc hạnh phúc trọn vẹn, luôn yêu thương nhau thật nhiều!',
+    "Chia vui cùng bạn trong ngày trọng đại này. Cầu mong cuộc sống sau này của 2 vợ chồng thật thuận hòa, may mắn, làm ăn phát tài nha.",
+    "Tôi mong tình yêu của hai bạn thật bền chặt, gắn bó để xây dựng tổ ấm yên bình, hạnh phúc!",
+    "Hai bạn của tôi chắc chắn sẽ có được nhiều hạnh phúc. Mong hai bạn có sức khỏe dồi dào, làm ăn phát đạt và sớm có cháu cho ông bà bồng bế nhé!",
+    "Gửi lời chúc mừng chân thành nhất tới bạn của tôi. Chúc hai bạn một cuộc sống thật tuyệt vời, hòa thuận, gắn bó son sắt, thủy chung, hạnh phúc lâu dài.",
+    "Nơi nào có yêu thương nơi đó chắc chắn hạnh phúc. Hai bạn đã tìm được nơi đủ đầy yêu thương rồi, hãy cùng nắm tay nhau đi hết cuộc đời nhé!",
+    "Khởi đầu một cuộc sống mới, nguyện ước cho bạn của tôi những ngày tháng hạnh phúc phía trước để cùng xây dựng tổ ấm với người bạn đời. Happy ending!",
+    "Mình tin rằng đây sẽ là khởi đầu cho những điều tốt đẹp sắp tới trong cuộc sống của hai bạn. Hãy yêu thương và cùng nhau vượt qua mọi khó khăn trong cuộc sống nhé.",
+    "Hôn nhân đánh dấu sự kết thúc một câu chuyện tình yêu và bắt đầu một trận đấu vật. Chúc bạn những điều tốt đẹp nhất.",
+    "Tôi sẽ nói cho bạn bí mật của một cuộc hôn nhân hạnh phúc. Đó vẫn là … một bí mật cho tất cả! Chúc bạn tất cả những điều tốt đẹp nhất của thời gian phía trước.",
+    "Hôn nhân thật đẹp. Cuối cùng bạn đã tìm thấy một người mà bạn bị làm phiền suốt cuộc đời.",
+    "Hai trở thành một: Một giường, một điều khiển từ xa, một phòng tắm! Xin chúc mừng đám cưới hai bạn.",
+    "Chúc đôi trai tài gái sắc nhà mình hạnh phúc vẹn tròn, cung hỷ cung hỷ!",
+    "Chúc mừng anh trai của em đã có người rước nhé. Em mong anh chị có cuộc sống vui vẻ, hạnh phúc phía trước, làm ăn phát tài phát lộc.",
+    "Anh chị là một cặp trời sinh, chắc chắn sau này sẽ rất hạnh phúc. Em chúc anh chị sức khỏe dồi dào, làm ăn phát đạt và sớm có thiên thần nhỏ cho vui cửa vui nhà.",
+    "Hôm nay là ngày vui của anh chị và cũng là ngày em rất hạnh phúc. Chúc anh chị mãi yêu thương nhau như bây giờ và đạt được mọi ước nguyện trong cuộc sống.",
+    "Chúc anh/chị/em trăm năm hạnh phúc, thuận vợ thuận chồng.",
+    "Hôm nay chú rể đẹp trai, cô dâu xinh gái. Chúc mừng ngày thành hôn hai bạn tôi!",
+    "Chúc mừng đôi bạn trẻ nhé! Mãi yêu thương nhau đến đầu bạc răng long bạn nha!",
+    "Thay mặt team (tên nhóm) chúc hai bạn ngày ngày ân ái, bên nhau trọn đời.",
+    "Happy wedding! Chúc hai bạn có cuộc sống mới ngập tràn tiếng cười và niềm vui, sớm có thiên thần nhỏ bồng bé!"
+]
+const wishList = document.getElementById('wishSuggestions');
+wishSuggestions.forEach(message => {
+    const listItem = document.createElement('li');
+    const link = document.createElement('a');
+    link.className = 'showContent';
+    link.onclick = function () {
+        document.getElementById('detail-comment').value = message;
+    };
+    link.innerText = message;
+    listItem.setAttribute('data-normalized', removeAccents(message.toLowerCase()));
+
+    listItem.appendChild(link);
+    wishList.appendChild(listItem);
+});
+
+function searchWishSuggestionsFunction() {
+    const searchText = removeAccents(
+        document.getElementById('searchWishSuggestions').value.toLowerCase()
+    );
+    const items = document.getElementById('wishSuggestions').getElementsByTagName('li');
+    Array.from(items).forEach(item => {
+        const normalizedText = item.getAttribute('data-normalized');
+        if (normalizedText.includes(searchText)) {
+            item.style.display = '';
+        } else {
+            item.style.display = 'none';
         }
     });
-    const currentUrl = window.location.href;
-    const url = new URL(currentUrl);
-    const params = new URLSearchParams(url.search);
-    let guestId = params.get('code');
-    let guests, currentGuest, rsvpData;
-</script>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Phúc Anh &amp; Nguyễn Ngọc Wedding site!</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description"
-          content="Ngày cưới: 24-11-2024 | Điều tuyệt vời nhất mà bạn từng học là yêu và được yêu để đáp lại">
-    <meta name="keywords" content="Wedding,Lê Phúc Anh,Nguyễn Thị Ngọc">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="application-name" content="P.Anh & N.Ngọc Wedding">
-    <meta name="author" content="anhlp">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon/favicon.webp">
+}
 
-    <!-- facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Lễ cưới: Phúc Anh &amp; Nguyễn Ngọc">
-    <meta property="og:title" content="Lễ cưới: Phúc Anh &amp; Nguyễn Ngọc">
-    <meta property="og:description"
-          content="Ngày cưới: 24-11-2024 | Điều tuyệt vời nhất mà bạn từng học là yêu và được yêu để đáp lại">
-    <meta property="og:url" content="https://phucanh08.github.io/wedding-card">
-    <meta property="og:image" content="https://phucanh08.github.io/wedding-card/assets/images/preview_image.webp">
-    <meta property="og:image:url" content="https://phucanh08.github.io/wedding-card/assets/images/preview_image.webp">
-    <meta property="og:image:secure_url"
-          content="https://phucanh08.github.io/wedding-card/assets/images/preview_image.webp">
+const showAutocomplete = document.querySelector('.show-autocomplete')
+const hideAutocomplete = document.querySelector('.hide-autocomplete')
+const wishesAutocompleteContent = document.querySelector('.wishes-autocomplete-content')
 
-    <!-- twitter -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Lễ cưới: Phúc Anh &amp; Nguyễn Ngọc">
-    <meta name="twitter:description"
-          content="Ngày cưới: 24-11-2024 | Điều tuyệt vời nhất mà bạn từng học là yêu và được yêu để đáp lại">
-    <meta name="twitter:image" content="https://phucanh08.github.io/wedding-card/assets/images/preview_image.webp">
-    <meta name="twitter:label1" content="Được viết bởi">
-    <meta name="twitter:data1" content="Lê Phúc Anh">
-    <meta name="twitter:label2" content="Thời gian để đọc">
-    <meta name="twitter:data2" content="6 phút">
-    <style>
-        /* cyrillic */
-        @font-face {
-            font-family: 'Bellota Text';
-            font-style: normal;
-            font-weight: 400;
-            font-display: swap;
-            src: url(https://fonts.gstatic.com/s/bellotatext/v18/0FlTVP2VnlWS4f3-UE9hHXMx-tkPVy38Sxer.woff2) format('woff2');
-            unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-        }
-
-        /* vietnamese */
-        @font-face {
-            font-family: 'Bellota Text';
-            font-style: normal;
-            font-weight: 400;
-            font-display: swap;
-            src: url(https://fonts.gstatic.com/s/bellotatext/v18/0FlTVP2VnlWS4f3-UE9hHXMx8dkPVy38Sxer.woff2) format('woff2');
-            unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-        }
-
-        /* latin-ext */
-        @font-face {
-            font-family: 'Bellota Text';
-            font-style: normal;
-            font-weight: 400;
-            font-display: swap;
-            src: url(https://fonts.gstatic.com/s/bellotatext/v18/0FlTVP2VnlWS4f3-UE9hHXMx8NkPVy38Sxer.woff2) format('woff2');
-            unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-        }
-
-        /* latin */
-        @font-face {
-            font-family: 'Bellota Text';
-            font-style: normal;
-            font-weight: 400;
-            font-display: swap;
-            src: url(https://fonts.gstatic.com/s/bellotatext/v18/0FlTVP2VnlWS4f3-UE9hHXMx_tkPVy38Sw.woff2) format('woff2');
-            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-        }
-
-        /* vietnamese */
-        @font-face {
-            font-family: 'Bonheur Royale';
-            font-style: normal;
-            font-weight: 400;
-            font-display: swap;
-            src: url(https://fonts.gstatic.com/s/bonheurroyale/v13/c4m51nt_GMTrtX-b9GcG4-YRmbK3eUbXNIIiMQI.woff2) format('woff2');
-            unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-        }
-
-        /* latin-ext */
-        @font-face {
-            font-family: 'Bonheur Royale';
-            font-style: normal;
-            font-weight: 400;
-            font-display: swap;
-            src: url(https://fonts.gstatic.com/s/bonheurroyale/v13/c4m51nt_GMTrtX-b9GcG4-YRmbK2eUbXNIIiMQI.woff2) format('woff2');
-            unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-        }
-
-        /* latin */
-        @font-face {
-            font-family: 'Bonheur Royale';
-            font-style: normal;
-            font-weight: 400;
-            font-display: swap;
-            src: url(https://fonts.gstatic.com/s/bonheurroyale/v13/c4m51nt_GMTrtX-b9GcG4-YRmbK4eUbXNIIi.woff2) format('woff2');
-            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-        }
-
-        /* cyrillic-ext */
-        @font-face {
-            font-family: 'Marmelad';
-            font-style: normal;
-            font-weight: 400;
-            src: url(https://fonts.gstatic.com/s/marmelad/v18/Qw3eZQdSHj_jK2e-8uFBEecuCFR9RHw.woff2) format('woff2');
-            unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
-        }
-
-        /* cyrillic */
-        @font-face {
-            font-family: 'Marmelad';
-            font-style: normal;
-            font-weight: 400;
-            src: url(https://fonts.gstatic.com/s/marmelad/v18/Qw3eZQdSHj_jK2e-8uFIEecuCFR9RHw.woff2) format('woff2');
-            unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-        }
-
-        /* vietnamese */
-        @font-face {
-            font-family: 'Marmelad';
-            font-style: normal;
-            font-weight: 400;
-            src: url(https://fonts.gstatic.com/s/marmelad/v18/Qw3eZQdSHj_jK2e-8uFDEecuCFR9RHw.woff2) format('woff2');
-            unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-        }
-
-        /* latin-ext */
-        @font-face {
-            font-family: 'Marmelad';
-            font-style: normal;
-            font-weight: 400;
-            src: url(https://fonts.gstatic.com/s/marmelad/v18/Qw3eZQdSHj_jK2e-8uFCEecuCFR9RHw.woff2) format('woff2');
-            unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-        }
-
-        /* latin */
-        @font-face {
-            font-family: 'Marmelad';
-            font-style: normal;
-            font-weight: 400;
-            src: url(https://fonts.gstatic.com/s/marmelad/v18/Qw3eZQdSHj_jK2e-8uFMEecuCFR9.woff2) format('woff2');
-            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-        }
-    </style>
-
-    <link rel="stylesheet" href="templates/template135/css/libs.css"/>
-    <link rel="stylesheet" href="templates/template135/css/style.css"/>
-    <link rel="stylesheet" href="common/calendar.css">
-</head>
-<script type="text/javascript">
-    const subs = [
-        "Tình yêu là điều kiện trong đó hạnh phúc của người khác là điều cần thiết cho chính bạn",
-        "Tình yêu không chỉ là một danh từ - nó là một động từ; nó còn hơn cả một cảm giác - đó là sự quan tâm, chia sẻ, giúp đỡ, hy sinh",
-        "Vì vậy, để được ai đó nhìn thấy đầy đủ và được yêu mến dù thế nào đi nữa — đây là một sự dâng hiến của con người có thể là điều kỳ diệu",
-        "Tình yêu không làm cho thế giới quay tròn. Tình yêu là những gì làm cho chuyến đi đáng giá",
-        "Tình yêu không có rào cản. Nó nhảy rào, nhảy rào, xuyên tường để đến đích với đầy hy vọng",
-        "Tôi có thể chinh phục thế giới bằng một tay miễn là bạn đang nắm tay kia",
-        "Tình yêu đích thực đứng về phía nhau trong những ngày tốt đẹp và sát cánh hơn trong những ngày tồi tệ",
-        "Được ai đó yêu sâu sắc sẽ mang lại cho bạn sức mạnh, trong khi yêu ai đó sâu sắc sẽ cho bạn dũng khí",
-        "Đối với thế giới, bạn có thể là một người, nhưng với một người, bạn là cả thế giới",
-        "Tôi yêu bạn vì tất cả những gì bạn đang có, tất cả những gì bạn đã có, và tất cả những gì bạn chưa hiện hữu",
-        "Bước đi với bàn tay của bạn trong tay tôi và bàn tay của tôi trong tay bạn, đó chính xác là nơi tôi muốn luôn ở đó",
-        "Tình yêu là khi hạnh phúc của người kia trở thành ưu tiên của trái tim bạn",
-        "Yêu không phải là tìm một người hoàn hảo, mà là học cách yêu sự không hoàn hảo một cách hoàn hảo",
-        "Tình yêu bắt đầu từ ánh mắt, lớn lên bằng sự quan tâm và tồn tại bằng sự thấu hiểu",
-        "Ở bên đúng người, im lặng cũng trở nên ấm áp",
-        "Tình yêu không cần quá nhiều lời hứa, chỉ cần ở lại khi mọi thứ trở nên khó khăn",
-        "Yêu là khi bạn muốn trở về nhà, dù bạn đang ở bất cứ đâu",
-        "Tình yêu là cùng nhau già đi, nhưng vẫn nắm tay như thuở ban đầu",
-        "Không phải ai bước vào cuộc đời bạn cũng ở lại, nhưng người yêu bạn thật lòng sẽ không rời đi",
-        "Tình yêu không đo bằng thời gian, mà bằng những khoảnh khắc khiến tim rung động",
-        "Yêu đúng người là khi bạn được là chính mình mà không cần cố gắng",
-        "Tình yêu là một cuộc hành trình, không phải đích đến",
-        "Chúng ta yêu không phải vì cần nhau, mà vì chọn nhau mỗi ngày",
-        "Tình yêu thật sự không làm bạn mệt mỏi, nó khiến bạn mạnh mẽ hơn",
-        "Yêu là nhìn về cùng một hướng, dù con đường có gập ghềnh",
-        "Tình yêu là kiên nhẫn lắng nghe, ngay cả khi không đồng ý",
-        "Người yêu bạn sẽ không hứa một đời hoàn hảo, nhưng sẽ hứa không bỏ bạn một mình",
-        "Tình yêu là khi một tin nhắn ngắn cũng đủ làm bạn mỉm cười cả ngày",
-        "Yêu không phải là chiếm hữu, mà là trân trọng",
-        "Tình yêu là nơi bạn tìm thấy bình yên giữa thế giới đầy ồn ào",
-        "Yêu là cùng nhau vượt qua giông bão, chứ không phải tránh né nó",
-        "Tình yêu không cần phô trương, chỉ cần chân thành",
-        "Ở bên người mình yêu, thời gian trôi chậm lại",
-        "Tình yêu là sự lựa chọn lặp đi lặp lại, mỗi ngày",
-        "Yêu là khi bạn sẵn sàng thay đổi, không phải vì bị ép buộc",
-        "Tình yêu là nhà, nơi trái tim muốn quay về"
-    ]
-    let photoGalleries = [];
-    for (let i = 1; i <= 36; i++) {
-        photoGalleries.push(
-            {
-                src: `assets/images/galleries/pic${i}/large.webp`,
-                thumb: `assets/images/galleries/pic${i}/small.webp`,
-                subHtml: `<div class="lg-sub-html"><h4>${subs[i-1]}</h4></div>`
-            }
-        )
+function toggleWishesAutocompleteContent() {
+    if (wishesAutocompleteContent.style.display === 'none') {
+        setTimeout(() => {
+            wishesAutocompleteContent.style.display = '';
+            wishesAutocompleteContent.focus();
+            showAutocomplete.style.display = 'none';
+            hideAutocomplete.style.display = '';
+        }, 100);
     }
-</script>
-<body>
-<!--BEGIN PRELOADER-->
-<script>
-    window.onload = function () {
-        document.querySelector('#preloader').style.display = 'none'; // Ẩn preloader
-        document.querySelector('.wrapper').style.display = ''; // Hiện nội dung
-    };
-</script>
-<style>
-    #preloader {
-        position: fixed;
-        background: #fff;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 99999999;
-        text-align: center
+}
+
+document.addEventListener('click', function (event) {
+    if (!wishesAutocompleteContent.contains(event.target)) {
+        wishesAutocompleteContent.style.display = 'none';
+        showAutocomplete.style.display = '';
+        hideAutocomplete.style.display = 'none';
+    }
+});</script><div class="emoji-picker"><emoji-picker style="max-width:100%;max-height:350px" class="light"></emoji-picker></div></div></div><div class="col-auto text-center"><button type="submit" class="p-2 w-50 btn btn-danger border-0" id="btn-submit-comment">Gửi lời chúc</button></div><div class="clearfix error-handling-messages"><div id="success">Thank you</div></div></form><div class="mt-3 px-4 py-3" id="show-comments"></div></div></div></section><section class="section-title footer-section py-5 text-center section-bg-affect"><div class="container-fluid"><h3 class="title">Thank you!</h3><h5 class="sub-title">-- Phúc Anh & Nguyễn Ngọc --</h5></div></section></div><div class="offcanvas offcanvas-end offcanvas-menu" tabindex="-1" id="offcanvasNavbar" data-bs-scroll="true" data-bs-backdrop="true" aria-labelledby="offcanvasNavbarLabel"><div class="offcanvas-body"><ul class="navbar-nav justify-content-end flex-grow-1"><li class="offcanvas-header pb-4 pt-2 px-2 justify-content-end"><button type="button" class="btn-close p-0" data-bs-dismiss="offcanvas" aria-label="Close"></button></li><li class="nav-item"><a class="section-sub-title nav-link" href="#couple">Cô Dâu &amp; Chú Rể</a></li><li class="nav-item"><a class="section-sub-title nav-link active" aria-current="page" href="#gallery">Album Hình Cưới</a></li><li class="nav-item"><a class="section-sub-title nav-link active" aria-current="page" href="#story">Chuyện tình yêu</a></li><li class="nav-item"><a class="section-sub-title nav-link active" aria-current="page" href="#invitation">Lời Ngỏ</a></li><li class="nav-item"><a class="section-sub-title nav-link" href="#event">Sự kiện cưới</a></li><li class="nav-item"><a class="section-sub-title nav-link" href="#wishes">Sổ Lưu Bút</a></li><li class="nav-item"><a class="section-sub-title nav-link" href="#donate">Mừng cưới</a></li></ul></div></div><div class="rsvp-modal section-bg-affect" id="rsvp-modal"><div class="container-fluid donate-modal-content"><span class="donate-modal-close text-danger">&times;</span><div class="w-100 p-4"><h2 data-aos="fade-up" class="section-title text-body text-center m-0">Xác nhận tham dự</h2><h3 id="title-confirm-id" data-aos="fade-up" class="section-sub-title text-body mb-4 text-center">Thật vui vì được gặp và đón tiếp các bạn trong một dịp đặc biệt như đám cưới của chúng tôi.</h3><div class="modal-body"><form id="rsvp-form" method="post"><div class="row"><input type="hidden" id="event_id" name="event_id" value="65eb2608ebd9f4c0110a33d7"> <input type="hidden" id="guest_id" name="guest_id" value="65ee6f8173ad745f4e037715"><div class="col-12" style="margin-bottom:10px"><input name="guest-name" id="guest-name" type="text" class="form-input" oninput="validateSendConfirmBtn()" placeholder="Nhập tên của bạn*"></div><div class="col-12" style="margin-bottom:10px"><select class="form-select" onchange="validateSendConfirmBtn()" name="attendance_status" id="attendance_status_id" style="margin-top:4px"><option value="" selected="selected" disabled="disabled">Bạn sẽ tham gia chứ?</option><option value="none">Chưa xác định trước được</option><option value="Y">Nhất định rồi!!!</option><option value="N">Tôi không tham gia được</option></select></div><div class="col-12" style="margin-bottom:10px"><select class="form-select" onchange="validateSendConfirmBtn()" name="plus_ones" id="plus_ones_id" style="margin-top:4px;display:none"><option value="" selected="selected" disabled="disabled">Bạn có người đi cùng không?</option><option value="1">Đi một mình</option><option value="2">Đi cùng 1 người</option><option value="3">Đi cùng 2 người</option><option value="4">Đi cùng 3 người</option><option value="5">Đi cùng 4 người</option><option value="6">Đi cùng 5 người</option></select></div><script>function validateSendConfirmBtn() {
+    const plusOne = document.getElementById('plus_ones_id');
+    const guestName = document.getElementById('guest-name');
+    const attendanceStatus = document.getElementById('attendance_status_id');
+    const sentBtn = document.getElementById('send-confirm-btn');
+    if (guestName.value.trim() === '') {
+        sentBtn.disabled = true;
+        return;
     }
 
-    #preloader .preloader-title {
-        font-size: 20pt;
-        color: currentColor;
-        line-height: .9;
-        position: absolute;
-        top: 60px;
-        left: 50%;
-        -webkit-transform: translateX(-50%);
-        -moz-transform: translateX(-50%);
-        -ms-transform: translateX(-50%);
-        -o-transform: translateX(-50%);
-        transform: translateX(-50%);
-        font-family: 'Marmelad', sans-serif
+    switch (attendanceStatus.value) {
+        case 'none':
+        case 'N':
+            plusOne.style.display = 'none';
+            sentBtn.disabled = false;
+            break;
+        case 'Y':
+            plusOne.style.display = '';
+            sentBtn.disabled = plusOne.value === '';
+            break;
+        default:
+            sentBtn.disabled = true;
+            break;
     }
-
-    #preloader .preloader-title small {
-        color: currentColor;
-        line-height: .9;
-        font-size: 12pt
-    }
-
-    .loading-heart {
-        fill: transparent;
-        stroke: #FF0012;
-        stroke-width: 11;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        -webkit-transform: translate(-50%, -50%);
-        -moz-transform: translate(-50%, -50%);
-        -ms-transform: translate(-50%, -50%);
-        -o-transform: translate(-50%, -50%);
-        transform: translate(-50%, -50%);
-        text-align: center;
-        display: inline-block
-    }
-
-    .loading-heart svg {
-        overflow: visible;
-        width: 11rem
-    }
-
-    .loading-heart path {
-        stroke-dashoffset: 0;
-        stroke-dasharray: 1550;
-        transform-origin: center;
-        -webkit-animation: stroke-animation 3s ease-in-out infinite forwards;
-        -khtml-animation: stroke-animation 3s ease-in-out infinite forwards;
-        -moz-animation: stroke-animation 3s ease-in-out infinite forwards;
-        -ms-animation: stroke-animation 3s ease-in-out infinite forwards;
-        -o-animation: stroke-animation 3s ease-in-out infinite forwards;
-        animation: stroke-animation 3s ease-in-out infinite forwards
-    }
-
-    @keyframes stroke-animation {
-        0% {
-            stroke-dashoffset: 0
-        }
-
-        30% {
-            stroke-dashoffset: 1550
-        }
-
-        60% {
-            stroke-dashoffset: 3100;
-            fill: transparent;
-            -webkit-transform: scale(1);
-            -moz-transform: scale(1);
-            -ms-transform: scale(1);
-            -o-transform: scale(1);
-            transform: scale(1)
-        }
-
-        100% {
-            stroke-dashoffset: 3100
-        }
-    }
-</style>
-<div id="preloader">
-    <div class="loading-heart">
-        <svg viewBox="0 0 512 512" width="100">
-            <path d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"></path>
-        </svg>
-        <div class="preloader-title">
-            A <small>&amp;</small> N
-        </div>
-    </div>
-</div>
-<!--END PRELOADER-->
-
-<div class="wrapper">
-    <header id="header" class="site-header header-style-1 d-none">
-        <meta name="format-detection" content="telephone=no">
-        <nav class="navbar bg-white shadow-sm py-1">
-            <div class="container-fluid">
-                <div class="w-100 d-flex align-items-center justify-content-between">
-                    <a class="section-title navbar-brand" href="#">A & N</a>
-                    <button
-                            class="navbar-toggler rounded-0 border-0 p-0"
-                            type="button"
-                            data-bs-toggle="offcanvas"
-                            data-bs-target="#offcanvasNavbar"
-                            aria-controls="offcanvasNavbar"
-                    >
-                        <i class="bi bi-list fs-3 text-black"></i>
-                    </button>
-                </div>
-            </div>
-        </nav>
-    </header>
-
-    <section class="banner-section">
-        <div class="main_area p-3">
-            <div class="day_wrapper" data-aos="fade-up" data-aos-delay="500">
-                <div class="day_area p-1 text-center">
-                    <div class="section-sub-title d-flex day_area_inner text-center p-2 py-3">
-                        <p class="m-0 we"> Chúng tôi </p>
-                        <div class="wrap-text">
-                            <p class="day m-0">24</p>
-                            <p class="month m-0">11</p>
-                        </div>
-                        <p class="m-0">Sắp kết hôn.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="main_image_area pt-4 pb-8" data-aos="fade-up" data-aos-delay="50">
-
-                <div class="main_image">
-                    <img loading="lazy" alt="main_image"
-                         src="assets/images/main_image.webp">
-                </div>
-                <img loading="lazy" class="bg-title" src="templates/template135/img/main_title.webp"
-                     alt=""/>
-                <div id="title-wedding-card" class="wrap-name pt-7 title" style="padding: 0 25px">
-                    Phúc Anh <small>&amp;</small> Nguyễn Ngọc
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-4 accessibilities-section">
-        <div class="container-fluid">
-            <div class="row gx-2 justify-content-center">
-                <div class="col-sm-4">
-                    <a href="#wishes" class="w-100 mb-1 px-2 accessibility-btn btn btn-secondary"
-                       data-aos="fade-right">
-                        <span class="content-button">
-                            <img loading="lazy" class="access-section-icon"
-                                 src="assets/images/common/wishes.webp" alt="access-btn">  Gửi lời chúc
-                        </span>
-                    </a>
-                </div>
-                <div
-                        class="col-sm-4"
-                        onclick="(() => {
-                        document.getElementById('rsvp-modal').style.display = 'flex';
-                    })()"
-                >
-                    <a target="_blank"
-                       class="w-100 mb-1 px-2 accessibility-btn btn btn-secondary"
-                       data-aos="fade-up">
-                        <span class="content-button">
-                            <img loading="lazy" class="access-section-icon"
-                                 src="assets/images/common/rsvp4.webp" alt="access-btn"> Xác nhận tham dự
-                        </span>
-                    </a>
-                </div>
-                <div class="col-sm-4">
-                    <a href="javascript:void(0)"
-                       class="w-100 mb-1 accessibility-btn btn btn-secondary buttonDonate"
-                       data-aos="fade-left">
-                        <span class="content-button">
-                            <img loading="lazy" class="access-section-icon"
-                                 src="assets/images/common/money_bag.webp"
-                                 alt="access-btn"> Mừng cưới
-                        </span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-5 couple-section section-bg-affect" id="couple">
-        <div class="container-fluid">
-            <h2 data-aos="fade-up" class="section-title text-center m-0">
-                Cô Dâu &amp; Chú Rể
-            </h2>
-            <div class="section-title wrap-people mt-5">
-                <div class="member member-groom mb-5">
-                    <div data-aos="flip-left" class="member-image animation mb-3 text-center">
-                        <img loading="lazy" src="assets/images/groom.webp"
-                             alt="groom"/>
-                    </div>
-                    <div class="parent d-flex flex-column mx-auto text-center my-2">
-
-                        <div class="parent-name">Con ông: <span>Lê Văn Luận</span></div>
-
-                        <div class="parent-name">Con bà: <span>Lê Thị Kim Giang</span></div>
-
-                    </div>
-                    <div class="groom-story d-flex flex-column">
-                        <p class="text-story fs-6 text-center m-0">
-                            Là lập trình viên hiện đang công tác tại một công ty ở Cầu Giấy, Hà
-                            Nội.
-                            Là một người hiền lành và ít nói. Luôn coi trọng tình cảm và yêu thương
-                            gia đình.
-                            Với anh: “Gia đình là điểm tựa vững chắc nhất và là bến đỗ bình yên
-                            không đâu sánh bằng đối với mỗi con người.
-                            Đó luôn là nơi tràn ngập tình yêu thương để ta trở về.”
-                        </p>
-                        <a class="fs-6 fw-bold text-center mb-2 text-decoration-none" tabindex="0"
-                           role="button"
-                           data-bs-toggle="popover"
-                           data-bs-trigger="focus"
-                           data-bs-placement="bottom"
-                           data-bs-content="Là lập trình viên hiện đang công tác tại một công ty ở Cầu Giấy, Hà
-                            Nội.
-                            Là một người hiền lành và ít nói. Luôn coi trọng tình cảm và yêu thương
-                            gia đình.
-                            Với anh: “Gia đình là điểm tựa vững chắc nhất và là bến đỗ bình yên
-                            không đâu sánh bằng đối với mỗi con người.
-                            Đó luôn là nơi tràn ngập tình yêu thương để ta trở về.”">Xem
-                            thêm</a>
-                    </div>
-                    <div class="d-flex justify-content-center">
-                <span data-aos="fade-left" class="member-name m-0">
-                  Phúc Anh /
-                </span>
-                        <ul data-aos="fade-up"
-                            class="member-contact social-links d-flex p-0 m-0 mx-2">
-                            <li><a href="https://web.facebook.com/phucanh24" target="_blank">
-                                <i class="bi bi-facebook"></i>
-                            </a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="member member-bride mt-5">
-                    <div data-aos="flip-right" class="member-image animation mb-3 text-center">
-                        <img loading="lazy" src="assets/images/bride.webp"
-                             alt="bride"/>
-                    </div>
-                    <div class="parent d-flex flex-column mx-auto text-center my-2">
-
-                        <div class="parent-name">Con ông: <span>Nguyễn Đức Long</span></div>
-
-                        <div class="parent-name">Con bà: <span>Hồ Thị Huế</span></div>
-                    </div>
-
-                    <div class="bride-story d-flex flex-column">
-                        <p class="text-story fs-6 text-center m-0">
-                            Cô gái đến từ chùa Hương, hiện là dược sĩ đang công tác ở một bệnh viện tại Hà Nội.
-                            Là một người hay cười nhưng dễ xúc động; sống chân thành, tình cảm và luôn được mọi người
-                            yêu thương.
-                        </p>
-                        <a class="fs-6 fw-bold text-center mb-2 text-decoration-none" tabindex="0"
-                           role="button"
-                           data-bs-toggle="popover"
-                           data-bs-trigger="focus"
-                           data-bs-placement="bottom"
-                           data-bs-content="Cô gái đến từ chùa Hương, hiện là dược sĩ đang công tác ở một bệnh viện tại Hà Nội.
-                            Là một người hay cười nhưng dễ xúc động; sống chân thành, tình cảm và luôn được mọi người yêu thương.">Xem
-                            thêm</a>
-                    </div>
-                    <div class="d-flex justify-content-center">
-                <span data-aos="fade-left" class="member-name m-0">
-                  Nguyễn Ngọc /
-                </span>
-                        <ul data-aos="fade-up"
-                            class="member-contact social-links d-flex p-0 m-0 mx-2">
-                            <li><a href="https://web.facebook.com/RupyCapricornus" target="_blank">
-                                <i class="bi bi-facebook"></i>
-                            </a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <section class="py-5 video-section section-bg-affect" id="video">
-        <div class="container-fluid">
-            <h2 class="section-title text-center" data-aos="fade-up">
-                Video Cưới
-            </h2>
-            <h3 class="section-sub-title mb-4 text-center" data-aos="fade-up">
-                Tình yêu không làm cho thế giới quay tròn.
-            </h3>
-            <div class="ratio ratio-16x9" data-aos="zoom-in">
-                <iframe width="100%" src="https://www.youtube.com/embed/CSstEz-prSY?si=upaPaIewybtlZxM3"
-                        title="YouTube video player"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen></iframe>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-5 gallery-section section-bg-affect" id="gallery">
-        <div class="container-fluid">
-            <h2 class="section-title text-center" data-aos="zoom-in-up">
-                Album Hình Cưới
-            </h2>
-            <h3 class="section-sub-title mb-4 text-center" data-aos="zoom-in-up">
-                Yêu cậu yêu cả một đời, thương cậu thương cả một thời thanh xuân.
-            </h3>
-            <div class="row gx-2" id="photoGalleryContainer">
-                <div class="col-6 gallery-item section-sub-title mb-2 btn-see-more-gallery"
-                     data-aos="fade-right"
-                     data-index="22">
-                    <img loading="lazy" src="assets/images/galleries/pic23/small.webp" alt="pic23"/>
-                </div>
-                <div class="col-6 gallery-item section-sub-title mb-2 btn-see-more-gallery"
-                     data-aos="fade-left"
-                     data-index="25">
-                    <img loading="lazy" src="assets/images/galleries/pic26/small.webp" alt="pic26"/>
-                </div>
-                <div class="col-6 gallery-item section-sub-title mb-2 btn-see-more-gallery"
-                     data-aos="fade-right"
-                     data-index="17">
-                    <img loading="lazy" src="assets/images/galleries/pic18/small.webp" alt="pic18"/>
-                </div>
-                <div class="col-6 gallery-item section-sub-title mb-2 btn-see-more-gallery"
-                     data-aos="fade-left"
-                     data-index="15">
-                    <img loading="lazy" src="assets/images/galleries/pic16/small.webp" alt="pic16"/>
-                </div>
-                <div class="col-6 gallery-item section-sub-title mb-2 btn-see-more-gallery"
-                     data-aos="fade-right"
-                     data-index="10">
-                    <img loading="lazy" src="assets/images/galleries/pic11/small.webp" alt="pic11"/>
-                </div>
-                <div class="col-6 gallery-item section-sub-title mb-2 btn-see-more-gallery"
-                     data-aos="fade-left"
-                     data-index="2">
-                    <img loading="lazy" src="assets/images/galleries/pic3/small.webp" alt="pic3"/>
-                </div>
-            </div>
-
-            <div class="text-center aos-init aos-animate" data-aos="fade-up">
-                <a href="javascript:void(0)" id="btn-see-more-gallery"
-                   class="btn btn-secondary mt-4 btn-see-more-gallery">
-                    <span> Tất cả hình ảnh </span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-5 section-sub-title weddingdate-section section-bg-affect" id="weddingdate">
-        <div class="container-fluid">
-            <div class="w-100">
-                <div class="mini_calendar m-auto pb-3" data-aos="fade-up-right">
-                    <div class="mini_calendar">
-                        <table>
-                            <caption class="calendar-month">Th&aacute;ng 11 / 2024</caption>
-                            <tr>
-                                <th abbr="Monday">Thứ 2</th>
-                                <th abbr="Tuesday">Thứ 3</th>
-                                <th abbr="Wednesday">Thứ 4</th>
-                                <th abbr="Thursday">Thứ 5</th>
-                                <th abbr="Friday">Thứ 6</th>
-                                <th abbr="Saturday">Thứ 7</th>
-                                <th abbr="Sunday">CN</th>
-                            </tr>
-                            <tr>
-                                <td class="emptydays" colspan="4">&nbsp;</td>
-                                <td>1</td>
-                                <td>2</td>
-                                <td>3</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>5</td>
-                                <td>6</td>
-                                <td>7</td>
-                                <td>8</td>
-                                <td>9</td>
-                                <td>10</td>
-                            </tr>
-                            <tr>
-                                <td>11</td>
-                                <td>12</td>
-                                <td>13</td>
-                                <td>14</td>
-                                <td>15</td>
-                                <td>16</td>
-                                <td>17</td>
-                            </tr>
-                            <tr>
-                                <td>18</td>
-                                <td>19</td>
-                                <td>20</td>
-                                <td>21</td>
-                                <td>22</td>
-                                <td>
-                                    <div id="wedding_party_date">23</div>
-                                </td>
-                                <td>
-                                    <div id="wedding_date">24</div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>25</td>
-                                <td>26</td>
-                                <td>27</td>
-                                <td>28</td>
-                                <td>29</td>
-                                <td>30</td>
-                                <td class="emptydays" colspan="1">&nbsp;</td>
-                            </tr>
-                        </table>
-                    </div>
-
-                </div>
-                <div class="countdown" data-aos="fade-up-left">
-                    <div class="m-auto" id="clock" data-date="2024-11-24" data-text-day="Ngày"
-                         data-text-hour="Giờ"
-                         data-text-minute="Phút" data-text-second="Giây"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-5 story-section section-bg-affect" id="story">
-        <div class="container-fluid">
-            <h2 data-aos="fade-up" class="section-title text-center">
-                Chuyện tình yêu
-            </h2>
-            <h3 data-aos="fade-up" class="section-sub-title mb-4 text-center">
-                Tình cảm đẹp nhất là khi cả hai cùng chân thành. <br/>
-                Tình yêu đẹp nhất là khi cả hai không ai có ý định rời đi,<br/>
-                cho dù có bất cứ chuyện gì xảy ra đi chăng nữa.
-            </h3>
-            <div class="story-content">
-                <div class="timeline">
-                    <div class="outer">
-                        <div class="timeline-card" data-aos="fade-right">
-                            <div class="info">
-                                <span class="date">❤️❤️❤️️❤️❤️</span>
-                                <h3 class="title">Phút giây đầu tiên</h3>
-                                <p>
-                                    Có những sự tình cờ mà có lẽ anh đã phải dành hết sự may mắn mới có được. Cụ thể là
-                                    việc gặp em!
-                                </p>
-                                <div class="img-holder">
-                                    <img loading="lazy" src="assets/images/love_story_1.webp" alt="love_story_1"/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="timeline-card" data-aos="fade-left">
-                            <div class="info">
-                                <span class="date">❤️❤️❤️❤️❤️</span>
-                                <h3 class="title">Lời tỏ tình dễ thương^^</h3>
-                                <p>
-                                    Bình yên thì cũng tốt, nhưng gặp khó chẳng nỡ buông thì lại càng trân trọng nhiều
-                                    hơn. Anh thích tụi mình của những ngày mệt nhoài gắng gượng, vẫn tranh thủ chút thời
-                                    gian dành cho nhau. Anh thích em giận hờn chỉ cần anh dỗ một chút lại tươi cười
-                                    ngay, thích tụi mình với những lần nắm tay bất kỳ đâu. Và anh thích những câu chuyện
-                                    dài lâu.
-                                </p>
-                                <div class="img-holder">
-                                    <img loading="lazy" src="assets/images/love_story_2.webp" alt="love_story_2"/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="timeline-card" data-aos="fade-right">
-                            <div class="info">
-                                <span class="date">September 28 2024</span>
-                                <h3 class="title">Phút giây cầu hôn</h3>
-                                <p>
-                                    Có rất nhiều nỗi nhớ được gói gọn bằng một cái ôm, vậy nên lần nào được gặp em, anh
-                                    đều muốn chạy đến ôm lấy em lâu một chút. Anh không biết việc mình thương và được
-                                    thương bởi một người có đáng tự hào không, nhưng chỉ cần nghĩ tới chuyện có em là
-                                    của riêng mình giữa biết bao nhiêu người, anh vẫn cảm thấy bản thân là một người
-                                    thật sự hạnh phúc.
-                                </p>
-                                <div class="img-holder">
-                                    <img loading="lazy" src="assets/images/love_story_3.webp" alt="love_story_3"/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="timeline-card" data-aos="fade-left">
-                            <div class="info">
-                                <span class="date">October 13 2024</span>
-                                <h3 class="title">Ngày lễ đính hôn</h3>
-                                <p>
-                                    Cảm ơn vì chúng ta đã gắn bó với nhau
-                                    10 năm, từ là bạn thân tới là bạn đời.
-                                    Mãi bên cạnh nhau em nhé!
-                                </p>
-                                <div class="img-holder">
-                                    <img loading="lazy" src="assets/images/love_story_4.webp" alt="love_story_4"/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-5 invitation-section section-bg-affect" id="invitation">
-        <div class="container-fluid">
-            <div class="w-100">
-                <div data-aos="fade-up" class="invation-title">
-                    <h3 class="text-center title m-0">Lời Ngỏ</h3>
-                    <p class="text-center m-0">
-
-                    </p>
-                </div>
-                <div>
-                    <div data-aos="fade-up" class="invitation-content my-5 text-center sub-title">
-                        Cảm ơn tất cả những người bạn thân yêu của tôi!<br/>
-                        Tôi biết các bạn rất bận rộn, bận rộn với công việc, bận rộn với
-                        gia đình nhỏ của mình…<br/>
-                        Nhưng tất cả đã có mặt hôm nay để chúc mừng tinh yêu và hạnh phúc của chúng
-                        tôi.<br/>
-                        Một lần nữa chân thành cảm ơn tất cả các bạn!
-                    </div>
-                    <div data-aos="fade-up" class="couple-img mb-5">
-                        <img loading="lazy" src="assets/images/introduction.webp" alt="introduction">
-                    </div>
-                    <div data-aos="fade-up"
-                         class="section-title invitation-couple text-center my-5 fs-4">
-                        <p>*Groom/<span> Phúc Anh</span></p>
-                        <p>*Bride/<span> Nguyễn Ngọc</span></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-5 event-section section-bg-affect" id="event">
-        <div class="container-fluid">
-            <h2 data-aos="fade-up" class="section-title text-center">
-                Sự Kiện Cưới
-            </h2>
-            <h3 data-aos="fade-up" class="section-sub-title mb-4 text-center">
-                Cảm ơn bạn rất nhiều vì đã gửi những lời chúc mừng tốt đẹp nhất đến đám cưới của
-                chúng tôi!
-            </h3>
-            <div data-aos="flip-right"
-                 class="event-item d-flex flex-row p-0 border-0 rounded overflow-hidden">
-                <div class="image-wrap position-relative"
-                     style="background-image: url('assets/images/bride_wedding.webp');">
-                    <div class="dresscode-colors-wrap w-100">
-                        <div class="dresscode-colors-event">
-                            <span class="tooltip-dresscode">Dress Code</span>
-                            <div class="dresscode-colors-item" style="background:#eda2b6;"></div>
-                            <div class="dresscode-colors-item" style="background:#ffffff;"></div>
-                            <div class="dresscode-colors-item" style="background:#623262;"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="info-wrap p-3">
-                    <h5 class="section-sub-title">LỄ CƯỚI NHÀ GÁI</h5>
-                    <strong>09:00 24/11/2024</strong>
-                    <p class="card-text">
-                        <span>Tư gia nhà gái - </span>
-                        Số 63, đường Đền Trình Tuyết Sơn, Phú Yên, Hương Sơn, Mỹ Đức, Hà Nội
-                    </p>
-                    <div class="calendar-button" style="display:none;">
-                        <div class="atcb" style="display:none;">
-                            {
-                            "name":"LỄ CƯỚI NHÀ GÁI (Đám cưới Phúc Anh và Nguyễn Ngọc)",
-                            "description":"Cảm ơn bạn đã dành thời gian tham dự đám cưới của chúng
-                            tôi!",
-                            "startDate":"2024-11-24",
-                            "endDate":"2024-11-24",
-                            "startTime":"09:00",
-                            "endTime":"10:00",
-                            "location":"Số 63, đường Đền Trình Tuyết Sơn, Phú Yên, Hương Sơn, Mỹ
-                            Đức, Hà
-                            Nội",
-                            "options":["Apple","Google","iCal","Microsoft365","MicrosoftTeams","Outlook.com","Yahoo"],
-                            "timeZone":"Asia/Ho_Chi_Minh",
-                            "iCalFileName":"Reminder-Event",
-                            "listStyle":"modal",
-                            "label":"Thêm vào lịch",
-                            "trigger":"click"
-                            }
-                        </div>
-                    </div>
-                    <a href="#" data-index="1"
-                       class="section-sub-title btn btn-sm btn-secondary calendar-button-custom-click">Thêm
-                        vào lịch</a>
-                    <a href="https://maps.app.goo.gl/sCifnHivgFWN3GCu6"
-                       target="_blank" class="section-sub-title btn btn-sm btn-secondary">Xem bản
-                        đồ</a>
-                </div>
-            </div>
-            <div data-aos="flip-left "
-                 class="event-item d-flex flex-row p-0 border-0 rounded overflow-hidden">
-                <div class="image-wrap position-relative"
-                     style="background-image: url('assets/images/bride_wedding_party.webp');">
-                    <div class="dresscode-colors-wrap w-100">
-                        <div class="dresscode-colors-event">
-                            <span class="tooltip-dresscode">Dress Code</span>
-                            <div class="dresscode-colors-item" style="background:#504e63;"></div>
-                            <div class="dresscode-colors-item" style="background:#cc8a4d;"></div>
-                            <div class="dresscode-colors-item" style="background:#bc5f6a;"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="info-wrap p-3">
-                    <h5 class="section-sub-title">TIỆC CƯỚI NHÀ GÁI</h5>
-                    <strong>16:00 23/11/2024</strong>
-                    <p class="card-text">
-                        <span>Tư gia nhà gái - </span>
-                        Số 63, đường Đền Trình Tuyết Sơn, Phú Yên, Hương Sơn, Mỹ Đức, Hà Nội
-                    </p>
-                    <div class="calendar-button" style="display:none;">
-                        <div class="atcb" style="display:none;">
-                            {
-                            "name":"TIỆC CƯỚI NHÀ GÁI (Đám cưới Phúc Anh và Nguyễn Ngọc)",
-                            "description":"Cảm ơn bạn đã dành thời gian tham dự đám cưới của chúng
-                            tôi!",
-                            "startDate":"2024-11-23",
-                            "endDate":"2024-11-23",
-                            "startTime":"16:00",
-                            "endTime":"19:00",
-                            "location":"Số 63, đường Đền Trình Tuyết Sơn, Phú Yên, Hương Sơn, Mỹ
-                            Đức, Hà Nội",
-                            "options":["Apple","Google","iCal","Microsoft365","MicrosoftTeams","Outlook.com","Yahoo"],
-                            "timeZone":"Asia/Ho_Chi_Minh",
-                            "iCalFileName":"Reminder-Event",
-                            "listStyle":"modal",
-                            "label":"Thêm vào lịch",
-                            "trigger":"click"
-                            }
-                        </div>
-                    </div>
-                    <a href="#" data-index="2"
-                       class="section-sub-title btn btn-sm btn-secondary calendar-button-custom-click">Thêm
-                        vào lịch</a>
-                    <a href="https://maps.app.goo.gl/sCifnHivgFWN3GCu6"
-                       target="_blank" class="section-sub-title btn btn-sm btn-secondary">Xem bản
-                        đồ</a>
-                </div>
-            </div>
-            <div data-aos="flip-right"
-                 class="event-item d-flex flex-row p-0 border-0 rounded overflow-hidden">
-                <div class="image-wrap position-relative"
-                     style="background-image: url('assets/images/groom_wedding.webp');">
-                    <div class="dresscode-colors-wrap w-100">
-                        <div class="dresscode-colors-event">
-                            <span class="tooltip-dresscode">Dress Code</span>
-                            <div class="dresscode-colors-item" style="background:#32435f;"></div>
-                            <div class="dresscode-colors-item" style="background:#ffffff;"></div>
-                            <div class="dresscode-colors-item" style="background:#57233a;"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="info-wrap p-3">
-                    <h5 class="section-sub-title">LỄ CƯỚI NHÀ TRAI</h5>
-                    <strong>10:00 24/11/2024</strong>
-                    <p class="card-text">
-                        <span>Tư gia nhà trai - </span>
-                        Số 19, ngõ 81, Văn Giang, Đại Nghĩa, Mỹ Đức, Hà Nội
-                    </p>
-                    <div class="calendar-button" style="display:none;">
-                        <div class="atcb" style="display:none;">
-                            {
-                            "name":"LỄ CƯỚI NHÀ TRAI (Đám cưới Phúc Anh và Nguyễn Ngọc)",
-                            "description":"Cảm ơn bạn đã dành thời gian tham dự đám cưới của chúng
-                            tôi!",
-                            "startDate":"2024-11-23",
-                            "endDate":"2024-11-23",
-                            "startTime":"10:00",
-                            "endTime":"12:00",
-                            "location":"Số 19, ngõ 81, Văn Giang, Đại Nghĩa, Mỹ Đức, Hà Nội",
-                            "options":["Apple","Google","iCal","Microsoft365","MicrosoftTeams","Outlook.com","Yahoo"],
-                            "timeZone":"Asia/Ho_Chi_Minh",
-                            "iCalFileName":"Reminder-Event",
-                            "listStyle":"modal",
-                            "label":"Thêm vào lịch",
-                            "trigger":"click"
-                            }
-                        </div>
-                    </div>
-                    <a href="#" data-index="3"
-                       class="section-sub-title btn btn-sm btn-secondary calendar-button-custom-click">Thêm
-                        vào lịch</a>
-                    <a href="https://maps.app.goo.gl/5w4rfJMSM8PZU5NU6"
-                       target="_blank" class="section-sub-title btn btn-sm btn-secondary">Xem bản
-                        đồ</a>
-                </div>
-            </div>
-            <div data-aos="flip-left "
-                 class="event-item d-flex flex-row p-0 border-0 rounded overflow-hidden">
-                <div class="image-wrap position-relative"
-                     style="background-image: url('assets/images/groom_wedding_party.webp');">
-                    <div class="dresscode-colors-wrap w-100">
-                        <div class="dresscode-colors-event">
-                            <span class="tooltip-dresscode">Dress Code</span>
-                            <div class="dresscode-colors-item" style="background:#7fb174;"></div>
-                            <div class="dresscode-colors-item" style="background:#504e63;"></div>
-                            <div class="dresscode-colors-item" style="background:#632a7e;"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="info-wrap p-3">
-                    <h5 class="section-sub-title">TIỆC CƯỚI NHÀ TRAI</h5>
-                    <strong>15:00 23/11/2024</strong>
-                    <p class="card-text">
-                        <span>Nhà văn hoá thôn Văn Giang -</span>
-                        Văn Giang, Đại Nghĩa, Mỹ Đức, Hà Nội
-                    </p>
-                    <div class="calendar-button" style="display:none;">
-                        <div class="atcb" style="display:none;">
-                            {
-                            "name":"TIỆC CƯỚI NHÀ TRAI (Đám cưới Phúc Anh và Nguyễn Ngọc)",
-                            "description":"Cảm ơn bạn đã dành thời gian tham dự đám cưới của chúng
-                            tôi!",
-                            "startDate":"2024-11-23",
-                            "endDate":"2024-11-23",
-                            "startTime":"15:00",
-                            "endTime":"19:00",
-                            "location":"Nhà văn hoá thôn Văn Giang, Văn Giang, Đại Nghĩa, Mỹ Đức, Hà
-                            Nội",
-                            "options":["Apple","Google","iCal","Microsoft365","MicrosoftTeams","Outlook.com","Yahoo"],
-                            "timeZone":"Asia/Ho_Chi_Minh",
-                            "iCalFileName":"Reminder-Event",
-                            "listStyle":"modal",
-                            "label":"Thêm vào lịch",
-                            "trigger":"click"
-                            }
-                        </div>
-                    </div>
-                    <a href="#" data-index="4"
-                       class="section-sub-title btn btn-sm btn-secondary calendar-button-custom-click">Thêm
-                        vào lịch</a>
-                    <a href="https://maps.app.goo.gl/JCrtjNu25NJVHe387"
-                       target="_blank" class="section-sub-title btn btn-sm btn-secondary">Xem bản
-                        đồ</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-5 donate-section section-bg-affect" id="donate">
-        <div class="container-fluid ">
-            <div class="w-100">
-                <h2 data-aos="fade-up" class="section-title text-center m-0">
-                    Hộp mừng cưới
-                </h2>
-                <h3 data-aos="fade-up" class="section-sub-title mb-4 text-center">
-                    Thật vui vì được gặp và đón tiếp các bạn trong một dịp đặc biệt như đám cưới của
-                    chúng tôi.
-                </h3>
-                <div class="row d-flex justify-content-around donate-box mb-1">
-                    <div data-aos="fade-right" class="col-6 mb-4 donate-wrap">
-                        <div class="donate-card p-3 px-3 rounded text-center">
-                            <strong class="d-block sub-title mb-2 text-uppercase">Đến chú
-                                rể</strong>
-                            <img loading="lazy" class="qr-code-image m-auto mb-2"
-                                 src="assets/images/groom_qr_donate.webp" alt="groom_qr_donate">
-                            <p class="mb-1"><strong>Vietcombank</strong></p>
-                            <p class="mb-1"><strong>LE PHUC ANH</strong></p>
-                            <p class="mb-1"><strong>9375221238</strong></p>
-                            <p class="mb-1">
-                                <strong>Trụ sở CN Thành Công</strong>
-                                <br/>
-                                <br/>
-                            </p>
-                        </div>
-                    </div>
-                    <div data-aos="fade-left" class="col-6 donate-wrap">
-                        <div class="donate-card p-3 px-4 rounded text-center">
-                            <strong class="d-block sub-title mb-2 text-uppercase">Đến cô
-                                dâu</strong>
-                            <img loading="lazy" class="qr-code-image m-auto mb-2"
-                                 src="assets/images/bride_qr_donate.webp" alt="bride_qr_donate">
-                            <p class="mb-1"><strong>BIDV</strong></p>
-                            <p class="mb-1"><strong>NGUYEN THI NGOC</strong></p>
-                            <p class="mb-1"><strong>8873029124</strong></p>
-                            <p class="mb-1"><strong>CN sở giao dịch 3 PGD Nguyễn Thanh Bình</strong></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-5 wishes-section section-bg-affect" id="wishes">
-        <div class="container-fluid">
-            <h2 data-aos="fade-up" class="section-title text-center">
-                Sổ Lưu Bút
-            </h2>
-            <h3 data-aos="fade-up" class="section-sub-title mb-4 text-center">
-                Cảm ơn bạn rất nhiều vì đã gửi những lời chúc mừng tốt đẹp nhất đến đám cưới của
-                chúng tôi!
-            </h3>
-            <div id="section-comment">
-                <form action="" id="wish-form" class="p-4 contact-validation-active">
-                    <div class="col-auto mb-3 d-flex">
-                        <input name="name"
-                               id="name-comment"
-                               type="text"
-                               class="form-control border-0"
-                               placeholder="Nhập tên của bạn*"/>
-                    </div>
-                    <div class="col-auto mb-3">
-                        <div class="textarea-emoji-picker position-relative">
-                            <div class="vitualTextarea form-control px-0">
-                                <textarea name="content"
-                                          class="form-control border-0"
-                                          id="detail-comment"
-                                          rows="3"
-                                          placeholder="Nhập lời chúc của bạn*"></textarea>
-                                <div class="textAreaIcons">
-                                <span class="show-autocomplete tooltip-custom"
-                                      onclick="toggleWishesAutocompleteContent();"
-                                      data-toggle="tooltip"
-                                      data-placement="top" title="Lời chúc gợi ý">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                         fill="currentColor"
-                                         class="bi bi-lightbulb" viewBox="0 0 16 16">
-                                      <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a2 2 0 0 0-.453-.618A5.98 5.98 0 0 1 2 6m6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1"/>
-                                    </svg>
-                                </span>
-                                    <span class="hide-autocomplete tooltip-custom"
-                                          onclick="toggleWishesAutocompleteContent();"
-                                          style="display: none;">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                         fill="currentColor"
-                                         class="bi bi-lightbulb-off" viewBox="0 0 16 16">
-                                      <path fill-rule="evenodd"
-                                            d="M2.23 4.35A6 6 0 0 0 2 6c0 1.691.7 3.22 1.826 4.31.203.196.359.4.453.619l.762 1.769A.5.5 0 0 0 5.5 13a.5.5 0 0 0 0 1 .5.5 0 0 0 0 1l.224.447a1 1 0 0 0 .894.553h2.764a1 1 0 0 0 .894-.553L10.5 15a.5.5 0 0 0 0-1 .5.5 0 0 0 0-1 .5.5 0 0 0 .288-.091L9.878 12H5.83l-.632-1.467a3 3 0 0 0-.676-.941 4.98 4.98 0 0 1-1.455-4.405zm1.588-2.653.708.707a5 5 0 0 1 7.07 7.07l.707.707a6 6 0 0 0-8.484-8.484zm-2.172-.051a.5.5 0 0 1 .708 0l12 12a.5.5 0 0 1-.708.708l-12-12a.5.5 0 0 1 0-.708"/>
-                                    </svg>
-                                </span>
-                                    <span class="emoji-picker-button tooltip-custom"
-                                          data-toggle="tooltip"
-                                          data-placement="top" title="Chèn biểu tượng">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                         fill="currentColor"
-                                         class="bi bi-emoji-smile" viewBox="0 0 16 16">
-                                      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-                                      <path d="M4.285 9.567a.5.5 0 0 1 .683.183A3.5 3.5 0 0 0 8 11.5a3.5 3.5 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683M7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5m4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5"/>
-                                    </svg>
-                                </span>
-                                    <div class="wishes-autocomplete-content" style="display: none;">
-                                        <div>
-                                            <label for="searchWishSuggestions" style="display: flex">
-                                                <input type="text" id="searchWishSuggestions"
-                                                       onkeyup="searchWishSuggestionsFunction()"
-                                                       placeholder="Tìm kiếm...">
-                                            </label>
-
-                                        </div>
-
-                                        <ul id="wishSuggestions"></ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <script>
-                                // Hàm chuyển có dấu thành không dấu
-                                function removeAccents(str) {
-                                    return str.normalize('NFD')
-                                        .replace(/[\u0300-\u036f]/g, '')
-                                        .replace(/đ/g, 'd')
-                                        .replace(/Đ/g, 'D');
-                                }
-
-                                const wishSuggestions = [
-                                    'Chúc mừng hạnh phúc! Chúc hai bạn trăm năm hạnh phúc!',
-                                    'Chúc mừng ngày trọng đại tới hai bạn. Hạnh phúc bền lâu và trọn vẹn nhé!',
-                                    'Chúc mừng hạnh phúc hai bạn. Chúc hai bạn bên nhau đầu bạc răng long, sớm có thiên thần nhỏ nhé!',
-                                    'Chúc hai bạn ngày vui hạnh phúc. Hãy yêu thương nhau thật nhiều và sống thật hạnh phúc nha!',
-                                    'Chúc hai bạn sớm có con đàn cháu đống, cửa nhà lúc nào cũng đầm ấm, yên vui nhé!',
-                                    'Thật vui vì cuối cùng ngày này cũng tới với bạn. Tôi thành tâm chúc hai bạn thật nhiều hạnh phúc và sống đời vui vẻ cùng nhau mãi mãi!',
-                                    'Một chương mới đã mở ra với hai bạn rồi. Tôi mong cuộc sống mới của cả hai sẽ tràn ngập hy vọng, hạnh phúc và niềm vui!',
-                                    'Chúc đôi trai tài gái sắc hạnh phúc trọn vẹn, luôn yêu thương nhau thật nhiều!',
-                                    "Chia vui cùng bạn trong ngày trọng đại này. Cầu mong cuộc sống sau này của 2 vợ chồng thật thuận hòa, may mắn, làm ăn phát tài nha.",
-                                    "Tôi mong tình yêu của hai bạn thật bền chặt, gắn bó để xây dựng tổ ấm yên bình, hạnh phúc!",
-                                    "Hai bạn của tôi chắc chắn sẽ có được nhiều hạnh phúc. Mong hai bạn có sức khỏe dồi dào, làm ăn phát đạt và sớm có cháu cho ông bà bồng bế nhé!",
-                                    "Gửi lời chúc mừng chân thành nhất tới bạn của tôi. Chúc hai bạn một cuộc sống thật tuyệt vời, hòa thuận, gắn bó son sắt, thủy chung, hạnh phúc lâu dài.",
-                                    "Nơi nào có yêu thương nơi đó chắc chắn hạnh phúc. Hai bạn đã tìm được nơi đủ đầy yêu thương rồi, hãy cùng nắm tay nhau đi hết cuộc đời nhé!",
-                                    "Khởi đầu một cuộc sống mới, nguyện ước cho bạn của tôi những ngày tháng hạnh phúc phía trước để cùng xây dựng tổ ấm với người bạn đời. Happy ending!",
-                                    "Mình tin rằng đây sẽ là khởi đầu cho những điều tốt đẹp sắp tới trong cuộc sống của hai bạn. Hãy yêu thương và cùng nhau vượt qua mọi khó khăn trong cuộc sống nhé.",
-                                    "Hôn nhân đánh dấu sự kết thúc một câu chuyện tình yêu và bắt đầu một trận đấu vật. Chúc bạn những điều tốt đẹp nhất.",
-                                    "Tôi sẽ nói cho bạn bí mật của một cuộc hôn nhân hạnh phúc. Đó vẫn là … một bí mật cho tất cả! Chúc bạn tất cả những điều tốt đẹp nhất của thời gian phía trước.",
-                                    "Hôn nhân thật đẹp. Cuối cùng bạn đã tìm thấy một người mà bạn bị làm phiền suốt cuộc đời.",
-                                    "Hai trở thành một: Một giường, một điều khiển từ xa, một phòng tắm! Xin chúc mừng đám cưới hai bạn.",
-                                    "Chúc đôi trai tài gái sắc nhà mình hạnh phúc vẹn tròn, cung hỷ cung hỷ!",
-                                    "Chúc mừng anh trai của em đã có người rước nhé. Em mong anh chị có cuộc sống vui vẻ, hạnh phúc phía trước, làm ăn phát tài phát lộc.",
-                                    "Anh chị là một cặp trời sinh, chắc chắn sau này sẽ rất hạnh phúc. Em chúc anh chị sức khỏe dồi dào, làm ăn phát đạt và sớm có thiên thần nhỏ cho vui cửa vui nhà.",
-                                    "Hôm nay là ngày vui của anh chị và cũng là ngày em rất hạnh phúc. Chúc anh chị mãi yêu thương nhau như bây giờ và đạt được mọi ước nguyện trong cuộc sống.",
-                                    "Chúc anh/chị/em trăm năm hạnh phúc, thuận vợ thuận chồng.",
-                                    "Hôm nay chú rể đẹp trai, cô dâu xinh gái. Chúc mừng ngày thành hôn hai bạn tôi!",
-                                    "Chúc mừng đôi bạn trẻ nhé! Mãi yêu thương nhau đến đầu bạc răng long bạn nha!",
-                                    "Thay mặt team (tên nhóm) chúc hai bạn ngày ngày ân ái, bên nhau trọn đời.",
-                                    "Happy wedding! Chúc hai bạn có cuộc sống mới ngập tràn tiếng cười và niềm vui, sớm có thiên thần nhỏ bồng bé!"
-                                ]
-                                const wishList = document.getElementById('wishSuggestions');
-                                wishSuggestions.forEach(message => {
-                                    const listItem = document.createElement('li');
-                                    const link = document.createElement('a');
-                                    link.className = 'showContent';
-                                    link.onclick = function () {
-                                        document.getElementById('detail-comment').value = message;
-                                    };
-                                    link.innerText = message;
-                                    listItem.setAttribute('data-normalized', removeAccents(message.toLowerCase()));
-
-                                    listItem.appendChild(link);
-                                    wishList.appendChild(listItem);
-                                });
-
-                                function searchWishSuggestionsFunction() {
-                                    const searchText = removeAccents(
-                                        document.getElementById('searchWishSuggestions').value.toLowerCase()
-                                    );
-                                    const items = document.getElementById('wishSuggestions').getElementsByTagName('li');
-                                    Array.from(items).forEach(item => {
-                                        const normalizedText = item.getAttribute('data-normalized');
-                                        if (normalizedText.includes(searchText)) {
-                                            item.style.display = '';
-                                        } else {
-                                            item.style.display = 'none';
-                                        }
-                                    });
-                                }
-
-                                const showAutocomplete = document.querySelector('.show-autocomplete')
-                                const hideAutocomplete = document.querySelector('.hide-autocomplete')
-                                const wishesAutocompleteContent = document.querySelector('.wishes-autocomplete-content')
-
-                                function toggleWishesAutocompleteContent() {
-                                    if (wishesAutocompleteContent.style.display === 'none') {
-                                        setTimeout(() => {
-                                            wishesAutocompleteContent.style.display = '';
-                                            wishesAutocompleteContent.focus();
-                                            showAutocomplete.style.display = 'none';
-                                            hideAutocomplete.style.display = '';
-                                        }, 100);
-                                    }
-                                }
-
-                                document.addEventListener('click', function (event) {
-                                    if (!wishesAutocompleteContent.contains(event.target)) {
-                                        wishesAutocompleteContent.style.display = 'none';
-                                        showAutocomplete.style.display = '';
-                                        hideAutocomplete.style.display = 'none';
-                                    }
-                                });
-                            </script>
-
-                            <div class="emoji-picker">
-                                <emoji-picker style="max-width: 100%;max-height: 350px;"
-                                              class="light"></emoji-picker>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-auto text-center">
-                        <button type="submit"
-                                class="p-2 w-50 btn btn-danger border-0"
-                                id="btn-submit-comment"
-                        >
-                            Gửi lời chúc
-                        </button>
-                    </div>
-                    <div class="clearfix error-handling-messages">
-                        <div id="success">Thank you</div>
-                    </div>
-                </form>
-                <div class="mt-3 px-4 py-3" id="show-comments"></div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section-title footer-section py-5 text-center section-bg-affect">
-        <div class="container-fluid">
-            <h3 class="title">Thank you!</h3>
-            <h5 class="sub-title">-- Phúc Anh & Nguyễn Ngọc --</h5>
-        </div>
-    </section>
-</div>
-
-<div class="offcanvas offcanvas-end offcanvas-menu" tabindex="-1" id="offcanvasNavbar"
-     data-bs-scroll="true"
-     data-bs-backdrop="true" aria-labelledby="offcanvasNavbarLabel">
-    <div class="offcanvas-body">
-        <ul class="navbar-nav justify-content-end flex-grow-1">
-            <li class="offcanvas-header pb-4 pt-2 px-2 justify-content-end">
-                <button type="button" class="btn-close p-0" data-bs-dismiss="offcanvas"
-                        aria-label="Close"></button>
-            </li>
-
-            <li class="nav-item">
-                <a class="section-sub-title nav-link" href="#couple">Cô Dâu &amp; Chú Rể</a>
-            </li>
-
-            <!--            <li class="nav-item">-->
-            <!--                <a class="section-sub-title nav-link active" aria-current="page" href="#video">Video-->
-            <!--                    Cưới</a>-->
-            <!--            </li>-->
-
-            <li class="nav-item">
-                <a class="section-sub-title nav-link active" aria-current="page" href="#gallery">Album
-                    Hình Cưới</a>
-            </li>
-
-            <li class="nav-item">
-                <a class="section-sub-title nav-link active" aria-current="page" href="#story">Chuyện
-                    tình yêu</a>
-            </li>
-
-            <li class="nav-item">
-                <a class="section-sub-title nav-link active" aria-current="page" href="#invitation">Lời
-                    Ngỏ</a>
-            </li>
-
-            <li class="nav-item">
-                <a class="section-sub-title nav-link" href="#event">Sự kiện cưới</a>
-            </li>
-
-            <li class="nav-item">
-                <a class="section-sub-title nav-link" href="#wishes">Sổ Lưu Bút</a>
-            </li>
-
-            <li class="nav-item">
-                <a class="section-sub-title nav-link" href="#donate">Mừng cưới</a>
-            </li>
-        </ul>
-    </div>
-</div>
-
-<div class="rsvp-modal section-bg-affect" id="rsvp-modal">
-    <div class="container-fluid donate-modal-content">
-        <span class="donate-modal-close text-danger">&times;</span>
-        <div class="w-100 p-4">
-            <h2 data-aos="fade-up" class="section-title text-body text-center m-0">
-                Xác nhận tham dự
-            </h2>
-            <h3 id="title-confirm-id" data-aos="fade-up" class="section-sub-title text-body mb-4 text-center">
-                Thật vui vì được gặp và đón tiếp các bạn trong một dịp đặc biệt như đám cưới của
-                chúng tôi.
-            </h3>
-            <div class="modal-body">
-                <form id="rsvp-form" method="post">
-                    <div class="row">
-                        <input type="hidden" id="event_id" name="event_id" value="65eb2608ebd9f4c0110a33d7">
-                        <input type="hidden" id="guest_id" name="guest_id" value="65ee6f8173ad745f4e037715">
-                        <div class="col-12" style="margin-bottom: 10px;">
-                            <input name="guest-name"
-                                   id="guest-name"
-                                   type="text"
-                                   class="form-input"
-                                   oninput="validateSendConfirmBtn()"
-                                   placeholder="Nhập tên của bạn*"/>
-                        </div>
-                        <div class="col-12" style="margin-bottom: 10px;">
-                            <select class="form-select"
-                                    onchange="validateSendConfirmBtn()"
-                                    name="attendance_status"
-                                    id="attendance_status_id"
-                                    style="margin-top: 4px; ">
-                                <option value="" selected disabled>Bạn sẽ tham gia chứ?</option>
-                                <option value="none">Chưa xác định trước được</option>
-                                <option value="Y">Nhất định rồi!!!</option>
-                                <option value="N">Tôi không tham gia được</option>
-                            </select>
-                        </div>
-                        <div class="col-12" style="margin-bottom: 10px;">
-                            <select
-                                    class="form-select"
-                                    onchange="validateSendConfirmBtn()"
-                                    name="plus_ones"
-                                    id="plus_ones_id"
-                                    style="margin-top: 4px; display: none">
-                                <option value="" selected disabled>Bạn có người đi cùng không?</option>
-                                <option value=1>Đi một mình</option>
-                                <option value=2>Đi cùng 1 người</option>
-                                <option value=3>Đi cùng 2 người</option>
-                                <option value=4>Đi cùng 3 người</option>
-                                <option value=5>Đi cùng 4 người</option>
-                                <option value=6>Đi cùng 5 người</option>
-                            </select>
-                        </div>
-                        <script>
-                            function validateSendConfirmBtn() {
-                                const plusOne = document.getElementById('plus_ones_id');
-                                const guestName = document.getElementById('guest-name');
-                                const attendanceStatus = document.getElementById('attendance_status_id');
-                                const sentBtn = document.getElementById('send-confirm-btn');
-                                if (guestName.value.trim() === '') {
-                                    sentBtn.disabled = true;
-                                    return;
-                                }
-
-                                switch (attendanceStatus.value) {
-                                    case 'none':
-                                    case 'N':
-                                        plusOne.style.display = 'none';
-                                        sentBtn.disabled = false;
-                                        break;
-                                    case 'Y':
-                                        plusOne.style.display = '';
-                                        sentBtn.disabled = plusOne.value === '';
-                                        break;
-                                    default:
-                                        sentBtn.disabled = true;
-                                        break;
-                                }
-                            }
-                        </script>
-                        <div class="row-guest-questions">
-                        </div>
-                    </div>
-                    <div class="message-success" style="display: none;">
-                        <div class="form-message form-message-success">
-                            <svg width="17px" height="17px" viewBox="0 0 17 17"
-                                 xmlns="http://www.w3.org/2000/svg"
-                                 class="ng-scope"><title>F28A5059-2988-42E8-A07D-911419DD80B1</title>
-                                <desc>Created with sketchtool.</desc>
-                                <defs></defs>
-                                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                    <g id="Guest-List---Add-Inline-Dialogs"
-                                       transform="translate(-730.000000, -252.000000)" fill="#78CC61">
-                                        <g id="dialog" transform="translate(690.000000, 216.000000)">
-                                            <g id="message" transform="translate(40.000000, 26.000000)">
-                                                <path d="M8.5,10 C3.80553623,10 0,13.8055362 0,18.5 C0,23.1944638 3.80553623,27 8.5,27 C13.1944638,27 17,23.1944638 17,18.5 C17,13.8055362 13.1944638,10 8.5,10 Z M12.5538841,14.7117101 L13.5931014,15.7627536 C11.2406957,18.1151594 8.88878261,20.4670725 6.53686957,22.8194783 C5.50307246,21.7625217 4.45202899,20.7233043 3.40689855,19.6781739 L4.44611594,18.6384638 L6.53686957,20.7287246 L12.5538841,14.7117101 Z"
-                                                      id="icon-green-success"></path>
-                                            </g>
-                                        </g>
-                                    </g>
-                                </g>
-                            </svg>
-                            <span style="margin-left: 5px;"></span>
-                        </div>
-                    </div>
-                    <div class="message-error text-danger" style="display: none;color:red;">
-                        <div class="form-message form-message-error">
-                            <svg width="17px" height="17px" viewBox="0 0 17 17"
-                                 xmlns="http://www.w3.org/2000/svg"
-                                 class="ng-scope"><title>Page 1</title>
-                                <desc></desc>
-                                <defs></defs>
-                                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                    <g id="Group-6" transform="translate(0.000000, -2.000000)" fill="#71D9BC">
-                                        <path d="M8.5,2 C3.79641481,2 0,5.79641481 0,10.5 C0,15.2035852 3.79641481,19 8.5,19 C13.2035852,19 17,15.2035852 17,10.5 C17,5.79641481 13.2035852,2 8.5,2 L8.5,2 Z M10,15.165872 C10,15.6130558 9.60377883,16 9.14587385,16 L7.854404,16 C7.39622117,16 7,15.6130558 7,15.165872 L7,9.83439935 C7,9.36577897 7.39622117,9 7.854404,9 L9.14587385,9 C9.60377883,9 10,9.38694422 10,9.83439935 L10,15.165872 Z M8.49124329,8 C7.67497633,8 7,7.32894118 7,6.5 C7,5.67082353 7.67497633,5 8.49124329,5 C9.32502367,5 10,5.67082353 10,6.5 C10,7.32894118 9.32502367,8 8.49124329,8 L8.49124329,8 Z"
-                                              id="Page-1"></path>
-                                    </g>
-                                </g>
-                            </svg>
-                            <span style="margin-left: 5px;"></span>
-                        </div>
-                    </div>
-
-                    <div class="action-btns" style="display: flex; justify-content: space-evenly; padding-top: 15px">
-                        <button id="send-confirm-btn" class="btn btn-dark btn-dark-1" style="width: 40%" disabled>
-                            Xác nhận
-                        </button>
-                        <button
-                                type="button"
-                                onclick="(() => {
+}</script><div class="row-guest-questions"></div></div><div class="message-success" style="display:none"><div class="form-message form-message-success"><svg width="17px" height="17px" viewBox="0 0 17 17" xmlns="http://www.w3.org/2000/svg" class="ng-scope"><title>F28A5059-2988-42E8-A07D-911419DD80B1</title><desc>Created with sketchtool.</desc><defs></defs><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="Guest-List---Add-Inline-Dialogs" transform="translate(-730.000000, -252.000000)" fill="#78CC61"><g id="dialog" transform="translate(690.000000, 216.000000)"><g id="message" transform="translate(40.000000, 26.000000)"><path d="M8.5,10 C3.80553623,10 0,13.8055362 0,18.5 C0,23.1944638 3.80553623,27 8.5,27 C13.1944638,27 17,23.1944638 17,18.5 C17,13.8055362 13.1944638,10 8.5,10 Z M12.5538841,14.7117101 L13.5931014,15.7627536 C11.2406957,18.1151594 8.88878261,20.4670725 6.53686957,22.8194783 C5.50307246,21.7625217 4.45202899,20.7233043 3.40689855,19.6781739 L4.44611594,18.6384638 L6.53686957,20.7287246 L12.5538841,14.7117101 Z" id="icon-green-success"></path></g></g></g></g></svg><span style="margin-left:5px"></span></div></div><div class="message-error text-danger" style="display:none;color:red"><div class="form-message form-message-error"><svg width="17px" height="17px" viewBox="0 0 17 17" xmlns="http://www.w3.org/2000/svg" class="ng-scope"><title>Page 1</title><desc></desc><defs></defs><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="Group-6" transform="translate(0.000000, -2.000000)" fill="#71D9BC"><path d="M8.5,2 C3.79641481,2 0,5.79641481 0,10.5 C0,15.2035852 3.79641481,19 8.5,19 C13.2035852,19 17,15.2035852 17,10.5 C17,5.79641481 13.2035852,2 8.5,2 L8.5,2 Z M10,15.165872 C10,15.6130558 9.60377883,16 9.14587385,16 L7.854404,16 C7.39622117,16 7,15.6130558 7,15.165872 L7,9.83439935 C7,9.36577897 7.39622117,9 7.854404,9 L9.14587385,9 C9.60377883,9 10,9.38694422 10,9.83439935 L10,15.165872 Z M8.49124329,8 C7.67497633,8 7,7.32894118 7,6.5 C7,5.67082353 7.67497633,5 8.49124329,5 C9.32502367,5 10,5.67082353 10,6.5 C10,7.32894118 9.32502367,8 8.49124329,8 L8.49124329,8 Z" id="Page-1"></path></g></g></svg><span style="margin-left:5px"></span></div></div><div class="action-btns" style="display:flex;justify-content:space-evenly;padding-top:15px"><button id="send-confirm-btn" class="btn btn-dark btn-dark-1" style="width:40%" disabled="disabled">Xác nhận</button><button type="button" onclick="(() => {
                                     document.getElementById('rsvp-modal').style.display = '';
                                     document.getElementById('donate-modal').style.display = 'block';
-                                })()"
-                                class="btn btn-dark btn-dark-1 donate"
-                                style="width: 40%"
-                        >
-                            Mừng cưới
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div class="py-5 donate-section donate-modal section-bg-affect" id="donate-modal">
-    <div class="container-fluid donate-modal-content">
-        <span class="donate-modal-close text-danger">&times;</span>
-        <div class="w-100 p-4">
-            <h2 data-aos="fade-up" class="section-title text-body text-center m-0">
-                Hộp mừng cưới
-            </h2>
-            <h3 data-aos="fade-up" class="section-sub-title text-body mb-4 text-center">
-                Thật vui vì được gặp và đón tiếp các bạn trong một dịp đặc biệt như đám cưới của
-                chúng tôi.
-            </h3>
-            <div class="row justify-content-center donate-box mb-1">
-                <div data-aos="fade-right" class="col-6 px-4 mb-4">
-                    <div class="donate-card p-4 rounded text-center">
-                        <strong class="d-block sub-title mb-2 text-uppercase">Đến chú rể</strong>
-                        <img loading="lazy" class="qr-code-image m-auto mb-2"
-                             src="assets/images/groom_qr_donate.webp" alt="groom_qr_donate">
-                        <p class="mb-1"><strong>Vietcombank</strong></p>
-                        <p class="mb-1"><strong>LE PHUC ANH</strong></p>
-                        <p class="mb-1"><strong>9375221238</strong></p>
-                        <p class="mb-1">
-                            <strong>Trụ sở CN Thành Công</strong>
-                            <br/>
-                            <br/>
-                        </p>
-                    </div>
-                </div>
-                <div data-aos="fade-left" class="col-6 px-4 ">
-                    <div class="donate-card p-4 rounded text-center">
-                        <strong class="d-block sub-title mb-2 text-uppercase">Đến cô dâu</strong>
-                        <img loading="lazy" class="qr-code-image m-auto mb-2"
-                             src="assets/images/bride_qr_donate.webp" alt="bride_qr_donate">
-                        <p class="mb-1"><strong>BIDV</strong></p>
-                        <p class="mb-1"><strong>NGUYEN THI NGOC</strong></p>
-                        <p class="mb-1"><strong>8873029124</strong></p>
-                        <p class="mb-1"><strong>CN sở giao dịch 3 PGD Nguyễn Thanh Bình</strong></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div id="menu-access">
-    <div class="btn-menu-open" onclick="toggleMenuAccess();">
-        <i class="bi bi-list text-white"></i>
-    </div>
-    <div class="btn-menu-close" onclick="toggleMenuAccess();">
-        <i class="bi bi-x-lg text-white"></i>
-    </div>
-    <ul class="p-0 m-0 list-menu-icon">
-        <li class="text-center">
-            <a href="#wishes" class="text-white">
-                    <span class="content-button tooltipBtn">
-                        <span class="tooltiptext">Gửi lời chúc</span>
-                        <img loading="lazy" class="access-icon" src="assets/images/common/wishes.webp"
-                             alt="">
-                    </span>
-            </a>
-        </li>
-
-        <li class="text-center"
-            onclick="(()=>{
+                                })()" class="btn btn-dark btn-dark-1 donate" style="width:40%">Mừng cưới</button></div></form></div></div></div></div><div class="py-5 donate-section donate-modal section-bg-affect" id="donate-modal"><div class="container-fluid donate-modal-content"><span class="donate-modal-close text-danger">&times;</span><div class="w-100 p-4"><h2 data-aos="fade-up" class="section-title text-body text-center m-0">Hộp mừng cưới</h2><h3 data-aos="fade-up" class="section-sub-title text-body mb-4 text-center">Thật vui vì được gặp và đón tiếp các bạn trong một dịp đặc biệt như đám cưới của chúng tôi.</h3><div class="row justify-content-center donate-box mb-1"><div data-aos="fade-right" class="col-6 px-4 mb-4"><div class="donate-card p-4 rounded text-center"><strong class="d-block sub-title mb-2 text-uppercase">Đến chú rể</strong><img loading="lazy" class="qr-code-image m-auto mb-2" src="assets/images/groom_qr_donate.webp" alt="groom_qr_donate"><p class="mb-1"><strong>Vietcombank</strong></p><p class="mb-1"><strong>LE PHUC ANH</strong></p><p class="mb-1"><strong>9375221238</strong></p><p class="mb-1"><strong>Trụ sở CN Thành Công</strong><br><br></p></div></div><div data-aos="fade-left" class="col-6 px-4"><div class="donate-card p-4 rounded text-center"><strong class="d-block sub-title mb-2 text-uppercase">Đến cô dâu</strong><img loading="lazy" class="qr-code-image m-auto mb-2" src="assets/images/bride_qr_donate.webp" alt="bride_qr_donate"><p class="mb-1"><strong>BIDV</strong></p><p class="mb-1"><strong>NGUYEN THI NGOC</strong></p><p class="mb-1"><strong>8873029124</strong></p><p class="mb-1"><strong>CN sở giao dịch 3 PGD Nguyễn Thanh Bình</strong></p></div></div></div></div></div></div><div id="menu-access"><div class="btn-menu-open" onclick="toggleMenuAccess()"><i class="bi bi-list text-white"></i></div><div class="btn-menu-close" onclick="toggleMenuAccess()"><i class="bi bi-x-lg text-white"></i></div><ul class="p-0 m-0 list-menu-icon"><li class="text-center"><a href="#wishes" class="text-white"><span class="content-button tooltipBtn"><span class="tooltiptext">Gửi lời chúc</span><img loading="lazy" class="access-icon" src="assets/images/common/wishes.webp" alt=""></span></a></li><li class="text-center" onclick="(()=>{
                 document.getElementById('rsvp-modal').style.display = 'flex';
-            })()"
-        >
-            <a target="_blank" class="text-white">
-                    <span class="content-button tooltipBtn">
-                        <span class="tooltiptext">Xác nhận tham dự</span>
-                        <img loading="lazy" class="access-icon" src="assets/images/common/rsvp4.webp"
-                             alt="">
-                    </span>
-            </a>
-        </li>
-
-        <li class="text-center" onclick="(() => {
+            })()"><a target="_blank" class="text-white"><span class="content-button tooltipBtn"><span class="tooltiptext">Xác nhận tham dự</span><img loading="lazy" class="access-icon" src="assets/images/common/rsvp4.webp" alt=""></span></a></li><li class="text-center" onclick="(() => {
             document.getElementById('donate-modal').style.display = 'block';
-        })()">
-            <a class="text-white">
-                    <span class="content-button tooltipBtn">
-                        <span class="tooltiptext">Mừng cưới</span>
-                        <img loading="lazy" class="access-icon"
-                             src="assets/images/common/money_bag.webp" alt="">
-                    </span>
-            </a>
-        </li>
-    </ul>
-    <script>
-        const btnMenuOpen = document.querySelector('#menu-access > .btn-menu-open');
-        const btnMenuClose = document.querySelector('#menu-access > .btn-menu-close');
-        const listMenuIcon = document.querySelector('#menu-access > .list-menu-icon');
+        })()"><a class="text-white"><span class="content-button tooltipBtn"><span class="tooltiptext">Mừng cưới</span><img loading="lazy" class="access-icon" src="assets/images/common/money_bag.webp" alt=""></span></a></li></ul><script>const btnMenuOpen = document.querySelector('#menu-access > .btn-menu-open');
+const btnMenuClose = document.querySelector('#menu-access > .btn-menu-close');
+const listMenuIcon = document.querySelector('#menu-access > .list-menu-icon');
 
-        function toggleMenuAccess() {
-            if (btnMenuClose.style.display !== 'none') {
-                btnMenuOpen.style.display = '';
-                btnMenuClose.style.display = 'none';
-                listMenuIcon.style.opacity = '0';
-                listMenuIcon.style.pointerEvents = 'none';
-            } else {
-                btnMenuOpen.style.display = 'none';
-                btnMenuClose.style.display = 'block';
-                listMenuIcon.style.opacity = '1';
-            }
-        }
-    </script>
-</div>
-
-
-<!--BEGIN PLAYER-->
-<style>
-    @-webkit-keyframes biilogo-pulse {
-        from {
-            -webkit-transform: scale3d(1, 1, 1);
-            transform: scale3d(1, 1, 1);
-        }
-        50% {
-            -webkit-transform: scale3d(0.95, 0.95, 0.95);
-            transform: scale3d(0.95, 0.95, 0.95);
-        }
-        to {
-            -webkit-transform: scale3d(1, 1, 1);
-            transform: scale3d(1, 1, 1);
-        }
+function toggleMenuAccess() {
+    if (btnMenuClose.style.display !== 'none') {
+        btnMenuOpen.style.display = '';
+        btnMenuClose.style.display = 'none';
+        listMenuIcon.style.opacity = '0';
+        listMenuIcon.style.pointerEvents = 'none';
+    } else {
+        btnMenuOpen.style.display = 'none';
+        btnMenuClose.style.display = 'block';
+        listMenuIcon.style.opacity = '1';
     }
+}</script></div><style>@-webkit-keyframes biilogo-pulse{from{-webkit-transform:scale3d(1,1,1);transform:scale3d(1,1,1)}50%{-webkit-transform:scale3d(.95,.95,.95);transform:scale3d(.95,.95,.95)}to{-webkit-transform:scale3d(1,1,1);transform:scale3d(1,1,1)}}@keyframes biilogo-pulse{from{-webkit-transform:scale3d(1,1,1);transform:scale3d(1,1,1)}50%{-webkit-transform:scale3d(.95,.95,.95);transform:scale3d(.95,.95,.95)}to{-webkit-transform:scale3d(1,1,1);transform:scale3d(1,1,1)}}.bii-player{position:fixed;bottom:70px;left:50px;width:40px;height:40px;z-index:99999;display:block}.bii-player .playerIcon{cursor:pointer;display:block;width:40px;height:40px;-webkit-border-radius:50%;border-radius:50%;background-color:#df4758;padding-top:7px;padding-left:9px;position:absolute;z-index:2}.bii-player:after{content:"";position:absolute;-webkit-border-radius:50%;border-radius:50%;background-color:rgba(242,59,67,.3);width:120%;height:120%;left:-10%;top:-10%;-webkit-animation:biilogo-pulse 1s infinite;animation:biilogo-pulse 1s infinite;z-index:1}.bii-player img{width:100%;z-index:999999;position:absolute;cursor:pointer}.bii-player.show-sec .bii-player-secondary{visibility:visible}.bii-player.show-sec .bii-player-secondary-content{transform:translate3d(0,0,0)}.bii-player-secondary{position:absolute;width:310px;left:25px;height:50px;overflow:hidden;visibility:hidden}.bii-player-secondary-content{display:flex;align-items:center;cursor:pointer;user-select:none;position:absolute;width:310px;left:-25px;background:#fff;height:40px;padding:8px 11px 8px 50px;border:1px solid #df4759;border-radius:30px;z-index:1;font-size:14px;transform:translate3d(-100%,0,0);transition:transform 175ms ease;font-family:arial,sans-serif;font-weight:200;color:#000}@media (max-width:799px){.bii-player{bottom:30px;left:20px}}</style><audio id="myAudio" src="assets/musics/take-my-hand.m4a" preload="auto" loop></audio><div id="player" class="bii-player"><div onclick="togglePlay()" class="bii-player-secondary"><div class="bii-player-secondary-content">Click vào đây để nghe nhạc nhé!</div></div><div onclick="togglePlay()" class="playerIcon"><span id="playerVolumeOff"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="27" fill="#fff" class="bi bi-volume-mute-fill" viewBox="0 0 16 16"><path d="M6.717 3.55A.5.5 0 0 1 7 4v8a.5.5 0 0 1-.812.39L3.825 10.5H1.5A.5.5 0 0 1 1 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06zm7.137 2.096a.5.5 0 0 1 0 .708L12.207 8l1.647 1.646a.5.5 0 0 1-.708.708L11.5 8.707l-1.646 1.647a.5.5 0 0 1-.708-.708L10.793 8 9.146 6.354a.5.5 0 1 1 .708-.708L11.5 7.293l1.646-1.647a.5.5 0 0 1 .708 0z"/></svg></span><span style="display:none" id="playerVolumeOn"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="27" fill="#fff" class="bi bi-volume-up-fill" viewBox="0 0 16 16"><path d="M11.536 14.01A8.473 8.473 0 0 0 14.026 8a8.473 8.473 0 0 0-2.49-6.01l-.708.707A7.476 7.476 0 0 1 13.025 8c0 2.071-.84 3.946-2.197 5.303l.708.707z"/><path d="M10.121 12.596A6.48 6.48 0 0 0 12.025 8a6.48 6.48 0 0 0-1.904-4.596l-.707.707A5.483 5.483 0 0 1 11.025 8a5.483 5.483 0 0 1-1.61 3.89l.706.706z"/><path d="M8.707 11.182A4.486 4.486 0 0 0 10.025 8a4.486 4.486 0 0 0-1.318-3.182L8 5.525A3.489 3.489 0 0 1 9.025 8 3.49 3.49 0 0 1 8 10.475l.707.707zM6.717 3.55A.5.5 0 0 1 7 4v8a.5.5 0 0 1-.812.39L3.825 10.5H1.5A.5.5 0 0 1 1 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06z"/></svg></span></div></div><script>const audio = document.getElementById('myAudio');
+const playerVolumeOff = document.getElementById('playerVolumeOff');
+const playerVolumeOn = document.getElementById('playerVolumeOn');
 
-    @keyframes biilogo-pulse {
-        from {
-            -webkit-transform: scale3d(1, 1, 1);
-            transform: scale3d(1, 1, 1);
-        }
-        50% {
-            -webkit-transform: scale3d(0.95, 0.95, 0.95);
-            transform: scale3d(0.95, 0.95, 0.95);
-        }
-        to {
-            -webkit-transform: scale3d(1, 1, 1);
-            transform: scale3d(1, 1, 1);
-        }
+function togglePlay() {
+    if (audio.paused) {
+        audio.play();
+        playerVolumeOff.style.display = 'none';
+        playerVolumeOn.style.display = 'block';
+    } else {
+        audio.pause();
+        playerVolumeOff.style.display = 'block';
+        playerVolumeOn.style.display = 'none';
     }
+}
 
-    .bii-player {
-        position: fixed;
-        bottom: 70px;
-        left: 50px;
-        width: 40px;
-        height: 40px;
-        z-index: 99999;
-        display: block;
-    }
+document.addEventListener('DOMContentLoaded', function () {
+    const player = document.getElementById('player');
 
-    .bii-player .playerIcon {
-        cursor: pointer;
-        display: block;
-        width: 40px;
-        height: 40px;
-        -webkit-border-radius: 50%;
-        border-radius: 50%;
-        background-color: #df4758;
-        padding-top: 7px;
-        padding-left: 9px;
-        position: absolute;
-        z-index: 2;
-    }
-
-    .bii-player:after {
-        content: "";
-        position: absolute;
-        -webkit-border-radius: 50%;
-        border-radius: 50%;
-        background-color: rgba(242, 59, 67, 0.3);
-        width: 120%;
-        height: 120%;
-        left: -10%;
-        top: -10%;
-        -webkit-animation: biilogo-pulse 1s infinite;
-        animation: biilogo-pulse 1s infinite;
-        z-index: 1;
-    }
-
-    .bii-player img {
-        width: 100%;
-        z-index: 999999;
-        position: absolute;
-        cursor: pointer;
-    }
-
-    .bii-player.show-sec .bii-player-secondary {
-        visibility: visible;
-    }
-
-    .bii-player.show-sec .bii-player-secondary-content {
-        transform: translate3d(0, 0, 0);
-    }
-
-    .bii-player-secondary {
-        position: absolute;
-        width: 310px;
-        left: 25px;
-        height: 50px;
-        overflow: hidden;
-        visibility: hidden;
-    }
-
-    .bii-player-secondary-content {
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-        user-select: none;
-        position: absolute;
-        width: 310px;
-        left: -25px;
-        background: #fff;
-        height: 40px;
-        padding: 8px 11px 8px 50px;
-        border: 1px solid #df4759;
-        border-radius: 30px;
-        z-index: 1;
-        font-size: 14px;
-        transform: translate3d(-100%, 0, 0);
-        transition: transform 175ms ease;
-        font-family: arial, sans-serif;
-        font-weight: 200;
-        color: #000;
-    }
-
-    @media (max-width: 799px) {
-        .bii-player {
-            bottom: 30px;
-            left: 20px;
-        }
-    }
-</style>
-<audio id="myAudio" src="assets/musics/take-my-hand.m4a" preload="auto" loop></audio>
-<div id="player" class="bii-player">
-    <div onclick="togglePlay();" class="bii-player-secondary">
-        <div class="bii-player-secondary-content">Click vào đây để nghe nhạc nhé!</div>
-    </div>
-    <div onclick="togglePlay();" class="playerIcon">
-        <span id="playerVolumeOff">
-            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="27" fill="#fff" class="bi bi-volume-mute-fill"
-                 viewBox="0 0 16 16">
-                <path d="M6.717 3.55A.5.5 0 0 1 7 4v8a.5.5 0 0 1-.812.39L3.825 10.5H1.5A.5.5 0 0 1 1 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06zm7.137 2.096a.5.5 0 0 1 0 .708L12.207 8l1.647 1.646a.5.5 0 0 1-.708.708L11.5 8.707l-1.646 1.647a.5.5 0 0 1-.708-.708L10.793 8 9.146 6.354a.5.5 0 1 1 .708-.708L11.5 7.293l1.646-1.647a.5.5 0 0 1 .708 0z"/>
-            </svg>
-        </span>
-        <span style="display:none;" id="playerVolumeOn">
-            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="27" fill="#fff" class="bi bi-volume-up-fill"
-                 viewBox="0 0 16 16">
-                <path d="M11.536 14.01A8.473 8.473 0 0 0 14.026 8a8.473 8.473 0 0 0-2.49-6.01l-.708.707A7.476 7.476 0 0 1 13.025 8c0 2.071-.84 3.946-2.197 5.303l.708.707z"/>
-                <path d="M10.121 12.596A6.48 6.48 0 0 0 12.025 8a6.48 6.48 0 0 0-1.904-4.596l-.707.707A5.483 5.483 0 0 1 11.025 8a5.483 5.483 0 0 1-1.61 3.89l.706.706z"/>
-                <path d="M8.707 11.182A4.486 4.486 0 0 0 10.025 8a4.486 4.486 0 0 0-1.318-3.182L8 5.525A3.489 3.489 0 0 1 9.025 8 3.49 3.49 0 0 1 8 10.475l.707.707zM6.717 3.55A.5.5 0 0 1 7 4v8a.5.5 0 0 1-.812.39L3.825 10.5H1.5A.5.5 0 0 1 1 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06z"/>
-            </svg>
-        </span>
-    </div>
-</div>
-<script>
-    const audio = document.getElementById('myAudio');
-    const playerVolumeOff = document.getElementById('playerVolumeOff');
-    const playerVolumeOn = document.getElementById('playerVolumeOn');
-
-    function togglePlay() {
-        if (audio.paused) {
-            audio.play();
-            playerVolumeOff.style.display = 'none';
-            playerVolumeOn.style.display = 'block';
-        } else {
-            audio.pause();
-            playerVolumeOff.style.display = 'block';
-            playerVolumeOn.style.display = 'none';
-        }
-    }
-
-    document.addEventListener('DOMContentLoaded', function () {
-        const player = document.getElementById('player');
-
+    setTimeout(() => {
+        player.classList.add('show-sec');
         setTimeout(() => {
-            player.classList.add('show-sec');
-            setTimeout(() => {
-                player.classList.remove('show-sec');
-            }, 6000);
-        }, 2000);
-    });
+            player.classList.remove('show-sec');
+        }, 6000);
+    }, 2000);
+});
 
-    // auto play sau tương tác đầu tiên
-    function autoPlayOnce() {
-        audio.play().then(() => {
-            playerVolumeOff.style.display = 'none';
-            playerVolumeOn.style.display = 'block';
-        }).catch(() => {});
-    }
+// auto play sau tương tác đầu tiên
+function autoPlayOnce() {
+    audio.play().then(() => {
+        playerVolumeOff.style.display = 'none';
+        playerVolumeOn.style.display = 'block';
+    }).catch(() => {});
+}
 
-    ['click', 'touchstart', 'scroll'].forEach(event => {
-        window.addEventListener(event, autoPlayOnce, { once: true });
-    });
-</script>
+['click', 'touchstart', 'scroll'].forEach(event => {
+    window.addEventListener(event, autoPlayOnce, { once: true });
+});</script><style>.snowflake{color:#fff;font-size:1em;font-family:Arial,sans-serif;text-shadow:0 0 5px #000}.snowflake,.snowflake .inner{animation-iteration-count:infinite;animation-play-state:running}@keyframes snowflakes-fall{0%{transform:translateY(0)}100%{transform:translateY(110vh)}}@keyframes snowflakes-shake{0%,100%{transform:translateX(0)}50%{transform:translateX(80px)}}.snowflake{position:fixed;top:-10%;z-index:9999;-webkit-user-select:none;user-select:none;cursor:default;animation-name:snowflakes-shake;animation-duration:3s;animation-timing-function:ease-in-out}.snowflake .inner{animation-duration:10s;animation-name:snowflakes-fall;animation-timing-function:linear}.snowflake:nth-of-type(0){left:1%;animation-delay:0s}.snowflake:nth-of-type(0) .inner{animation-delay:0s}.snowflake:first-of-type{left:10%;animation-delay:1s}.snowflake:first-of-type .inner,.snowflake:nth-of-type(8) .inner{animation-delay:1s}.snowflake:nth-of-type(2){left:20%;animation-delay:.5s}.snowflake:nth-of-type(2) .inner,.snowflake:nth-of-type(6) .inner{animation-delay:6s}.snowflake:nth-of-type(3){left:30%;animation-delay:2s}.snowflake:nth-of-type(11) .inner,.snowflake:nth-of-type(3) .inner{animation-delay:4s}.snowflake:nth-of-type(4){left:40%;animation-delay:2s}.snowflake:nth-of-type(10) .inner,.snowflake:nth-of-type(4) .inner{animation-delay:2s}.snowflake:nth-of-type(5){left:50%;animation-delay:3s}.snowflake:nth-of-type(5) .inner{animation-delay:8s}.snowflake:nth-of-type(6){left:60%;animation-delay:2s}.snowflake:nth-of-type(7){left:70%;animation-delay:1s}.snowflake:nth-of-type(7) .inner{animation-delay:2.5s}.snowflake:nth-of-type(8){left:80%;animation-delay:0s}.snowflake:nth-of-type(9){left:90%;animation-delay:1.5s}.snowflake:nth-of-type(9) .inner{animation-delay:3s}.snowflake:nth-of-type(10){left:25%;animation-delay:0s}.snowflake:nth-of-type(11){left:65%;animation-delay:2.5s}.snowflake-image{width:16px;height:16px;display:block}</style><div id="snowflakes" class="snowflakes" aria-hidden="true"></div><script>let timeout;
 
-<!--END PLAYER-->
+function setupSnowFlakes() {
+    clearTimeout(timeout);
+    timeout = setTimeout(function () {
+        const snowflakes = document.getElementById('snowflakes');
+        // Xóa tất cả bông tuyết hiện có trước khi thêm mới
+        snowflakes.innerHTML = '';
 
-<!--BEGIN SNOWFLAKES-->
-<style>
-    /* customizable snowflake styling */
-    .snowflake {
-        color: #fff;
-        font-size: 1em;
-        font-family: Arial, sans-serif;
-        text-shadow: 0 0 5px #000;
-    }
+        // Số lượng bông tuyết cần tạo
+        const numberOfSnowflakes = Math.floor(window.innerWidth / 100);
 
-    .snowflake, .snowflake .inner {
-        animation-iteration-count: infinite;
-        animation-play-state: running
-    }
-
-    @keyframes snowflakes-fall {
-        0% {
-            transform: translateY(0)
+        for (let i = 0; i < numberOfSnowflakes; i++) {
+            const snowflake = document.createElement('div');
+            snowflake.className = 'snowflake';
+            snowflake.style.left = Math.random() * 100 + 'vw'; // Đặt vị trí ngẫu nhiên
+            snowflake.style.animationDelay = Math.random() * 5 + 's'; // Đặt độ trễ ngẫu nhiên
+            snowflake.innerHTML = '<div class="inner"><img loading="lazy" alt="snow" src="assets/images/common/heart.webp" class="snowflake-image"></div>';
+            snowflakes.appendChild(snowflake);
         }
-        100% {
-            transform: translateY(110vh)
-        }
-    }
+    }, 300); // Thời gian debounce là 300ms
+}
 
-    @keyframes snowflakes-shake {
-        0%, 100% {
-            transform: translateX(0)
-        }
-        50% {
-            transform: translateX(80px)
-        }
-    }
-
-    .snowflake {
-        position: fixed;
-        top: -10%;
-        z-index: 9999;
-        -webkit-user-select: none;
-        user-select: none;
-        cursor: default;
-        animation-name: snowflakes-shake;
-        animation-duration: 3s;
-        animation-timing-function: ease-in-out
-    }
-
-    .snowflake .inner {
-        animation-duration: 10s;
-        animation-name: snowflakes-fall;
-        animation-timing-function: linear
-    }
-
-    .snowflake:nth-of-type(0) {
-        left: 1%;
-        animation-delay: 0s
-    }
-
-    .snowflake:nth-of-type(0) .inner {
-        animation-delay: 0s
-    }
-
-    .snowflake:first-of-type {
-        left: 10%;
-        animation-delay: 1s
-    }
-
-    .snowflake:first-of-type .inner, .snowflake:nth-of-type(8) .inner {
-        animation-delay: 1s
-    }
-
-    .snowflake:nth-of-type(2) {
-        left: 20%;
-        animation-delay: .5s
-    }
-
-    .snowflake:nth-of-type(2) .inner, .snowflake:nth-of-type(6) .inner {
-        animation-delay: 6s
-    }
-
-    .snowflake:nth-of-type(3) {
-        left: 30%;
-        animation-delay: 2s
-    }
-
-    .snowflake:nth-of-type(11) .inner, .snowflake:nth-of-type(3) .inner {
-        animation-delay: 4s
-    }
-
-    .snowflake:nth-of-type(4) {
-        left: 40%;
-        animation-delay: 2s
-    }
-
-    .snowflake:nth-of-type(10) .inner, .snowflake:nth-of-type(4) .inner {
-        animation-delay: 2s
-    }
-
-    .snowflake:nth-of-type(5) {
-        left: 50%;
-        animation-delay: 3s
-    }
-
-    .snowflake:nth-of-type(5) .inner {
-        animation-delay: 8s
-    }
-
-    .snowflake:nth-of-type(6) {
-        left: 60%;
-        animation-delay: 2s
-    }
-
-    .snowflake:nth-of-type(7) {
-        left: 70%;
-        animation-delay: 1s
-    }
-
-    .snowflake:nth-of-type(7) .inner {
-        animation-delay: 2.5s
-    }
-
-    .snowflake:nth-of-type(8) {
-        left: 80%;
-        animation-delay: 0s
-    }
-
-    .snowflake:nth-of-type(9) {
-        left: 90%;
-        animation-delay: 1.5s
-    }
-
-    .snowflake:nth-of-type(9) .inner {
-        animation-delay: 3s
-    }
-
-    .snowflake:nth-of-type(10) {
-        left: 25%;
-        animation-delay: 0s
-    }
-
-    .snowflake:nth-of-type(11) {
-        left: 65%;
-        animation-delay: 2.5s
-    }
-
-
-    .snowflake-image {
-        width: 16px; /* Kích thước bạn muốn */
-        height: 16px; /* Kích thước bạn muốn */
-        display: block; /* Đảm bảo không có khoảng trống bên dưới */
-    }
-</style>
-<div id="snowflakes" class="snowflakes" aria-hidden="true"></div>
-<script>
-    let timeout;
-
-    function setupSnowFlakes() {
-        clearTimeout(timeout);
-        timeout = setTimeout(function () {
-            const snowflakes = document.getElementById('snowflakes');
-            // Xóa tất cả bông tuyết hiện có trước khi thêm mới
-            snowflakes.innerHTML = '';
-
-            // Số lượng bông tuyết cần tạo
-            const numberOfSnowflakes = Math.floor(window.innerWidth / 100);
-
-            for (let i = 0; i < numberOfSnowflakes; i++) {
-                const snowflake = document.createElement('div');
-                snowflake.className = 'snowflake';
-                snowflake.style.left = Math.random() * 100 + 'vw'; // Đặt vị trí ngẫu nhiên
-                snowflake.style.animationDelay = Math.random() * 5 + 's'; // Đặt độ trễ ngẫu nhiên
-                snowflake.innerHTML = '<div class="inner"><img loading="lazy" alt="snow" src="assets/images/common/heart.webp" class="snowflake-image"></div>';
-                snowflakes.appendChild(snowflake);
-            }
-        }, 300); // Thời gian debounce là 300ms
-    }
-
-    window.addEventListener('resize', setupSnowFlakes);
-    // Gọi hàm một lần khi tải trang
-    setupSnowFlakes();
-</script>
-<!--END SNOWFLAKES-->
-</body>
-<script src="common/calendar.js" defer></script>
-<script src="templates/template135/js/libs.js" async></script>
-<script type="module" src="firebase-config.js" defer></script>
-<script src="templates/template135/js/script.js"></script>
-<script src="common/emoji-picker/js/insertTextAtCursor.js" defer></script>
-<script src="common/emoji-picker/js/init.js" type="module" defer></script>
-</html>
+window.addEventListener('resize', setupSnowFlakes);
+// Gọi hàm một lần khi tải trang
+setupSnowFlakes();</script></body><script src="common/calendar.js" defer="defer"></script><script src="templates/template135/js/libs.js" async></script><script type="module" src="firebase-config.js" defer="defer"></script><script src="templates/template135/js/script.js"></script><script src="common/emoji-picker/js/insertTextAtCursor.js" defer="defer"></script><script src="common/emoji-picker/js/init.js" type="module" defer="defer"></script></html>
