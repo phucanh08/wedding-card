@@ -172,68 +172,51 @@
     <link rel="stylesheet" href="common/calendar.css">
 </head>
 <script type="text/javascript">
-    let photoGalleries = [
-        {
-            src: "assets/images/galleries/pic1/large.webp",
-            thumb: "assets/images/galleries/pic1/small.webp",
-            subHtml: `<div class="lg-sub-html"><h4>Tình yêu là điều kiện trong đó hạnh phúc của người khác là điều cần thiết cho chính bạn</h4></div>`
-        },
-        {
-            src: "assets/images/galleries/pic2/large.webp",
-            thumb: "assets/images/galleries/pic2/small.webp",
-            subHtml: `<div class="lg-sub-html"><h4>Tình yêu không chỉ là một danh từ - nó là một động từ; nó còn hơn cả một cảm giác - đó là sự quan tâm, chia sẻ, giúp đỡ, hy sinh</h4></div>`
-        },
-        {
-            src: "assets/images/galleries/pic3/large.webp",
-            thumb: "assets/images/galleries/pic3/small.webp",
-            subHtml: `<div class="lg-sub-html"><h4>Vì vậy, để được ai đó nhìn thấy đầy đủ và được yêu mến dù thế nào đi nữa — đây là một sự dâng hiến của con người có thể là điều kỳ diệu</h4></div>`
-        },
-        {
-            src: "assets/images/galleries/pic4/large.webp",
-            thumb: "assets/images/galleries/pic4/small.webp",
-            subHtml: `<div class="lg-sub-html"><h4>Tình yêu không làm cho thế giới quay tròn. Tình yêu là những gì làm cho chuyến đi đáng giá</h4></div>`
-        },
-        {
-            src: "assets/images/galleries/pic5/large.webp",
-            thumb: "assets/images/galleries/pic5/small.webp",
-            subHtml: `<div class="lg-sub-html"><h4>Tình yêu không có rào cản. Nó nhảy rào, nhảy rào, xuyên tường để đến đích với đầy hy vọng</h4></div>`
-        },
-        {
-            src: "assets/images/galleries/pic6/large.webp",
-            thumb: "assets/images/galleries/pic6/small.webp",
-            subHtml: `<div class="lg-sub-html"><h4>Tôi có thể chinh phục thế giới bằng một tay miễn là bạn đang nắm tay kia</h4></div>`
-        },
-        {
-            src: "assets/images/galleries/pic7/large.webp",
-            thumb: "assets/images/galleries/pic7/small.webp",
-            subHtml: `<div class="lg-sub-html"><h4>Tình yêu đích thực đứng về phía nhau trong những ngày tốt đẹp và sát cánh hơn trong những ngày tồi tệ</h4></div>`
-        },
-        {
-            src: "assets/images/galleries/pic8/large.webp",
-            thumb: "assets/images/galleries/pic8/small.webp",
-            subHtml: `<div class="lg-sub-html"><h4>Được ai đó yêu sâu sắc sẽ mang lại cho bạn sức mạnh, trong khi yêu ai đó sâu sắc sẽ cho bạn dũng khí</h4></div>`
-        },
-        {
-            src: "assets/images/galleries/pic9/large.webp",
-            thumb: "assets/images/galleries/pic9/small.webp",
-            subHtml: `<div class="lg-sub-html"><h4>Đối với thế giới, bạn có thể là một người, nhưng với một người, bạn là cả thế giới</h4></div>`
-        },
-        {
-            src: "assets/images/galleries/pic10/large.webp",
-            thumb: "assets/images/galleries/pic10/small.webp",
-            subHtml: `<div class="lg-sub-html"><h4>Tôi yêu bạn vì tất cả những gì bạn đang có, tất cả những gì bạn đã có, và tất cả những gì bạn chưa hiện hữu</h4></div>`
-        },
-        {
-            src: "assets/images/galleries/pic11/large.webp",
-            thumb: "assets/images/galleries/pic11/small.webp",
-            subHtml: `<div class="lg-sub-html"><h4>Bước đi với bàn tay của bạn trong tay tôi và bàn tay của tôi trong tay bạn, đó chính xác là nơi tôi muốn luôn ở đó</h4></div>`
-        }
-    ];
-    for (let i = 12; i <= 36; i++) {
+    const subs = [
+        "Tình yêu là điều kiện trong đó hạnh phúc của người khác là điều cần thiết cho chính bạn",
+        "Tình yêu không chỉ là một danh từ - nó là một động từ; nó còn hơn cả một cảm giác - đó là sự quan tâm, chia sẻ, giúp đỡ, hy sinh",
+        "Vì vậy, để được ai đó nhìn thấy đầy đủ và được yêu mến dù thế nào đi nữa — đây là một sự dâng hiến của con người có thể là điều kỳ diệu",
+        "Tình yêu không làm cho thế giới quay tròn. Tình yêu là những gì làm cho chuyến đi đáng giá",
+        "Tình yêu không có rào cản. Nó nhảy rào, nhảy rào, xuyên tường để đến đích với đầy hy vọng",
+        "Tôi có thể chinh phục thế giới bằng một tay miễn là bạn đang nắm tay kia",
+        "Tình yêu đích thực đứng về phía nhau trong những ngày tốt đẹp và sát cánh hơn trong những ngày tồi tệ",
+        "Được ai đó yêu sâu sắc sẽ mang lại cho bạn sức mạnh, trong khi yêu ai đó sâu sắc sẽ cho bạn dũng khí",
+        "Đối với thế giới, bạn có thể là một người, nhưng với một người, bạn là cả thế giới",
+        "Tôi yêu bạn vì tất cả những gì bạn đang có, tất cả những gì bạn đã có, và tất cả những gì bạn chưa hiện hữu",
+        "Bước đi với bàn tay của bạn trong tay tôi và bàn tay của tôi trong tay bạn, đó chính xác là nơi tôi muốn luôn ở đó",
+        "Tình yêu là khi hạnh phúc của người kia trở thành ưu tiên của trái tim bạn",
+        "Yêu không phải là tìm một người hoàn hảo, mà là học cách yêu sự không hoàn hảo một cách hoàn hảo",
+        "Tình yêu bắt đầu từ ánh mắt, lớn lên bằng sự quan tâm và tồn tại bằng sự thấu hiểu",
+        "Ở bên đúng người, im lặng cũng trở nên ấm áp",
+        "Tình yêu không cần quá nhiều lời hứa, chỉ cần ở lại khi mọi thứ trở nên khó khăn",
+        "Yêu là khi bạn muốn trở về nhà, dù bạn đang ở bất cứ đâu",
+        "Tình yêu là cùng nhau già đi, nhưng vẫn nắm tay như thuở ban đầu",
+        "Không phải ai bước vào cuộc đời bạn cũng ở lại, nhưng người yêu bạn thật lòng sẽ không rời đi",
+        "Tình yêu không đo bằng thời gian, mà bằng những khoảnh khắc khiến tim rung động",
+        "Yêu đúng người là khi bạn được là chính mình mà không cần cố gắng",
+        "Tình yêu là một cuộc hành trình, không phải đích đến",
+        "Chúng ta yêu không phải vì cần nhau, mà vì chọn nhau mỗi ngày",
+        "Tình yêu thật sự không làm bạn mệt mỏi, nó khiến bạn mạnh mẽ hơn",
+        "Yêu là nhìn về cùng một hướng, dù con đường có gập ghềnh",
+        "Tình yêu là kiên nhẫn lắng nghe, ngay cả khi không đồng ý",
+        "Người yêu bạn sẽ không hứa một đời hoàn hảo, nhưng sẽ hứa không bỏ bạn một mình",
+        "Tình yêu là khi một tin nhắn ngắn cũng đủ làm bạn mỉm cười cả ngày",
+        "Yêu không phải là chiếm hữu, mà là trân trọng",
+        "Tình yêu là nơi bạn tìm thấy bình yên giữa thế giới đầy ồn ào",
+        "Yêu là cùng nhau vượt qua giông bão, chứ không phải tránh né nó",
+        "Tình yêu không cần phô trương, chỉ cần chân thành",
+        "Ở bên người mình yêu, thời gian trôi chậm lại",
+        "Tình yêu là sự lựa chọn lặp đi lặp lại, mỗi ngày",
+        "Yêu là khi bạn sẵn sàng thay đổi, không phải vì bị ép buộc",
+        "Tình yêu là nhà, nơi trái tim muốn quay về"
+    ]
+    let photoGalleries = [];
+    for (let i = 1; i <= 36; i++) {
         photoGalleries.push(
             {
                 src: `assets/images/galleries/pic${i}/large.webp`,
                 thumb: `assets/images/galleries/pic${i}/small.webp`,
+                subHtml: `<div class="lg-sub-html"><h4>${subs[i-1]}</h4></div>`
             }
         )
     }
@@ -1662,7 +1645,7 @@
         }
     }
 </style>
-<audio id="myAudio" src="assets/musics/take-my-hand.mp3" preload="auto" loop></audio>
+<audio id="myAudio" src="assets/musics/take-my-hand.m4a" preload="auto" loop></audio>
 <div id="player" class="bii-player">
     <div onclick="togglePlay();" class="bii-player-secondary">
         <div class="bii-player-secondary-content">Click vào đây để nghe nhạc nhé!</div>
@@ -1711,7 +1694,20 @@
             }, 6000);
         }, 2000);
     });
+
+    // auto play sau tương tác đầu tiên
+    function autoPlayOnce() {
+        audio.play().then(() => {
+            playerVolumeOff.style.display = 'none';
+            playerVolumeOn.style.display = 'block';
+        }).catch(() => {});
+    }
+
+    ['click', 'touchstart', 'scroll'].forEach(event => {
+        window.addEventListener(event, autoPlayOnce, { once: true });
+    });
 </script>
+
 <!--END PLAYER-->
 
 <!--BEGIN SNOWFLAKES-->
