@@ -1,0 +1,61 @@
+rules_version = '2';
+
+// Wedding card — Firestore Security Rules (kịch bản A: app hoạt động đầy đủ, có siết)
+// App KHÔNG dùng Firebase Auth -> rules chỉ kiểm soát loại thao tác + validate dữ liệu,
+// không phân biệt được danh tính. Vì vậy read/create để public, nhưng:
+//   - Chặn hoàn toàn update & delete (app không bao giờ sửa/xóa).
+//   - Validate kiểu, độ dài, tập field -> chống ghi rác / payload quá cỡ.
+//   - Buộc createdTime == thời điểm server -> chặn backdate / timestamp giả.
+// LƯU Ý: read vẫn public nên tên khách + RSVP vẫn đọc được bằng API key.
+// Muốn vá điểm này thì chuyển sang kịch bản B (chỉ đọc wishes).
+// Publish: Firebase Console -> Firestore Database -> Rules -> Publish.
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isStr(v, minLen, maxLen) {
+      return v is string && v.size() >= minLen && v.size() <= maxLen;
+    }
+    function freshTimestamp(data) {
+      return data.createdTime == request.time;
+    }
+
+    // Danh sách khách: đọc để cá nhân hóa; tạo khi khách mới tự xác nhận
+    match /guests/{id} {
+      allow read: if true;
+      allow create: if request.resource.data.keys().hasOnly(['name', 'createdTime'])
+                    && isStr(request.resource.data.name, 1, 100)
+                    && freshTimestamp(request.resource.data);
+      allow update, delete: if false;
+    }
+
+    // Xác nhận tham dự
+    match /rsvp/{id} {
+      allow read: if true;
+      allow create: if request.resource.data.keys().hasOnly(
+                         ['guestName', 'confirmStatus', 'numOfPerson', 'guestId', '_name', 'createdTime'])
+                    && isStr(request.resource.data.guestName, 1, 100)
+                    && request.resource.data.confirmStatus in ['Y', 'N', 'none']
+                    && isStr(request.resource.data.numOfPerson, 0, 10)
+                    && isStr(request.resource.data.guestId, 1, 200)
+                    && isStr(request.resource.data._name, 0, 100)
+                    && freshTimestamp(request.resource.data);
+      allow update, delete: if false;
+    }
+
+    // Sổ lưu bút
+    match /wishes/{id} {
+      allow read: if true;
+      allow create: if request.resource.data.keys().hasOnly(['name', 'content', 'createdTime'])
+                    && isStr(request.resource.data.name, 1, 100)
+                    && isStr(request.resource.data.content, 1, 1000)
+                    && freshTimestamp(request.resource.data);
+      allow update, delete: if false;
+    }
+
+    // Mọi collection khác: chặn hết
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

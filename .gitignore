@@ -1,2 +1,13 @@
 .idea
 .DS_Store
+
+# Private exported Firestore data (guest names, RSVPs, wishes) — never commit/deploy
+data/
+
+# Dev-only rules-test harness
+node_modules/
+firebase-debug.log
+firestore-debug.log
+
+# Local Claude Code state
+.claude/
