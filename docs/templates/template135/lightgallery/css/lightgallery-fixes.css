@@ -1,0 +1,17 @@
+/*
+ * LightGallery v1 → v2 conflict fixes.
+ * Phải nạp SAU lightgallery-bundle.css.
+ *
+ * libs.css (bundle cũ) vẫn chứa CSS LightGallery v1 trộn lẫn với Bootstrap nên
+ * không gỡ sạch được. v1 đặt `.lg-outer .lg-thumb-outer{position:absolute;bottom:0;
+ * transform:translate3d(0,100%,0)}` (trạng thái "đóng" của v1, mở bằng class
+ * .lg-thumb-open mà v2 không thêm) -> thanh thumbnail bị đẩy xuống dưới viewport:
+ *   - Chrome: thumbnail biến mất.
+ *   - Safari: lệch, đè lên ảnh lớn & caption.
+ * v2 đã tự chừa chỗ cho thumbnail bằng padding-bottom trên .lg-item, chỉ cần
+ * khử transform thừa của v1 là thanh thumbnail về đúng đáy.
+ */
+.lg-outer .lg-thumb-outer {
+    -webkit-transform: none !important;
+    transform: none !important;
+}
